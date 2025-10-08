@@ -3,7 +3,10 @@
 In this exercise, we will: 
 - access SAP Cloud ALM and explore the metrics visible in Health Monitoring
 - interact with App endpoints via SAP Automation Pilot
-- setup the integration between SAP Cloud ALM and SAP Automation Pilot  
+- setup the integration between SAP Cloud ALM and SAP Automation Pilot
+
+For a better understanding of the currnet use case, please consult the diagram shared below: 
+![](./images/ex-01-scenario.png)
 
 ## Exercise 1.1 Access SAP Cloud ALM and explore the metrics visible in Health Monitoring
 
