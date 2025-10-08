@@ -14,7 +14,8 @@ Your SAP BTP subaccount is XP267-0XX (use your hands-on session user e.g. XP266-
 Click on "dev" - that's you dev CF space. 
 ![](./images/00-02.png)
 
-You will land at the applications running on your "dev" CF space. There is an app named `bookshop-srv` with status "Started"
+You will land at the applications running on your "dev" CF space. There is an app named `bookshop-srv` with status "Started".
+
 Take a look and check the paramters visible - as you can notice, the memory allocated per instance is 400 MB. 
 ![](./images/00-03.png)
 
