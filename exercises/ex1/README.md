@@ -11,6 +11,7 @@ For a better understanding of the currnet use case, please consult the diagram s
 ## Exercise 1.1 Access SAP Cloud ALM and explore the metrics visible in Health Monitoring
 
 **Access SAP Cloud ALM** by following this link here: https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/
+
 **Login** with your user 
 Select the **Operations** menu item. 
 ![](./images/01-01.png)
