@@ -10,17 +10,30 @@ For a better understanding of the currnet use case, please consult the diagram s
 
 ## Exercise 1.1 Access SAP Cloud ALM and explore the metrics visible in Health Monitoring
 
-After completing these steps you will have created...
+**Access SAP Cloud ALM** by following this link here: https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/
+**Login** with your user 
+Select the **Operations** menu item. 
+![](./images/01-01.png)
 
-1. Click here.
-<br>![](/exercises/ex1/images/01_01_0010.png)
+Click on Health Monitoring capability. 
+![](./images/01-02.png)
 
-2.	Insert this line of code.
-```abap
-response->set_text( |Hello World! | ). 
-```
+You will land at Health Monitoring Overview screen. 
+Make sure Scope has been selected to your subaccount XP267-0XX_CF (e.g. XP267_000_CF)
+![](./images/01-03.png)
 
+Click on the tile and you shall be able to see the services/ system visible in the Health Monitoring. 
+![](./images/01-04.png)
 
+Click on the service to land to the SAP BTP Cloud Foundry environment Metrics Overview. 
+These are all metrics ingested by your CAP app via the Open Telemtry. 
+![](./images/01-05.png)
+
+Feel free to click on **All Metrics** tab to explore these metrics further. 
+![](./images/01-06.png)
+
+Well done! You can now undestand better the health status of you CAP app. 
+It is time to move your SAP Automation Pilot tenant and BTP Cockpit.
 
 ## Exercise 1.2 Interact with App endpoints via SAP Automation Pilot
 
