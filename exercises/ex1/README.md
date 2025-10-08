@@ -1,8 +1,11 @@
-# Exercise 1 - Exercise 1 Description
+# Exercise 1 - Access SAP Cloud ALM and trigger tigger simple commands to your App via SAP Automation Pilot 
 
-In this exercise, we will create...
+In this exercise, we will: 
+- access SAP Cloud ALM and explore the metrics visible in Health Monitoring
+- interact with App endpoints via SAP Automation Pilot
+- setup the integration between SAP Cloud ALM and SAP Automation Pilot  
 
-## Exercise 1.1 Sub Exercise 1 Description
+## Exercise 1.1 Access SAP Cloud ALM and explore the metrics visible in Health Monitoring
 
 After completing these steps you will have created...
 
@@ -16,7 +19,7 @@ response->set_text( |Hello World! | ).
 
 
 
-## Exercise 1.2 Sub Exercise 2 Description
+## Exercise 1.2 Interact with App endpoints via SAP Automation Pilot
 
 After completing these steps you will have...
 
@@ -34,6 +37,10 @@ READ TABLE lt_params REFERENCE INTO DATA(lr_params) WITH KEY name = 'cmd'.
 
 2.	Click here.
 <br>![](/exercises/ex1/images/01_02_0010.png)
+
+## Exercise 1.3 Setup the integration between SAP Cloud ALM and SAP Automation Pilot 
+
+After completing these steps you will have...
 
 
 ## Summary
