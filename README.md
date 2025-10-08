@@ -1,7 +1,6 @@
-# Session ID - XP267 
+# Session ID - XP267 | Experience the automation of technical operation tasks on SAP BTP
 
-## Description_01
-
+## Description
 This repository contains the material for the SAP TechEd 2025 wiht Session ID XP267 - **"Experience the automation of technical operation tasks on SAP BTP"**
 
 
