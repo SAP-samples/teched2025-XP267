@@ -2,19 +2,53 @@
 
 ## Description_01
 
-This repository contains the material for the SAP TechEd 2025 session called Session ID - Session Title.  
+This repository contains the material for the SAP TechEd 2025 wiht Session ID XP267 - **"Experience the automation of technical operation tasks on SAP BTP"**
+
 
 ## Overview
 
-This session introduces attendees to...
+This session introduces attendees to SAP Automation Pilot and SAP Cloud ALM in the context of Day 2 Operations. Main goail is participants to gain practical experience in automating different set of technical operation tasks in SAP Business Technology Platform (SAP BTP). To do so, by setting up an integration between SAP Automation Pilot and SAP Cloud ALM, during this hands-on we will explore how to trigger ready-to-use commands in SAP Automation Pilot to do troubleshooting and perform remediation actions based on alerts in SAP Cloud ALM. You will also learn how to build your own automation flows or exennd existing ones.
+
+## **Main scenario covered during this session:**
+Within the hands-on tutorial we will cover: 
+- Introduction to **SAP Automation Pilot** for running repetitive ops tasks
+- Introduction to **SAP Cloud ALM**
+- Extending SAP Automation Pilot by an integration to SAP AI Core service for **assessment of technical data and recommendations by AI**
+- Integration between SAP Automation Pilot and SAP Cloud ALM for  automating **operational tasks and remediations**
+
+**Hands-on:**
+  - Creating and testing **automation workflows** for common operational tasks.
+  - Extending SAP Automation Pilot by integrating it to SAP AI Core service.
+  - Exploring potential **use cases** where SAP Automation Pilot and SAP Cloud ALM adds value for Ops teams by using GenAI features provided by SAP
+
+## Products in focus 
+### SAP Automation Pilot 
+The goal of SAP Automation Pilot is to simplify and automate complex manual technical processes and flows. This enables DevOps teams to run their solutions on SAP BTP with minimal operational effort.
+### SAP Cloud ALM
+
+#### SAP Automation Pilot is a low-code / no-code automation engine that allows you to:
+- Automate sequences of steps,
+- Execute scripts in a serverless manner,
+- Use catalogs of commands provided by SAP to automate typical Ops tasks in and outside your SAP BTP landscape,
+- Build custom automations.
+ 
+Automations in SAP Automation Pilot can be triggered in various ways to best fit your operational needs - manually by the DevOps team, through the built-in scheduler, automatically via integration with services and ops platforms like SAP Cloud ALM, or by other applications and systems.
+
+The service is designed to work with low latency, even under a heavy workload, and is capable of triggering hundreds of automations simultaneously.
+
+##  **Let's Build & Automate!**
+This TechEd session is **interactive  hands-on**, ensuring you gain **real-world experience** with products and tools delivered by SAP. Get ready for your Day 2 Operations activities!
 
 ## Requirements
-
-The requirements to follow the exercises in this repository are...
+The requirements to follow the exercises in this repository are: 
+- Access to SAP Automation Pilot
+- Access to SAP Cloud ALM
+- A Cloud Foundry CAP application
+- SAP AI Core credentials and a GPT-4o deployment
+- "Technical user" on your SAP BTP Cloud Foundry space (already provided to each participant)
 
 ## Exercises
-
-Provide the exercise content here directly in README.md using [markdown](https://guides.github.com/features/mastering-markdown/) and linking to the specific exercise pages, below is an example.
+Let's start the excercise - for a better understanding, please follow the excercises as listed below:
 
 - [Getting Started](exercises/ex0/)
 - [Exercise 1 - First Exercise Description](exercises/ex1/)
@@ -23,15 +57,6 @@ Provide the exercise content here directly in README.md using [markdown](https:/
 - [Exercise 2 - Second Exercise Description](exercises/ex2/)
     - [Exercise 2.1 - Exercise 2 Sub Exercise 1 Description](exercises/ex2#exercise-21-sub-exercise-1-description)
     - [Exercise 2.2 - Exercise 2 Sub Exercise 2 Description](exercises/ex2#exercise-22-sub-exercise-2-description)
-
-  
-**OR** Link to the Tutorial Navigator for example...
-
-Start the exercises [here](https://developers.sap.com/tutorials/abap-environment-trial-onboarding.html).
-
-**IMPORTANT**
-
-Your repo must contain the .reuse and LICENSES folder and the License section below. DO NOT REMOVE the section or folders/files. Also, remove all unused template assets(images, folders, etc) from the exercises folder. 
 
 ## Contributing
 Please read the [CONTRIBUTING.md](./CONTRIBUTING.md) to understand the contribution guidelines.
