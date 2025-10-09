@@ -109,7 +109,7 @@ Click on the **Close** button. Now you are all done.
 
 - Password
 
-It is time to navigate to** SAP Cloud ALM **following this link: https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/
+It is time to navigate to **SAP Cloud ALM** following this link: https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/
 
 Click on **Operations** --> **Landscape Management**
 ![](./images/01-2-06.png)
