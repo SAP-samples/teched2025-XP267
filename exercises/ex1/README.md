@@ -214,11 +214,11 @@ To do so, click on the **edit icon** for the input key **URL**.
 Now update the Input Key accordingly: 
 - **Uncheck** the toggle for `Required`
 
-- **Default Value Source** - Input Key
+- **Default Value Source** - `Input Key`
 
-- **Input** - adppEndPoints
+- **Input** - `adppEndPoints`
 
-- **Input Key** - urlHomepage
+- **Input Key** - `urlHomepage`
 
 Click **Update** to save the configuration. 
 ![](./images/1-2-2-25.png)
