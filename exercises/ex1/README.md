@@ -36,11 +36,13 @@ Feel free to click on **All Metrics** tab to explore these metrics further.
 Well done! You can now undestand better the health status of you CAP app. 
 It is time to move your SAP Automation Pilot tenant and BTP Cockpit.
 
+
 ## Exercise 1.2 Interact with App endpoints via SAP Automation Pilot
 
 To check out you SAP Automation Pilot tenant you need to go back to you SAP BTP subaccount. 
 
 Your **SAP BTP subaccount is XP267-0XX** (use your hands-on session user e.g. XP266-001) and then click on **Services** dropdown from the lefside menu --> **Instances and Subscriptions** 
+
 From the **Subscriptions** sections --> **Automation Pilot** (see the screenshot below)
 ![](./images/01-1-01.png)
 
@@ -62,7 +64,7 @@ You are all set - it's time to move forward!
 
 It is time to bring SAP Automation Pilot and SAP Cloud ALM together.
 
-To do so we need to have handy coule of values from SAP Automation Pilot that we'll use later in SAP Cloud ALM: 
+To do so we need to have in hand few values from SAP Automation Pilot that we'll use later in SAP Cloud ALM: 
 
 In your SAP Automation Pilot, click on the **User** menu item (bottom left menu) and copy the values for: 
 
@@ -79,10 +81,14 @@ Now we need to create a service accont so click on the menu item (lefside menu) 
 ![](./images/01-2-03.png)
 
 From the pop-up, please add the following values: 
-username: `cloudALM`
-description: free text , i.e. `service account used in SAP Cloud ALM to trigger commands in SAP Automation Pilot`
-Permissions: from the drop-down select `Read` , `Write` , `Execute`
-Authentication Type: `Basic`
+
+- username: `cloudALM`
+
+- description: free text , i.e. `service account used in SAP Cloud ALM to trigger commands in SAP Automation Pilot`
+
+- Permissions: from the drop-down select `Read` , `Write` , `Execute`
+
+- Authentication Type: `Basic`
 
 Once ready - click on the button **Create**
 ![](./images/01-2-04.png)
