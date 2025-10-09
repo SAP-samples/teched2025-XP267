@@ -65,7 +65,9 @@ It is time to bring SAP Automation Pilot and SAP Cloud ALM together.
 To do so we need to have handy coule of values from SAP Automation Pilot that we'll use later in SAP Cloud ALM: 
 
 In your SAP Automation Pilot, click on the **User** menu item (bottom left menu) and copy the values for: 
+
 - Tenant ID
+
 - Tenant URL
 ![](./images/01-2-01.png)
 
@@ -92,9 +94,13 @@ Click on the **Close** button. Now you are all done.
 
 **Let's wrap-up** , now you should have copied from SAP Automation Pilot the values for: 
 - Tenant ID
+
 - Tenant URL
+
 - Base URL
+
 - Username
+
 - Password
 
 It is time to navigate to** SAP Cloud ALM **following this link: https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/
