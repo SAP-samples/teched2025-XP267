@@ -7,7 +7,7 @@ In this exercise, we will:
 
 For a better understanding of the currnet use case, please consult the diagram shared below: 
 
-<img src="./images/ex-02-scenario.png" width="700" height="400">
+<img src="./images/02-01.png" style="border:1px solid #0F62FE;">
 
 ## Exercise 2.1  Collect usage metrics with SAP Automation Pilot 
 
