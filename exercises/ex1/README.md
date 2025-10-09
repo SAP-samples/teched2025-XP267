@@ -8,7 +8,7 @@ In this exercise, we will:
 For a better understanding of the currnet use case, please consult the diagram shared below: 
 ![](./images/ex-01-scenario.png)
 
-![](./images/ex-01-scenario.png ![](./images/ex-01-scenario.png))
+<img src="./images/ex-01-scenario.png" width="700" height="400">
 
 ## Exercise 1.1 Access SAP Cloud ALM and explore the metrics visible in Health Monitoring
 
