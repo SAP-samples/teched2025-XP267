@@ -13,26 +13,61 @@ For a better understanding of the currnet use case, please consult the diagram s
 **Access SAP Automation Pilot**  and navigate via the left menu to **My Catalogs** --> click on **Commands** for the catalog `XP267 Ex02 - Custom Metrics into Cloud ALM`
 ![](./images/02-01.png)
 
+Navigate to the command named `CheckResourceQuotaUtilizationXP267Extended`
+![](./images/02-02.png)
 
+Thus command is already configured to calculate resource utilization of Cloud Foundry space and its parrent organization for your subaccount. 
+Trigger the command , no any further inputs are needed. 
+![](./images/02-03.png)
 
-**Login** with your user 
-Select the **Operations** menu item. 
-![](./images/01-01.png)
+After the command succesful execution, consult the output values by clicking on **Show** link under Output. 
+![](./images/02-04.png)
 
-Click on Health Monitoring capability. 
-![](./images/01-02.png)
-
-You will land at Health Monitoring Overview screen. 
-Make sure Scope has been selected to your subaccount XP267-0XX_CF (e.g. XP267_000_CF)
-![](./images/01-03.png)
-
-Click on the tile and you shall be able to see the services/ system visible in the Health Monitoring. 
-![](./images/01-04.png)
-
+That's a current snapshot of the resource utilization of Cloud Foundry space and its parrent organization for your subaccount. 
+![](./images/02-05.png)
 
 
 
 ## Exercise 2.2  Use existing commands in SAP Automation Pilot to push these metrics to SAP Cloud ALM 
+
+Now we want to push these metrics into SAP Cloud ALM - Health Monitoring. To do so, we'll need to extent this existing command. 
+
+**Go to the command itself**, scroll-down to the **Executor section** and click on **Add** button. 
+![](./images/02-06.png)
+
+Add the Executor 
+- **Place the new executor** just before the Ouput by clickin on **Here** botton.
+
+- **Alias** - `pushSpaceMemoryUtilization` 
+
+- **Command** - `PushCloudAlmQuotaXP267` - that's a command in SAP Automation Pilot that pushes quota data directly into SAP Cloud ALM metrics API.
+
+- **Keep enabled** the `Automap parameters`
+
+- Click on **Add** button
+![](./images/02-07.png)
+
+Now navigate to the executor you just created `pushSpaceMemoryUtilization` and click on the **Edit** button to update its parameters. 
+![](./images/02-08.png)
+
+Update the values accordingly: 
+
+- limit - `$(.getCfSpaceQuota.output.body | toObject | .apps.total_memory_in_mb // 0)`
+
+- name - `space.memory.utilization`
+
+- rating - `$(.calculateSpaceMemoryPercentage.output.message | toNumber | if . > 95 then "fatal" elif . > 85 then "critical" elif . > 70 then "warning" elif . > 0 then "ok" else "error" end)`
+
+- serviceId - `$(.execution.input.calmServiceId)`
+
+- unit - `mb`
+
+- used - `$(.calculateSpaceMemory.output.spaceMemory // 0)`
+
+Click on the **Update** button. 
+![](./images/02-09.png)
+
+
 
 **Access SAP Cloud ALM** by following this link here: https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/
 
