@@ -50,14 +50,12 @@ After completing this exercise, you will:
 1. Click on the **application route link** to open the CAP application.  
    ![](./images/00-04.png)
 
-2. On the landing page (the CDS server page), click the link to:  
-`/admin-books/webapp/index.html`
+2. On the landing page (the CDS server page), click the link to: `/admin-books/webapp/index.html`
+   This will open the **Admin Books** web application.
+   ![](./images/00-05.png)
 
-This will open the **Admin Books** web application.  
-![](./images/00-05.png)
-
-3. You should see a page similar to the one below, confirming that the application is running successfully:  
-![](./images/00-06.png)
+4. You should see a page similar to the one below, confirming that the application is running successfully:
+   ![](./images/00-06.png)
 
 ---
 
