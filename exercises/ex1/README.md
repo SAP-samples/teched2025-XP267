@@ -113,12 +113,19 @@ Now click on **Services and Systems** menu icon from the left sidebar menu --> c
 ![](./images/01-2-07.png)
 
 Now we need to fill in the data for **Add Service** screen as it follows: 
+
 **Name**: AP-XP267-0XX (as per user name, i.e. if your user is XP267-041 --> Name is AP-XP267-041) 
+
 **System Number**: {Tenant ID} (copied over from Automation Pilot, see previous step)
+
 **Service Type**: from the drop-down select `SAP Automation Pilot`
+
 **Role**: `Test`
+
 **Root URL**: {Tenant URL} (copied over from Automation Pilot, see previous step)
+
 **Deployment  Model**: from the drop-down select `BTP System`
+
 Click on **Save** button
 ![](./images/01-2-08.png)
 
