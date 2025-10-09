@@ -39,6 +39,8 @@ It is time to move your SAP Automation Pilot tenant and BTP Cockpit.
 
 ## Exercise 1.2 Interact with App endpoints via SAP Automation Pilot
 
+### Exercise 1.2.1 Explore main sections in SAP Automation Pilot
+
 To check out you SAP Automation Pilot tenant you need to go back to you SAP BTP subaccount. 
 
 Your **SAP BTP subaccount is XP267-0XX** (use your hands-on session user e.g. XP266-001) and then click on **Services** dropdown from the lefside menu --> **Instances and Subscriptions** 
@@ -57,7 +59,140 @@ From the same menu you also can explore:
 - **Commands** - listing all your commands in a list
 - **Inpits** - all available inpputs that can be referenced to any exisitng command
 
-You are all set - it's time to move forward! 
+### Exercise 1.2.2 Build our first command in SAP Automation Pilot
+Let's build our first command in SAP Automation Pilot. 
+
+Navigate to My Catalogs -> click on **Commands** from catalog named **XP267 Ex01 - Kick Start Commands**
+![](./images/1-2-2-01.png)
+
+You will land here - thera are already few commands create and we'll explore these in a bit. For now, click on the button **Create** :
+![](./images/1-2-2-02.png)
+
+- **Catalog** - pick up the `XP267 Ex01 - Kick Start Commands`
+
+- **Name** - simpleHttpRequest
+
+Click on **Create** button. 
+![](./images/1-2-2-03.png)
+
+Congrats - you had created a command in SAP Automation Pilot. However, as you see, thera are no inputs keys, outputs keys , neither executors for this command. Let's add some! 
+![](./images/1-2-2-04.png)
+
+Let's stat with the Inputs. 
+Click on **Add** button within the Inputs Key section. 
+![](./images/1-2-2-05.png)
+
+Fill in the **Add Input Key** popup: 
+
+- **Name** - `url`
+
+- **Type** - `string`
+
+- Make it `Required` by switching the toggle
+  
+Click on **Add** button to save it. 
+![](./images/1-2-2-06.png)
+
+Now let's add another input since we want to interact with our CAP app , we'll need to define the method of our simple call to this app. 
+Click on **Add** button within the Inputs Key section and fill in the **Add Input Key** popup: 
+
+- **Name** - `method`
+
+- **Type** - `string`
+
+- **Default Value Source** - `Static` (use the drop-down)
+
+- **Value** - `GET`
+
+![](./images/1-2-2-07.png)
+  
+Click on **Add** button to save it. 
+
+Now it is time to add an executor. To do so, click on **Add** button within the **Executors section**.. 
+![](./images/1-2-2-08.png)
+
+Within the Add **Executor pop-up**: 
+
+- **Select** where exactly within the automation flow the executor to be placed by click on **Here** button
+
+- **Alias** - `getAppEndpoint`
+
+- **Command** - `HttpRequest` (use an existing command to do http requests)
+
+- **Automap parameters** - leave it `enabled` (by default it is enabled so do not change it)
+
+- Click on **Add** button
+![](./images/1-2-2-09.png)
+
+As you see - the executor is now in place and there is an automated mapping between the input key `method` and the parameter `method` within the command. 
+![](./images/1-2-2-10.png)
+
+Now let's add few outputs which are to be consumed once the command it is fired and executed. 
+
+To do so, click on Click on **Add** button within the Output Keys section. 
+![](./images/1-2-2-11.png)
+
+
+Fill in the **Add Output Key** popup:
+- **Name** - `url`
+
+- **Type** - `string`
+
+- Click on **Add** button to save it.
+![](./images/1-2-2-12.png)
+
+Your output **url** is ready to be consumed. 
+![](./images/1-2-2-13.png)
+
+Repeat same steps to add these outputs: 
+
+- **Name** - `status`
+
+- **Type** - `number`
+
+AND 
+
+- **Name** - `header`
+
+- **Type** - `object`
+
+AND
+
+- **Name** - `body`
+
+- **Type** - `string`
+
+Your outputs are now in place. 
+![](./images/1-2-2-14.png)
+
+IMPORTANT: let's map the outputs to specific output values that will be populated along the command execution. To do so, click on **output**  within the Executors section followed by the **Edit** link: 
+![](./images/1-2-2-16-1.png)
+
+Update the values accordingly: 
+
+- body: `$(.getAppEndpoint.output.body)`
+
+- header: `$(.getAppEndpoint.output.headers)`
+
+- status: `$(.getAppEndpoint.output.status)`
+
+- url: `$(.getAppEndpoint.output.url)`
+
+Click on **Update** button to save the changes.
+![](./images/1-2-2-16-2.png)
+
+https://xp267041-dev-bookshop-srv.cfapps.eu10-004.hana.ondemand.com/admin-books/webapp/index.html
+Now let's trigger the command by clicking on the **Trigger** button
+![](./images/1-2-2-15.png)
+
+REMEBER: copy/paste your bookshop webapp index page from Excersie 1 within the `URL` parameter as we had left it required and clic on the button **Trigger**. 
+![](./images/1-2-2-16.png)
+
+The command has been completed succesfully! Click on the Output **Show** link to see the outputs returned by the command after its completion. 
+![](./images/1-2-2-17.png)
+
+You can validate and consume the output values returned by your command after being executed.
+
 
 
 ## Exercise 1.3 Setting up the integration between SAP Cloud ALM and SAP Automation Pilot
