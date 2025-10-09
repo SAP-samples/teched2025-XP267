@@ -11,7 +11,7 @@ For a better understanding of the currnet use case, please consult the diagram s
 ## Exercise 2.1  Collect usage metrics with SAP Automation Pilot 
 
 **Access SAP Automation Pilot**  and navigate via the left menu to **My Catalogs** --> click on **Commands** for the catalog `XP267 Ex02 - Custom Metrics into Cloud ALM`
-<img src="./images/02-01.png style="border:1px solid #ccc; border-radius:6px;"/>
+<img src="./images/02-01.png" width="700" height="400">
 
 Navigate to the command named `CheckResourceQuotaUtilizationXP267Extended`
 ![](./images/02-02.png)
