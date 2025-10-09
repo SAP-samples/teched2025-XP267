@@ -8,6 +8,8 @@ In this exercise, we will:
 For a better understanding of the currnet use case, please consult the diagram shared below: 
 ![](./images/ex-01-scenario.png)
 
+![](./images/ex-01-scenario.png ![](./images/ex-01-scenario.png))
+
 ## Exercise 1.1 Access SAP Cloud ALM and explore the metrics visible in Health Monitoring
 
 **Access SAP Cloud ALM** by following this link here: https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/
