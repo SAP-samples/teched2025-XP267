@@ -1,42 +1,50 @@
-# Exercise 2 - Exercise 2 Description
+# Exercise 2 - Collect usage metrics with SAP Automation Pilot for you BTP Subaccount and push these to SAP Cloud ALM
 
-In this exercise, we will create...
+In this exercise, we will: 
+- Collect usage metrics with SAP Automation Pilot 
+- Use existing commands in SAP Automation Pilot to push these metrics to SAP Cloud ALM 
+- Consume the custom metrics in SAP Cloud ALM - Health Monitoring  
 
-## Exercise 2.1 Sub Exercise 1 Description
+For a better understanding of the currnet use case, please consult the diagram shared below: 
+<img src="./images/ex-01-scenario.png" width="700" height="400">
 
-After completing these steps you will have created...
+## Exercise 2.1  Collect usage metrics with SAP Automation Pilot 
 
-1. Click here.
-<br>![](/exercises/ex2/images/02_01_0010.png)
-
-2.	Insert this line of code.
-```abap
-response->set_text( |Hello ABAP World! | ). 
-```
-
+**Access SAP Automation Pilot**  and navigate via the left menu to **My Catalogs** --> click on **Commands** for the catalog `XP267 Ex02 - Custom Metrics into Cloud ALM`
+![](./images/02-01.png)
 
 
-## Exercise 2.2 Sub Exercise 2 Description
 
-After completing these steps you will have...
+**Login** with your user 
+Select the **Operations** menu item. 
+![](./images/01-01.png)
 
-1.	Enter this code.
-```abap
-DATA(lt_params) = request->get_form_fields(  ).
-READ TABLE lt_params REFERENCE INTO DATA(lr_params) WITH KEY name = 'cmd'.
-  IF sy-subrc = 0.
-    response->set_status( i_code = 200
-                     i_reason = 'Everything is fine').
-    RETURN.
-  ENDIF.
+Click on Health Monitoring capability. 
+![](./images/01-02.png)
 
-```
+You will land at Health Monitoring Overview screen. 
+Make sure Scope has been selected to your subaccount XP267-0XX_CF (e.g. XP267_000_CF)
+![](./images/01-03.png)
 
-2.	Click here.
-<br>![](/exercises/ex2/images/02_02_0010.png)
+Click on the tile and you shall be able to see the services/ system visible in the Health Monitoring. 
+![](./images/01-04.png)
 
-## Summary
 
-You've now ...
 
-Continue to - [Exercise 3 - Excercise 3 ](../ex3/README.md)
+
+## Exercise 2.2  Use existing commands in SAP Automation Pilot to push these metrics to SAP Cloud ALM 
+
+**Access SAP Cloud ALM** by following this link here: https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/
+
+**Login** with your user 
+Select the **Operations** menu item. 
+![](./images/01-01.png)
+
+
+## Exercise 2.3  Consume the custom metrics in SAP Cloud ALM - Health Monitoring
+
+**Access SAP Cloud ALM** by following this link here: https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/
+
+**Login** with your user 
+Select the **Operations** menu item. 
+![](./images/01-01.png)
