@@ -68,12 +68,12 @@ Click on the **Update** button.
 ![](./images/02-09.png)
 
 Navigate to the executor `pushSpaceMemoryUtilization` and validate the paramters you just had added. It should look like this one:
-![](./images/02-010.png)
+![](./images/02-10.png)
 
 Now we need to add another executor next to it. The executor is about pushing the current usage for all our CF spaces on Org level (in case we do have more than one CF Space). 
 
 To do so, go to the executors section in your command and click on the **Add** button to add a new executro within you automation flow. 
-![](./images/02-011.png)
+![](./images/02-11.png)
 
 Add the Executor 
 - **Place the new executor** just before the Ouput by clickin on **Here** botton.
@@ -88,7 +88,7 @@ Add the Executor
 ![](./images/02-12.png)
 
 Now navigate to the executor you just created `pushOrgMemoryUtilization` and click on the **Edit** button to update its parameters. 
-![](./images/02-013.png)
+![](./images/02-13.png)
 
 Update the values accordingly: 
 
@@ -113,10 +113,10 @@ Navigate to the executor `pushOrgMemoryUtilization` and validate the paramters y
 **Trigger the command in SAP Automation Pilot**
 Now it is all set and you can trigger the command in SAP Automation Pilot. 
 To do so, click on the **Trigger** button located in the the top righ screen and proceed further as no any further inputs are needed.
-![](./images/02-016.png)
+![](./images/02-16.png)
 
 **Success** - the commands has been completed and data is pushed to SAP Cloud ALM! 
-![](./images/02-017.png)
+![](./images/02-17.png)
 
 Now let's check the data imngested into SAP Cloud ALM - Health Monitoring. 
 
@@ -127,20 +127,20 @@ Now let's check the data imngested into SAP Cloud ALM - Health Monitoring.
 **Login** with your user --> select the **Operations** menu item --> **Health Monitoring**
 
 Within Health Monitoring Overview, click on **Monitoring**
-![](./images/02-018.png)
+![](./images/02-18.png)
 
 Click on your SAP BTP Cloud Foundry environment `XP267_OXX_CF` (as per the usernam assigned to you, in example, XP267_001_CF) 
-![](./images/02-019.png)
+![](./images/02-19.png)
 
 You will open the **Metrcis Overview** screen in Health Monitoring. Within the very same screen, scroll-down to **Other Metrics** section and you will find the two metrics ( `org.memory.utilization` and `space.memory.utilization`) with the respective values pushed by SAP Automation Pilot. 
 Congrats - you can now feed directly your Obserbavility platform with any metric you might wish to bring in.
-![](./images/02-020.png)
+![](./images/02-20.png)
 
 From this screen, if you click on any of these two metrics, `space.memory.utilization` in example, you will see further details about the metric such as information, rating, value. Click on the **History** button. 
-![](./images/02-021.png)
+![](./images/02-21.png)
 
 You could explore how this metric's value had changed over the time and get additional insights. 
-![](./images/02-022.png)
+![](./images/02-22.png)
 
 ### Congrats - you can now feed directly your Obserbavility platform with any metric you might wish to bring in.
 
