@@ -335,29 +335,13 @@ Once saved, you shall see a screen like the one below. Click on **Ping Connectio
 Congrats - the endpoint check has been a successfull one. Now you can connect and use any command in SAP Automation Pilot from SAP Clod ALM. 
 ![](./images/01-2-13.png)
 
-Your **SAP BTP subaccount is XP267-0XX** (use your hands-on session user e.g. XP266-001) and then click on **Services** dropdown from the lefside menu --> **Instances and Subscriptions** 
-From the **Subscriptions** sections --> **Automation Pilot** (see the screenshot below)
-![](./images/01-1-01.png)
-
-You shall land SAP Automation Pilot **dashboard page**. 
-![](./images/01-1-02.png)
-
-
-Click on **Provided Catalogs** menu and check out all provided ready-to-use automation commands grouped in variois catalogs. These are 300+ ready-to-use commmands at your disposal. 
-![](./images/01-1-03.png)
-
-From the same menu you also can explore: 
-- **My Catalogs** - a newly added commands at your disposal
-- **Commands** - listing all your commands in a list
-- **Inpits** - all available inpputs that can be referenced to any exisitng command
 
 You are all set - it's time to move forward! 
 
 
-
 ## Summary
 
-You've now ...
+You've now learned the basic of SAP Automation Pilot, SAP Cloud ALM Health Monitoring and you have integrated the two products.
 
 Continue to - [Exercise 2 - Exercise 2 Description](../ex2/README.md)
 
