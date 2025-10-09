@@ -6,7 +6,7 @@ In this exercise, we will:
 - Consume the custom metrics in SAP Cloud ALM - Health Monitoring  
 
 For a better understanding of the currnet use case, please consult the diagram shared below: 
-<img src="./images/ex-01-scenario.png" width="700" height="400">
+<img src="./images/ex-02-scenario.png" width="700" height="400">
 
 ## Exercise 2.1  Collect usage metrics with SAP Automation Pilot 
 
