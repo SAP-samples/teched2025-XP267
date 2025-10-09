@@ -1,4 +1,4 @@
-<img width="1017" height="259" alt="image" src="https://github.com/user-attachments/assets/ec73076f-2101-4526-9146-b43cfc6d623d" /># Exercise 1 - Access SAP Cloud ALM and trigger tigger simple commands to your App via SAP Automation Pilot 
+# Exercise 1 - Access SAP Cloud ALM and trigger tigger simple commands to your App via SAP Automation Pilot 
 
 In this exercise, we will: 
 - access SAP Cloud ALM and explore the metrics visible in Health Monitoring
@@ -77,9 +77,65 @@ Now we need to create a service accont so click on the menu item (lefside menu) 
 ![](./images/01-2-03.png)
 
 From the pop-up, please add the following values: 
+username: `cloudALM`
+description: free text , i.e. `service account used in SAP Cloud ALM to trigger commands in SAP Automation Pilot`
+Permissions: from the drop-down select `Read` , `Write` , `Execute`
+Authentication Type: `Basic`
+
+Once ready - click on the button **Create**
+![](./images/01-2-04.png)
+
+**IMPORTANT** Copy now the **Usarname** and the **Password** as once this screen gets closed, you won't be able to copy over again the password. 
+![](./images/01-2-05.png)
+
+Click on the **Close** button. Now you are all done. 
+
+**Let's wrap-up** , now you should have copied from SAP Automation Pilot the values for: 
+- Tenant ID
+- Tenant URL
+- Base URL
+- Username
+- Password
+
+It is time to navigate to** SAP Cloud ALM **following this link: https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/
+
+Click on **Operations** --> **Landscape Management**
+![](./images/01-2-06.png)
 
 
-- 
+Now click on **Services and Systems** menu icon from the left sidebar menu --> click on **Add New Serivce** (see screenshot below)
+![](./images/01-2-07.png)
+
+Now we need to fill in the data for **Add Service** screen as it follows: 
+**Name**: AP-XP267-0XX (as per user name, i.e. if your user is XP267-041 --> Name is AP-XP267-041) 
+**System Number**: {Tenant ID} (copied over from Automation Pilot, see previous step)
+**Service Type**: from the drop-down select `SAP Automation Pilot`
+**Role**: `Test`
+**Root URL**: {Tenant URL} (copied over from Automation Pilot, see previous step)
+**Deployment  Model**: from the drop-down select `BTP System`
+Click on **Save** button
+![](./images/01-2-08.png)
+
+You should be able to see a new service like this one (see screenshot). Click on the Service name. 
+![](./images/01-2-09.png)
+
+Now we need to add an Endpoint on which we could call any command in SAP Automation Pilot. To do so Click on **Endpoints** tab --> **Add**
+![](./images/01-2-10.png)
+
+Fill in the data within the popup **Add Endpoint** as it follows: 
+**Endpoint Name**: same as the service name: AP-XP267-0XX (as per user name, i.e. if your user is XP267-041 --> Name is AP-XP267-041) 
+**Root URL**: {Base URL} (copied over from Automation Pilot, see previous step)
+**Root URL**: Keep Basic Authentication
+**User:** {username} (copied over from Automation Pilot, see previous step)
+**Password:** {password} (copied over from Automation Pilot, see previous step)
+Click on **Save** button
+![](./images/01-2-11.png)
+
+Once saved, you shall see a screen like the one below. Click on **Ping Connection** button. 
+![](./images/01-2-12.png)
+
+Congrats - the endpoint check has been a successfull one. Now you can connect and use any command in SAP Automation Pilot from SAP Clod ALM. 
+![](./images/01-2-13.png)
 
 Your **SAP BTP subaccount is XP267-0XX** (use your hands-on session user e.g. XP266-001) and then click on **Services** dropdown from the lefside menu --> **Instances and Subscriptions** 
 From the **Subscriptions** sections --> **Automation Pilot** (see the screenshot below)
