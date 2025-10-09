@@ -192,11 +192,48 @@ The command has been completed succesfully! Click on the Output **Show** link to
 
 You can validate and consume the output values returned by your command after being executed.
 
+**HINT** You can store input values in SAP Automation Pilot and reuse these to trigger commands and fetch the input values automatically. 
+
+Click on the Inputs menu. You see few inputs that have been already stored in SAP Automation Pilot. Click on `appEndPoints`. 
+![](./images/1-2-2-21.png)
+
+There are few API endpoints already stored. However you see that the value for input `urlHomepage` is set to `XXX`. Click on the edit icon to update it. 
+![](./images/1-2-2-22.png)
+
+Update the `value` with the URL for your app and **Save** it. 
+![](./images/1-2-2-23.png)
+
+Let's go back to our Kick Start catalog and click on the `getAppHomepage` command. 
+![](./images/1-2-2-20.png)
+
+Now, let's do a reference from the command input to the the stored input value for our app homepage. 
+
+To do so, click on the **edit icon** for the input key **URL**. 
+![](./images/1-2-2-24.png)
+
+Now update the Input Key accordingly: 
+- **Uncheck** the toggle for `Required`
+
+- **Default Value Source** - Input Key
+
+- **Input** - adppEndPoints
+
+- **Input Key** - urlHomepage
+
+Click **Update** to save the configuration. 
+![](./images/1-2-2-25.png)
+
+As you see , the reference to your stored input key is made. Now **Trigger** the command and it won't be needed to provide any further inputs . 
+![](./images/1-2-2-26.png)
+
+The command had been completed and you also have learned how to store input keys in SAP Automation Pilot and reference to these from your commands.
+
+**OPTIONAL:**  you can explore and trigger the other commands from your **Kick Start Catalog.** 
 
 
 ## Exercise 1.3 Setting up the integration between SAP Cloud ALM and SAP Automation Pilot
 
-It is time to bring SAP Automation Pilot and SAP Cloud ALM together.
+Now it is time to bring SAP Automation Pilot and SAP Cloud ALM together.
 
 To do so we need to have in hand few values from SAP Automation Pilot that we'll use later in SAP Cloud ALM: 
 
