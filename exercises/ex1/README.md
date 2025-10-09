@@ -94,6 +94,8 @@ Once ready - click on the button **Create**
 ![](./images/01-2-04.png)
 
 **IMPORTANT** Copy now the **Usarname** and the **Password** as once this screen gets closed, you won't be able to copy over again the password. 
+
+
 ![](./images/01-2-05.png)
 
 Click on the **Close** button. Now you are all done. 
@@ -120,17 +122,17 @@ Now click on **Services and Systems** menu icon from the left sidebar menu --> c
 
 Now we need to fill in the data for **Add Service** screen as it follows: 
 
-**Name**: AP-XP267-0XX (as per user name, i.e. if your user is XP267-041 --> Name is AP-XP267-041) 
+- **Name**: AP-XP267-0XX (as per user name, i.e. if your user is XP267-041 --> Name is AP-XP267-041) 
 
-**System Number**: {Tenant ID} (copied over from Automation Pilot, see previous step)
+- **System Number**: {Tenant ID} (copied over from Automation Pilot, see previous step)
 
-**Service Type**: from the drop-down select `SAP Automation Pilot`
+- **Service Type**: from the drop-down select `SAP Automation Pilot`
 
-**Role**: `Test`
+- **Role**: `Test`
 
-**Root URL**: {Tenant URL} (copied over from Automation Pilot, see previous step)
+- **Root URL**: {Tenant URL} (copied over from Automation Pilot, see previous step)
 
-**Deployment  Model**: from the drop-down select `BTP System`
+- **Deployment  Model**: from the drop-down select `BTP System`
 
 Click on **Save** button
 ![](./images/01-2-08.png)
@@ -142,11 +144,17 @@ Now we need to add an Endpoint on which we could call any command in SAP Automat
 ![](./images/01-2-10.png)
 
 Fill in the data within the popup **Add Endpoint** as it follows: 
-**Endpoint Name**: same as the service name: AP-XP267-0XX (as per user name, i.e. if your user is XP267-041 --> Name is AP-XP267-041) 
-**Root URL**: {Base URL} (copied over from Automation Pilot, see previous step)
-**Root URL**: Keep Basic Authentication
-**User:** {username} (copied over from Automation Pilot, see previous step)
-**Password:** {password} (copied over from Automation Pilot, see previous step)
+
+- **Endpoint Name**: same as the service name: AP-XP267-0XX (as per user name, i.e. if your user is XP267-041 --> Name is AP-XP267-041) 
+
+- **Root URL**: {Base URL} (copied over from Automation Pilot, see previous step)
+
+- **Root URL**: Keep Basic Authentication
+
+- **User:** {username} (copied over from Automation Pilot, see previous step)
+
+- **Password:** {password} (copied over from Automation Pilot, see previous step)
+
 Click on **Save** button
 ![](./images/01-2-11.png)
 
