@@ -181,11 +181,10 @@ Update the values accordingly:
 Click on **Update** button to save the changes.
 ![](./images/1-2-2-16-2.png)
 
-https://xp267041-dev-bookshop-srv.cfapps.eu10-004.hana.ondemand.com/admin-books/webapp/index.html
 Now let's trigger the command by clicking on the **Trigger** button
 ![](./images/1-2-2-15.png)
 
-REMEBER: copy/paste your bookshop webapp index page from Excersie 1 within the `URL` parameter as we had left it required and clic on the button **Trigger**. 
+REMEBER: copy/paste your bookshop webapp index page from **Excersie 1** within the `URL` parameter as we had left it required and clic on the button **Trigger**. 
 ![](./images/1-2-2-16.png)
 
 The command has been completed succesfully! Click on the Output **Show** link to see the outputs returned by the command after its completion. 
