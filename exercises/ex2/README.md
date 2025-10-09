@@ -28,8 +28,6 @@ After the command succesful execution, consult the output values by clicking on 
 That's a current snapshot of the resource utilization of Cloud Foundry space and its parrent organization for your subaccount. 
 ![](./images/02-05.png)
 
-
-
 ## Exercise 2.2  Use existing commands in SAP Automation Pilot to push these metrics to SAP Cloud ALM 
 
 Now we want to push these metrics into SAP Cloud ALM - Health Monitoring. To do so, we'll need to extent this existing command. 
@@ -110,7 +108,7 @@ Click on the **Update** button.
 ![](./images/02-14.png)
 
 Navigate to the executor `pushOrgMemoryUtilization` and validate the paramters you just had added. It should look like this one:
-![](./images/02-015.png)
+![](./images/02-15.png)
 
 **Trigger the command in SAP Automation Pilot**
 Now it is all set and you can trigger the command in SAP Automation Pilot. 
