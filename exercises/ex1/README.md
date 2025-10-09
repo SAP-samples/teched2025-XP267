@@ -1,4 +1,4 @@
-# Exercise 1 - Access SAP Cloud ALM and trigger tigger simple commands to your App via SAP Automation Pilot 
+<img width="1017" height="259" alt="image" src="https://github.com/user-attachments/assets/ec73076f-2101-4526-9146-b43cfc6d623d" /># Exercise 1 - Access SAP Cloud ALM and trigger tigger simple commands to your App via SAP Automation Pilot 
 
 In this exercise, we will: 
 - access SAP Cloud ALM and explore the metrics visible in Health Monitoring
@@ -38,26 +38,67 @@ It is time to move your SAP Automation Pilot tenant and BTP Cockpit.
 
 ## Exercise 1.2 Interact with App endpoints via SAP Automation Pilot
 
-After completing these steps you will have...
+To check out you SAP Automation Pilot tenant you need to go back to you SAP BTP subaccount. 
 
-1.	Enter this code.
-```abap
-DATA(lt_params) = request->get_form_fields(  ).
-READ TABLE lt_params REFERENCE INTO DATA(lr_params) WITH KEY name = 'cmd'.
-  IF sy-subrc <> 0.
-    response->set_status( i_code = 400
-                     i_reason = 'Bad request').
-    RETURN.
-  ENDIF.
+Your **SAP BTP subaccount is XP267-0XX** (use your hands-on session user e.g. XP266-001) and then click on **Services** dropdown from the lefside menu --> **Instances and Subscriptions** 
+From the **Subscriptions** sections --> **Automation Pilot** (see the screenshot below)
+![](./images/01-1-01.png)
 
-```
+You shall land SAP Automation Pilot **dashboard page**. 
+![](./images/01-1-02.png)
 
-2.	Click here.
-<br>![](/exercises/ex1/images/01_02_0010.png)
+Click on **Provided Catalogs** menu and check out all provided ready-to-use automation commands grouped in variois catalogs. These are 300+ ready-to-use commmands at your disposal. 
+![](./images/01-1-03.png)
 
-## Exercise 1.3 Setup the integration between SAP Cloud ALM and SAP Automation Pilot 
+From the same menu you also can explore: 
+- **My Catalogs** - a newly added commands at your disposal
+- **Commands** - listing all your commands in a list
+- **Inpits** - all available inpputs that can be referenced to any exisitng command
 
-After completing these steps you will have...
+You are all set - it's time to move forward! 
+
+
+## Exercise 1.3 Setting up the integration between SAP Cloud ALM and SAP Automation Pilot
+
+It is time to bring SAP Automation Pilot and SAP Cloud ALM together.
+
+To do so we need to have handy coule of values from SAP Automation Pilot that we'll use later in SAP Cloud ALM: 
+
+In your SAP Automation Pilot, click on the **User** menu item (bottom left menu) and copy the values for: 
+- Tenant ID
+- Tenant URL
+![](./images/01-2-01.png)
+
+Click now the "API" menu item (bottom left menu) a copy **Base URL** value: 
+![](./images/01-2-02.png)
+
+
+Now we need to create a service accont so click on the menu item (lefside menu) Service Accounts --> **Create** button
+![](./images/01-2-03.png)
+
+From the pop-up, please add the following values: 
+
+
+- 
+
+Your **SAP BTP subaccount is XP267-0XX** (use your hands-on session user e.g. XP266-001) and then click on **Services** dropdown from the lefside menu --> **Instances and Subscriptions** 
+From the **Subscriptions** sections --> **Automation Pilot** (see the screenshot below)
+![](./images/01-1-01.png)
+
+You shall land SAP Automation Pilot **dashboard page**. 
+![](./images/01-1-02.png)
+
+
+Click on **Provided Catalogs** menu and check out all provided ready-to-use automation commands grouped in variois catalogs. These are 300+ ready-to-use commmands at your disposal. 
+![](./images/01-1-03.png)
+
+From the same menu you also can explore: 
+- **My Catalogs** - a newly added commands at your disposal
+- **Commands** - listing all your commands in a list
+- **Inpits** - all available inpputs that can be referenced to any exisitng command
+
+You are all set - it's time to move forward! 
+
 
 
 ## Summary
