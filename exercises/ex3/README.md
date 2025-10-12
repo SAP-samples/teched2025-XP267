@@ -79,10 +79,10 @@ Add the Executor
 - **Keep enabled** the `Automap parameters`
 
 - Click on **Add** button
-![](./images/02-11.png)
+![](./images/03-11.png)
 
 Now navigate to the executor you just created `AICoreAnalyze` and click on the **Edit** button to update its parameters. 
-![](./images/02-12.png)
+![](./images/03-12.png)
 
 Update the values accordingly: 
 
@@ -95,10 +95,10 @@ Update the values accordingly:
 - **systemMessage** - `You are an AI assistant with expertise in CAP NodeJS applications. You will receive application logs from a CAP NodeJS application that uses HANA Cloud as its database. Your task is to analyze these logs and provide a summary highlighting the application's current state and any potential issues.`
 
 Click on the **Update** button. 
-![](./images/02-13.png)
+![](./images/03-13.png)
 
 Navigate to the executor `AICoreAnalyze` and validate the paramters you just had added. It should look like this one:
-![](./images/02-14.png)
+![](./images/03-14.png)
 
 What baisically we just did is that we are getting the app logs collected and we passing these to the SAP AI Core service (Gpt 4o mini model) and we are asking it for an assessment as we send a system messag as well: _"You are an AI assistant with expertise in CAP NodeJS applications. You will receive application logs from a CAP NodeJS application that uses HANA Cloud as its database. Your task is to analyze these logs and provide a summary highlighting the application's current state and any potential issues."_
 
@@ -106,7 +106,7 @@ It's time to explore the output and what assessment the AI Core service will ret
 As we already had learned in the previous execrcise, to consume an output value out of a command executed in SAP Automation Pilot we need to add an Output Key. 
 
 Within the command itself, Go now to the **Output Key** section and click on **Add**.
-![](./images/02-16.png)
+![](./images/03-16.png)
 
 Within the popup Add Output Key provide the following attributes: 
 
@@ -115,28 +115,28 @@ Within the popup Add Output Key provide the following attributes:
 - **Type** - `string`
 
   Click on **Add** button.
-  ![](./images/02-17.png)
+  ![](./images/03-17.png)
 
 IMPORTANT: let's map the outputs to specific output values that will be populated along the command execution. To do so, click on **output**  within the Executors section followed by the **Edit** link: 
-![](./images/02-18.png)
+![](./images/03-18.png)
 
 Update the values accordingly: 
 
 - **AIOutput**: `$(.AICoreAnalyze.output.response)`
 
 Click on **Update** button to save the changes.
-![](./images/02-19.png)
+![](./images/03-19.png)
 
 **Trigger the command in SAP Automation Pilot**
 Now it is all set and you can trigger the command in SAP Automation Pilot. 
 To do so, click on the **Trigger** button located in the the top righ screen and proceed further as no any further inputs are needed.
-![](./images/02-15.png)
+![](./images/03-15.png)
 
 The command has been completed succesfully! Click on the Output **Show** link to see the outputs returned by the command after its completion. 
-![](./images/02-20.png)
+![](./images/03-20.png)
 
 Click on the AIOutput arrow and you can get the insights provided by the SAP AI Core service based on the current snapshot of your app logs. 
-![](./images/02-21.png)
+![](./images/03-21.png)
 
 
 ## Exercise 3.3  Extend existing SAP Automation Pilot with a summary assessment by SAP AI Core service 
