@@ -10,7 +10,7 @@ For a better understanding of the currnet use case, please consult the diagram s
 <img src="./images/ex-03-scenario.png" width="700" height="400">
 
 
-## Exercise 2.1  Collect App logs and state with a command executed in SAP Automation Pilot 
+## Exercise 3.1  Collect App logs and state with a command executed in SAP Automation Pilot 
 
 **Access SAP Automation Pilot** and navigate via the left menu to **My Catalogs** --> click on **Commands** for the catalog `XP267 Ex03 - AI Powered Commands`
 
@@ -57,10 +57,28 @@ You shall see that the memory allocated within the space where your CAP app runs
 ![](./images/03-10.png)
 
 
+## Exercise 3.2  Extend existing SAP Automation Pilot with an integration to SAP AI Core service for assesment and recommendations by AI 
 
 
-=========
+Now, since we have all the needed informaiton to do an assessment of the health status for our CAP application, let's bring SAP AI Core service. Main idea is this assessment to be made by AI based on the current snapshot of the app logs and environment's parametes. 
 
+Of course, we'll use existing command in SAP Automation Pilot to push the data collected and a tailored prompt to SAP AI Core service and the consume its response. 
+Note: an SAP AI Core service, AI model deployment has been already made and `ServiceKey` needed for authentication has been added to you SAP Automation Pilot tenant. 
+
+![](./images/03-02.png)
+
+Thus command is already configured to collect the  logs , the current state and the latest events for you CAP application. 
+**Trigger** the command , no any further inputs are needed. 
+![](./images/03-03.png)
+
+
+
+
+
+
+
+
+====================
 
 ## Exercise 1.1 Access SAP Cloud ALM and explore the metrics visible in Health Monitoring
 
@@ -89,6 +107,17 @@ Feel free to click on **All Metrics** tab to explore these metrics further.
 
 Well done! You can now undestand better the health status of you CAP app. 
 It is time to move your SAP Automation Pilot tenant and BTP Cockpit.
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Exercise 1.2 Interact with App endpoints via SAP Automation Pilot
