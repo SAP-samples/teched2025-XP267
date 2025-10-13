@@ -32,7 +32,7 @@ _HINT: the output provides the insights that ~45% out of your memory allocated f
 
 ## Exercise 2.2  Use existing commands in SAP Automation Pilot to push these metrics to SAP Cloud ALM 
 
-Now we want to push these metrics into SAP Cloud ALM - Health Monitoring. To do so, we'll need to extent this existing command. 
+Now we want to push these metrics into SAP Cloud ALM - Health Monitoring. To do so, we'll need to extent this existing command: `CheckResourceQuotaUtilizationXP267Extended`
 
 **Go to the command itself**, scroll-down to the **Executor section** and click on **Add** button. 
 ![](./images/02-06.png)
