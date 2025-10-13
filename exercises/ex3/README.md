@@ -1,5 +1,5 @@
 
-# Exercise 3 - Extending SAP Automation Pilot by an integration to SAP AI Core service for assessment of technical data and recommendations by AI
+# Exercise 3 - Extending SAP Automation Pilot by an integration to SAP AI Core for recommendations by AI
 
 In this exercise, we will: 
 - run and exent a command in SAP Automation Pilot desinged to collect application logs and Cloud Foundry environment's parameters 
