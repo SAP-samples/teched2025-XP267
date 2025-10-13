@@ -87,7 +87,7 @@ Let's navigate to the app itsef `bookshop-srv` and get further insights about ap
 Well done - the memory allocated for your CAP app has been increased! 
 
 **HINT**: let's explore the SAP Automation Pilot command triggered `UpscaleAppXP267UserXXX` . Go to the executor `setAppResources` , check the parameter `memory` --> you will see the folliwing values: `$(.getAppState.output.memory + 256)` . That's a configuration so we take the current memory allocated to the CF space and we add 256 MB on top of it . Of course the value `256` can be modified , can be added as a dynamic input parameter, or a manual value that is to be entered by the user along the command execution. 
-
+![](./images/04-15.png)
 
 We are all set, app is running fine, let's close the alert in SAP Cloud ALM - Health Monitoring. 
 
@@ -96,6 +96,7 @@ We are all set, app is running fine, let's close the alert in SAP Cloud ALM - He
 Navigate to the **Alerts** and **Alert details page**. 
 
 Click on the Actions button and then select **Confirm**. 
+![](./images/04-16.png)
 
 **Success!!** - you had remediated the situation you just had had and the alert is now closed! 
 
