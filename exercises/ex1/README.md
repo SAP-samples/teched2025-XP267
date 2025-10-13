@@ -180,7 +180,8 @@ You can store and reuse input values in **SAP Automation Pilot**:
    - **Default Value Source**: `Input Key`  
    - **Input**: `appEndPoints`  
    - **Input Key**: `urlHomepage`  
-   Click **Update**.  
+   Click **Update**.
+   ![](./images/01-01-extra.png)
    ![](./images/1-2-2-25.png)
 
 6. Trigger the command again — it will now automatically use the stored input value.  
@@ -252,7 +253,7 @@ You should now have the following values ready:
    - **Deployment Model**: `BTP System`  
 
    Click **Save**.  
-   ![](./images/01-01-extra.png)
+   ![](./images/01-03-extra.png)
 
 5. Select the newly created service and open its details.  
    ![](./images/01-2-09.png)
