@@ -175,7 +175,7 @@ You can store and reuse input values in **SAP Automation Pilot**:
 4. Go back to your **Kick Start Catalog** and open the `getAppHomepage` command.  
    ![](./images/1-2-2-20.png)
 
-5. Edit the **URL** input key to reference the stored value:  
+5. Edit the **URL** input key within the **Input Keys contract secion** by clicking on the **pencil button** to reference the stored value:  
    - Uncheck **Required**  
    - **Default Value Source**: `Input Key`  
    - **Input**: `appEndPoints`  
