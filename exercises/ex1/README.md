@@ -252,7 +252,7 @@ You should now have the following values ready:
    - **Deployment Model**: `BTP System`  
 
    Click **Save**.  
-   ![](./images/01-2-08.png)
+   ![](./images/01-01-extra.png)
 
 5. Select the newly created service and open its details.  
    ![](./images/01-2-09.png)
