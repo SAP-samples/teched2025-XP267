@@ -125,8 +125,7 @@ Let’s obtain a concise **single-status** health summary (`OK`, `Investigate`, 
    - **Alias**: `AICoreAnalyzeSummary`  
    - **Command**: `GenerateGpt4OmniCompletion`  
    - Keep **Automap parameters** enabled  
-   - Click **Add**  
-   ![](./images/03-23.png)  
+   - Click **Add**    
    ![](./images/03-24.png)
 
 2. Edit **`AICoreAnalyzeSummary`** (note: ensure you edit the *Summary* executor):  
