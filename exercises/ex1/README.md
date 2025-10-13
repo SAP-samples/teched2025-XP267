@@ -155,6 +155,7 @@ Let’s create your first custom command.
    ![](./images/1-2-2-17.png)
 
 ✅ The command executed successfully and returned outputs such as status, headers, and response body.
+![](./images/01-00-extra.png)
 
 ---
 
