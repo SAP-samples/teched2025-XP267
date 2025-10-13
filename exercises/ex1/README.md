@@ -1,347 +1,287 @@
-# Exercise 1 - Access SAP Cloud ALM and trigger tigger simple commands to your App via SAP Automation Pilot 
+# Exercise 1 – Access SAP Cloud ALM and Trigger Commands to Your App via SAP Automation Pilot
 
-In this exercise, we will: 
-- access SAP Cloud ALM and explore the metrics visible in Health Monitoring
-- interact with App endpoints via SAP Automation Pilot
-- setup the integration between SAP Cloud ALM and SAP Automation Pilot
+In this exercise, you will:  
+- Access **SAP Cloud ALM** and explore metrics in **Health Monitoring**  
+- Interact with application endpoints via **SAP Automation Pilot**  
+- Set up the integration between **SAP Cloud ALM** and **SAP Automation Pilot**
 
-For a better understanding of the currnet use case, please consult the diagram shared below: 
+For a better understanding of the use case, refer to the diagram below:  
 <img src="./images/ex-01-scenario.png" width="700" height="400">
 
-## Exercise 1.1 Access SAP Cloud ALM and explore the metrics visible in Health Monitoring
+---
 
-**Access SAP Cloud ALM** by following this link here: https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/
+## Exercise 1.1 – Access SAP Cloud ALM and Explore Health Monitoring Metrics
 
-**Login** with your user 
-Select the **Operations** menu item. 
-![](./images/01-01.png)
+1. Access **SAP Cloud ALM**:  
+   [https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/](https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/)
 
-Click on Health Monitoring capability. 
-![](./images/01-02.png)
+2. **Log in** with your provided user credentials.  
 
-You will land at Health Monitoring Overview screen. 
-Make sure Scope has been selected to your subaccount XP267-0XX_CF (e.g. XP267_000_CF)
-![](./images/01-03.png)
+3. From the main menu, select **Operations**.  
+   ![](./images/01-01.png)
 
-Click on the tile and you shall be able to see the services/ system visible in the Health Monitoring. 
-![](./images/01-04.png)
+4. Click on **Health Monitoring**.  
+   ![](./images/01-02.png)
 
-Click on the service to land to the SAP BTP Cloud Foundry environment Metrics Overview. 
-These are all metrics ingested by your CAP app via the Open Telemtry. 
-![](./images/01-05.png)
+5. You will land on the **Health Monitoring Overview** screen.  
+   Make sure the **Scope** is set to your subaccount, e.g. `XP267-0XX_CF` (for example, `XP267_001_CF`).  
+   ![](./images/01-03.png)
 
-Feel free to click on **All Metrics** tab to explore these metrics further. 
-![](./images/01-06.png)
+6. Click on the tile to view all available services and systems in Health Monitoring.  
+   ![](./images/01-04.png)
 
-Well done! You can now undestand better the health status of you CAP app. 
-It is time to move your SAP Automation Pilot tenant and BTP Cockpit.
+7. Click on a service to access the **SAP BTP Cloud Foundry Metrics Overview**.  
+   These are metrics ingested from your CAP app through **OpenTelemetry**.  
+   ![](./images/01-05.png)
 
+8. Optionally, click on the **All Metrics** tab to explore the collected metrics in detail.  
+   ![](./images/01-06.png)
 
-## Exercise 1.2 Interact with App endpoints via SAP Automation Pilot
+✅ **Well done!** You can now monitor the health of your CAP app.  
+Next, you will explore **SAP Automation Pilot** and interact with your app endpoints.
 
-### Exercise 1.2.1 Explore main sections in SAP Automation Pilot
+---
 
-To check out you SAP Automation Pilot tenant you need to go back to you SAP BTP subaccount. 
+## Exercise 1.2 – Interact with App Endpoints via SAP Automation Pilot
 
-Your **SAP BTP subaccount is XP267-0XX** (use your hands-on session user e.g. XP266-001) and then click on **Services** dropdown from the lefside menu --> **Instances and Subscriptions** 
+### Exercise 1.2.1 – Explore Main Sections in SAP Automation Pilot
 
-From the **Subscriptions** sections --> **Automation Pilot** (see the screenshot below)
-![](./images/01-1-01.png)
+1. Return to your **SAP BTP subaccount** (`XP267-0XX`, for example, `XP267-001`).  
 
-You shall land SAP Automation Pilot **dashboard page**. 
-![](./images/01-1-02.png)
+2. From the left-side menu, go to **Services → Instances and Subscriptions**.  
 
-Click on **Provided Catalogs** menu and check out all provided ready-to-use automation commands grouped in variois catalogs. These are 300+ ready-to-use commmands at your disposal. 
-![](./images/01-1-03.png)
+3. Under **Subscriptions**, click on **Automation Pilot**.  
+   ![](./images/01-1-01.png)
 
-From the same menu you also can explore: 
-- **My Catalogs** - a newly added commands at your disposal
-- **Commands** - listing all your commands in a list
-- **Inpits** - all available inpputs that can be referenced to any exisitng command
+4. You will land on the **SAP Automation Pilot Dashboard**.  
+   ![](./images/01-1-02.png)
 
-### Exercise 1.2.2 Build our first command in SAP Automation Pilot
-Let's build our first command in SAP Automation Pilot. 
+5. From the left menu, open **Provided Catalogs**.  
+   Browse through the 300+ ready-to-use automation commands grouped by catalogs.  
+   ![](./images/01-1-03.png)
 
-Navigate to My Catalogs -> click on **Commands** from catalog named **XP267 Ex01 - Kick Start Commands**
-![](./images/1-2-2-01.png)
+You can also explore:  
+- **My Catalogs** – your custom and extended commands  
+- **Commands** – all commands available to your user  
+- **Inputs** – reusable parameters that can be referenced in commands  
 
-You will land here - thera are already few commands create and we'll explore these in a bit. For now, click on the button **Create** :
-![](./images/1-2-2-02.png)
+---
 
-- **Catalog** - pick up the `XP267 Ex01 - Kick Start Commands`
+### Exercise 1.2.2 – Build Your First Command in SAP Automation Pilot
 
-- **Name** - simpleHttpRequest
+Let’s create your first custom command.
 
-Click on **Create** button. 
-![](./images/1-2-2-03.png)
+1. Navigate to **My Catalogs** → open **Commands** from the catalog named **XP267 Ex01 – Kick Start Commands**.  
+   ![](./images/1-2-2-01.png)
 
-Congrats - you had created a command in SAP Automation Pilot. However, as you see, thera are no inputs keys, outputs keys , neither executors for this command. Let's add some! 
-![](./images/1-2-2-04.png)
+2. Click **Create**.  
+   ![](./images/1-2-2-02.png)
 
-Let's stat with the Inputs. 
-Click on **Add** button within the Inputs Key section. 
-![](./images/1-2-2-05.png)
+3. Fill in the details:  
+   - **Catalog**: `XP267 Ex01 – Kick Start Commands`  
+   - **Name**: `simpleHttpRequest`  
 
-Fill in the **Add Input Key** popup: 
+   Click **Create**.  
+   ![](./images/1-2-2-03.png)
 
-- **Name** - `url`
+4. The command is created but currently has no inputs, outputs, or executors.  
+   ![](./images/1-2-2-04.png)
 
-- **Type** - `string`
+#### Add Inputs
 
-- Make it `Required` by switching the toggle
-  
-Click on **Add** button to save it. 
-![](./images/1-2-2-06.png)
+1. Click **Add** under the **Input Keys** section.  
+   ![](./images/1-2-2-05.png)
 
-Now let's add another input since we want to interact with our CAP app , we'll need to define the method of our simple call to this app. 
-Click on **Add** button within the Inputs Key section and fill in the **Add Input Key** popup: 
+   Fill in:  
+   - **Name**: `url`  
+   - **Type**: `string`  
+   - Mark as **Required**  
+   Click **Add**.  
+   ![](./images/1-2-2-06.png)
 
-- **Name** - `method`
+2. Add another input key to define the HTTP method:  
+   - **Name**: `method`  
+   - **Type**: `string`  
+   - **Default Value Source**: `Static`  
+   - **Value**: `GET`  
+   Click **Add**.  
+   ![](./images/1-2-2-07.png)
 
-- **Type** - `string`
+#### Add Executor
 
-- **Default Value Source** - `Static` (use the drop-down)
+1. Click **Add** under the **Executors** section.  
+   ![](./images/1-2-2-08.png)
 
-- **Value** - `GET`
+2. In the **Add Executor** dialog:  
+   - Click **Here** to define the execution order  
+   - **Alias**: `getAppEndpoint`  
+   - **Command**: `HttpRequest`  
+   - Keep **Automap parameters** enabled  
+   Click **Add**.  
+   ![](./images/1-2-2-09.png)
 
-![](./images/1-2-2-07.png)
-  
-Click on **Add** button to save it. 
+   You will now see the executor added with mapped parameters.  
+   ![](./images/1-2-2-10.png)
 
-Now it is time to add an executor. To do so, click on **Add** button within the **Executors section**.. 
-![](./images/1-2-2-08.png)
+#### Add Outputs
 
-Within the Add **Executor pop-up**: 
+1. Click **Add** under the **Output Keys** section.  
+   ![](./images/1-2-2-11.png)
 
-- **Select** where exactly within the automation flow the executor to be placed by click on **Here** button
+   Add the following outputs:  
+   - **Name**: `url` – **Type**: `string`  
+   - **Name**: `status` – **Type**: `number`  
+   - **Name**: `header` – **Type**: `object`  
+   - **Name**: `body` – **Type**: `string`  
+   ![](./images/1-2-2-14.png)
 
-- **Alias** - `getAppEndpoint`
+2. Map outputs to their respective values:  
+   - **body**: `$(.getAppEndpoint.output.body)`  
+   - **header**: `$(.getAppEndpoint.output.headers)`  
+   - **status**: `$(.getAppEndpoint.output.status)`  
+   - **url**: `$(.getAppEndpoint.output.url)`  
+   Click **Update**.  
+   ![](./images/1-2-2-16-2.png)
 
-- **Command** - `HttpRequest` (use an existing command to do http requests)
+#### Trigger the Command
 
-- **Automap parameters** - leave it `enabled` (by default it is enabled so do not change it)
+1. Click **Trigger**.  
+   ![](./images/1-2-2-15.png)
 
-- Click on **Add** button
-![](./images/1-2-2-09.png)
+2. Provide the **URL** of your Bookshop web app (copied from Exercise 0) and click **Trigger**.  
+   ![](./images/1-2-2-16.png)
 
-As you see - the executor is now in place and there is an automated mapping between the input key `method` and the parameter `method` within the command. 
-![](./images/1-2-2-10.png)
+3. Once complete, click **Show** under **Output** to view the returned values.  
+   ![](./images/1-2-2-17.png)
 
-Now let's add few outputs which are to be consumed once the command it is fired and executed. 
+✅ The command executed successfully and returned outputs such as status, headers, and response body.
 
-To do so, click on Click on **Add** button within the Output Keys section. 
-![](./images/1-2-2-11.png)
+---
 
+### Optional – Using Stored Input Keys
 
-Fill in the **Add Output Key** popup:
-- **Name** - `url`
+You can store and reuse input values in **SAP Automation Pilot**:
 
-- **Type** - `string`
+1. Click **Inputs** in the left menu.  
+   ![](./images/1-2-2-21.png)
 
-- Click on **Add** button to save it.
-![](./images/1-2-2-12.png)
+2. Select the input set `appEndPoints` and click the **Edit** icon.  
+   ![](./images/1-2-2-22.png)
 
-Your output **url** is ready to be consumed. 
-![](./images/1-2-2-13.png)
+3. Update the `urlHomepage` value with your app’s URL and **Save**.  
+   ![](./images/1-2-2-23.png)
 
-Repeat same steps to add these outputs: 
+4. Go back to your **Kick Start Catalog** and open the `getAppHomepage` command.  
+   ![](./images/1-2-2-20.png)
 
-- **Name** - `status`
+5. Edit the **URL** input key to reference the stored value:  
+   - Uncheck **Required**  
+   - **Default Value Source**: `Input Key`  
+   - **Input**: `appEndPoints`  
+   - **Input Key**: `urlHomepage`  
+   Click **Update**.  
+   ![](./images/1-2-2-25.png)
 
-- **Type** - `number`
+6. Trigger the command again — it will now automatically use the stored input value.  
+   ![](./images/1-2-2-26.png)
 
-AND 
+✅ You’ve learned how to create, execute, and reuse inputs for commands in SAP Automation Pilot.
 
-- **Name** - `header`
+---
 
-- **Type** - `object`
+## Exercise 1.3 – Set Up Integration Between SAP Cloud ALM and SAP Automation Pilot
 
-AND
+Now, let’s integrate **SAP Cloud ALM** with **SAP Automation Pilot**.
 
-- **Name** - `body`
+### Step 1 – Gather Required Values from SAP Automation Pilot
 
-- **Type** - `string`
-
-Your outputs are now in place. 
-![](./images/1-2-2-14.png)
-
-IMPORTANT: let's map the outputs to specific output values that will be populated along the command execution. To do so, click on **output**  within the Executors section followed by the **Edit** link: 
-![](./images/1-2-2-16-1.png)
-
-Update the values accordingly: 
-
-- **body**: `$(.getAppEndpoint.output.body)`
-
-- **header**: `$(.getAppEndpoint.output.headers)`
-
-- **status**: `$(.getAppEndpoint.output.status)`
-
-- **url**: `$(.getAppEndpoint.output.url)`
-
-Click on **Update** button to save the changes.
-![](./images/1-2-2-16-2.png)
-
-Now let's trigger the command by clicking on the **Trigger** button
-![](./images/1-2-2-15.png)
-
-**REMEBER**: copy/paste your bookshop webapp index page from **Excersie 1** within the `URL` parameter as we had left it required and clic on the button **Trigger**. 
-![](./images/1-2-2-16.png)
-
-The command has been completed succesfully! Click on the Output **Show** link to see the outputs returned by the command after its completion. 
-![](./images/1-2-2-17.png)
-
-You can validate and consume the output values returned by your command after being executed.
-
-**HINT** You can store input values in SAP Automation Pilot and reuse these to trigger commands and fetch the input values automatically. 
-
-Click on the Inputs menu. You see few inputs that have been already stored in SAP Automation Pilot. Click on `appEndPoints`. 
-![](./images/1-2-2-21.png)
-
-There are few API endpoints already stored. However you see that the value for input `urlHomepage` is set to `XXX`. Click on the edit icon to update it. 
-![](./images/1-2-2-22.png)
-
-Update the `value` with the URL for your app and **Save** it. 
-![](./images/1-2-2-23.png)
-
-Let's go back to our Kick Start catalog and click on the `getAppHomepage` command. 
-![](./images/1-2-2-20.png)
-
-Now, let's do a reference from the command input to the the stored input value for our app homepage. 
-
-To do so, click on the **edit icon** for the input key **URL**. 
-![](./images/1-2-2-24.png)
-
-Now update the Input Key accordingly: 
-- **Uncheck** the toggle for `Required`
-
-- **Default Value Source** - `Input Key`
-
-- **Input** - `adppEndPoints`
-
-- **Input Key** - `urlHomepage`
-
-Click **Update** to save the configuration. 
-![](./images/1-2-2-25.png)
-
-As you see , the reference to your stored input key is made. Now **Trigger** the command and it won't be needed to provide any further inputs . 
-![](./images/1-2-2-26.png)
-
-The command had been completed and you also have learned how to store input keys in SAP Automation Pilot and reference to these from your commands.
-
-**OPTIONAL:**  you can explore and trigger the other commands from your **Kick Start Catalog.** 
-
-
-## Exercise 1.3 Setting up the integration between SAP Cloud ALM and SAP Automation Pilot
-
-Now it is time to bring SAP Automation Pilot and SAP Cloud ALM together.
-
-To do so we need to have in hand few values from SAP Automation Pilot that we'll use later in SAP Cloud ALM: 
-
-In your SAP Automation Pilot, click on the **User** menu item (bottom left menu) and copy the values for: 
-
-- Tenant ID
-
-- Tenant URL
+In **SAP Automation Pilot**, click on the **User** menu (bottom left corner) and copy the following:  
+- Tenant ID  
+- Tenant URL  
 ![](./images/01-2-01.png)
 
-Click now the "API" menu item (bottom left menu) a copy **Base URL** value: 
+Then click **API** (bottom left menu) and copy the **Base URL**.  
 ![](./images/01-2-02.png)
 
+### Step 2 – Create a Service Account
 
-Now we need to create a service accont so click on the menu item (lefside menu) Service Accounts --> **Create** button
-![](./images/01-2-03.png)
+1. In the left menu, go to **Service Accounts** → **Create**.  
+   ![](./images/01-2-03.png)
 
-From the pop-up, please add the following values: 
+2. Fill in:  
+   - **Username**: `cloudALM`  
+   - **Description**: e.g. *Service account used in SAP Cloud ALM to trigger commands in SAP Automation Pilot*  
+   - **Permissions**: `Read`, `Write`, `Execute`  
+   - **Authentication Type**: `Basic`  
 
-- username: `cloudALM`
+   Click **Create**.  
+   ![](./images/01-2-04.png)
 
-- description: free text , i.e. `service account used in SAP Cloud ALM to trigger commands in SAP Automation Pilot`
+3. Copy the **Username** and **Password** immediately — the password will not be displayed again.  
+   ![](./images/01-2-05.png)
 
-- Permissions: from the drop-down select `Read` , `Write` , `Execute`
+Click **Close** when done.
 
-- Authentication Type: `Basic`
+You should now have the following values ready:  
+- Tenant ID  
+- Tenant URL  
+- Base URL  
+- Username  
+- Password  
 
-Once ready - click on the button **Create**
-![](./images/01-2-04.png)
+---
 
-**IMPORTANT** Copy now the **Usarname** and the **Password** as once this screen gets closed, you won't be able to copy over again the password. 
+### Step 3 – Configure the Connection in SAP Cloud ALM
 
+1. Open **SAP Cloud ALM**:  
+   [https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/](https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/)
 
-![](./images/01-2-05.png)
+2. Go to **Operations → Landscape Management**.  
+   ![](./images/01-2-06.png)
 
-Click on the **Close** button. Now you are all done. 
+3. From the left sidebar, select **Services and Systems** → click **Add New Service**.  
+   ![](./images/01-2-07.png)
 
-**Let's wrap-up** , now you should have copied from SAP Automation Pilot the values for: 
-- Tenant ID
+4. Fill in the **Add Service** form:  
+   - **Name**: `AP-XP267-0XX` (e.g. `AP-XP267-041`)  
+   - **System Number**: *Tenant ID* (copied earlier)  
+   - **Service Type**: `SAP Automation Pilot`  
+   - **Role**: `Test`  
+   - **Root URL**: *Tenant URL*  
+   - **Deployment Model**: `BTP System`  
 
-- Tenant URL
+   Click **Save**.  
+   ![](./images/01-2-08.png)
 
-- Base URL
+5. Select the newly created service and open its details.  
+   ![](./images/01-2-09.png)
 
-- Username
+6. Go to the **Endpoints** tab → click **Add**.  
+   ![](./images/01-2-10.png)
 
-- Password
+7. Fill in the endpoint details:  
+   - **Endpoint Name**: `AP-XP267-0XX`  
+   - **Root URL**: *Base URL*  
+   - **Authentication**: Basic  
+   - **User**: *Username*  
+   - **Password**: *Password*  
+   Click **Save**.  
+   ![](./images/01-2-11.png)
 
-It is time to navigate to **SAP Cloud ALM** following this link: https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/
+8. After saving, click **Ping Connection** to verify the setup.  
+   ![](./images/01-2-12.png)
 
-Click on **Operations** --> **Landscape Management**
-![](./images/01-2-06.png)
+✅ **Success!** The endpoint connection is active. You can now trigger Automation Pilot commands directly from **SAP Cloud ALM**.  
+   ![](./images/01-2-13.png)
 
-
-Now click on **Services and Systems** menu icon from the left sidebar menu --> click on **Add New Serivce** (see screenshot below)
-![](./images/01-2-07.png)
-
-Now we need to fill in the data for **Add Service** screen as it follows: 
-
-- **Name**: AP-XP267-0XX (as per user name, i.e. if your user is XP267-041 --> Name is AP-XP267-041) 
-
-- **System Number**: {Tenant ID} (copied over from Automation Pilot, see previous step)
-
-- **Service Type**: from the drop-down select `SAP Automation Pilot`
-
-- **Role**: `Test`
-
-- **Root URL**: {Tenant URL} (copied over from Automation Pilot, see previous step)
-
-- **Deployment  Model**: from the drop-down select `BTP System`
-
-Click on **Save** button
-![](./images/01-2-08.png)
-
-You should be able to see a new service like this one (see screenshot). Click on the Service name. 
-![](./images/01-2-09.png)
-
-Now we need to add an Endpoint on which we could call any command in SAP Automation Pilot. To do so Click on **Endpoints** tab --> **Add**
-![](./images/01-2-10.png)
-
-Fill in the data within the popup **Add Endpoint** as it follows: 
-
-- **Endpoint Name**: same as the service name: AP-XP267-0XX (as per user name, i.e. if your user is XP267-041 --> Name is AP-XP267-041) 
-
-- **Root URL**: {Base URL} (copied over from Automation Pilot, see previous step)
-
-- **Root URL**: Keep Basic Authentication
-
-- **User:** {username} (copied over from Automation Pilot, see previous step)
-
-- **Password:** {password} (copied over from Automation Pilot, see previous step)
-
-Click on **Save** button
-![](./images/01-2-11.png)
-
-Once saved, you shall see a screen like the one below. Click on **Ping Connection** button. 
-![](./images/01-2-12.png)
-
-Congrats - the endpoint check has been a successfull one. Now you can connect and use any command in SAP Automation Pilot from SAP Clod ALM. 
-![](./images/01-2-13.png)
-
-
-You are all set - it's time to move forward! 
-
+---
 
 ## Summary
 
-You've now learned the basic of SAP Automation Pilot, SAP Cloud ALM Health Monitoring and you have integrated the two products.
+You have successfully:  
+- Explored **SAP Cloud ALM Health Monitoring**  
+- Created and executed commands in **SAP Automation Pilot**  
+- Integrated both products for automated operational actions  
 
-Continue to - [Exercise 2 - Exercise 2 Description](../ex2/README.md)
-
+Proceed to the next step:  
+➡️ [Exercise 2 – Exercise 2 Description](../ex2/README.md)
