@@ -24,7 +24,6 @@ Within the hands-on tutorial we will cover:
 ## Products in focus 
 ### SAP Automation Pilot 
 The goal of SAP Automation Pilot is to simplify and automate complex manual technical processes and flows. This enables DevOps teams to run their solutions on SAP BTP with minimal operational effort.
-### SAP Cloud ALM
 
 #### SAP Automation Pilot is a low-code / no-code automation engine that allows you to:
 - Automate sequences of steps,
@@ -35,6 +34,8 @@ The goal of SAP Automation Pilot is to simplify and automate complex manual tech
 Automations in SAP Automation Pilot can be triggered in various ways to best fit your operational needs - manually by the DevOps team, through the built-in scheduler, automatically via integration with services and ops platforms like SAP Cloud ALM, or by other applications and systems.
 
 The service is designed to work with low latency, even under a heavy workload, and is capable of triggering hundreds of automations simultaneously.
+
+### SAP Cloud ALM for Operations
 
 ##  **Let's Build & Automate!**
 This TechEd session is **interactive  hands-on**, ensuring you gain **real-world experience** with products and tools delivered by SAP. Get ready for your Day 2 Operations activities!
