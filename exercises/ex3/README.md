@@ -65,7 +65,7 @@ Of course, we'll use existing command in SAP Automation Pilot to push the data c
 _Note: an SAP AI Core service, AI model deployment has been already made and `ServiceKey` needed for authentication has been added to you SAP Automation Pilot tenant. _
 
 
- To do so, we'll need to extent the command from the previous step - `AppLogsAnalysisByAI`. 
+To do so, we'll need to extent the command from the previous step - `AppLogsAnalysisByAI`. 
 
 **Go to the command itself**, scroll-down to the **Executor section** and click on **Add** button. 
 
@@ -135,158 +135,279 @@ To do so, click on the **Trigger** button located in the the top righ screen and
 The command has been completed succesfully! Click on the Output **Show** link to see the outputs returned by the command after its completion. 
 ![](./images/03-20.png)
 
-Click on the AIOutput arrow and you can get the insights provided by the SAP AI Core service based on the current snapshot of your app logs. 
+Click on the AIOutput arrow and you can read the insights provided by the SAP AI Core service based on the current snapshot of your app logs. 
 ![](./images/03-21.png)
 
 
 ## Exercise 3.3  Extend existing SAP Automation Pilot with a summary assessment by SAP AI Core service 
 
-Now, since we have all the needed informaiton to do an assessment of the health status for our CAP application, let's bring SAP AI Core service. Main idea is this assessment to be made by AI based on the current snapshot of the app logs and environment's parametes. 
+Now, since we have in place an intgeration with SAP AI Core service, let's play and adjust the  insights and the recommendations provided.
+We can do so by adjusting the prmpts and the system messages we pass to the AI so that the response will be a different one. 
 
+Since the analysis from the first step might be quite long, let's try to summarize it and make it much shorter so that we can push this summary directly into SAP Cloud ALM - Health Monitoring.
 
+To do so: we'll need to extent the same command - `AppLogsAnalysisByAI`. 
 
+**Go to the command itself**, scroll-down to the **Executor section** and click on **Add** button. 
 
-
-
-
-You can validate and consume the output values returned by your command after being executed.
-
-
-Now we need to add another executor next to it. The executor is about pushing the current usage for all our CF spaces on Org level (in case we do have more than one CF Space). 
-
-To do so, go to the executors section in your command and click on the **Add** button to add a new executro within you automation flow. 
-![](./images/02-11.png)
+![](./images/03-23.png)
 
 Add the Executor 
 - **Place the new executor** just before the Ouput by clickin on **Here** botton.
 
-- **Alias** - `pushOrgMemoryUtilization` 
+- **Alias** - `AICoreAnalyzeSummary` 
 
-- **Command** - `PushCloudAlmQuotaXP267` - that's a command in SAP Automation Pilot that pushes quota data directly into SAP Cloud ALM metrics API.
+- **Command** - `GenerateGpt4OmniCompletion` - that's a provided command in SAP Automation Pilot that can push data to SAP AI Core service (Gpt 4o mini model) and provide the response.
 
 - **Keep enabled** the `Automap parameters`
 
 - Click on **Add** button
-![](./images/02-12.png)
+![](./images/03-24.png)
 
-Now navigate to the executor you just created `pushOrgMemoryUtilization` and click on the **Edit** button to update its parameters. 
-![](./images/02-13.png)
+Now navigate to the executor you just created `AICoreAnalyze` and click on the **Edit** button to update its parameters. 
+![](./images/03-25.png)
 
 Update the values accordingly: 
 
-- **limit** - `$(.getCfOrgQuota.output.body | toObject | .apps.total_memory_in_mb // 0)`
+- **deploymentId** - `$(.AICoreData.deploymentId)`
 
-- **name** - `org.memory.utilization`
+- **prompt** - `$(.AICoreAnalyze.output.response)` --> we are passing the AI Core analysis from the previous step
 
-- **rating** - `$(.calculateOrgMemoryPercentage.output.message | toNumber | if . > 95 then "fatal" elif . > 85 then "critical" elif . > 70 then "warning" elif . > 0 then "ok" else "error" end)`
+- **serviceKey** - `$(.AICoreData.serviceKey)`
 
-- **serviceId** - `$(.execution.input.calmServiceId)`
-
-- **unit** - `mb`
-
-- **used** - `$(.getCfOrgUsage.output.body | toObject | .usage_summary.memory_in_mb // 0)`
+- **systemMessage** - `You are an AI assistant with expertise in CAP NodeJS applications. You will receive an analysis of the logs from a CAP NodeJS application running on Cloud Foundry space. Your task is to analyze further the inputs and provide your assessment about the app health in just one status (use one out of these statuses as a single word with without any formatting or any other chars applied to the status: OK, Investigate, Critical).`
 
 Click on the **Update** button. 
-![](./images/02-14.png)
+![](./images/03-26.png)
 
-Navigate to the executor `pushOrgMemoryUtilization` and validate the paramters you just had added. It should look like this one:
-![](./images/02-15.png)
+Navigate to the executor `AICoreAnalyze` and validate the paramters you just had added. It should look like this one:
+![](./images/03-27.png)
+
+What baisically we just did is that we are getting the AI Core from the previous step and we are asking to the model to summarize it and to lavel it with just a single status which can be ingested and used directly into SAP Cloud ALM on a later stage. Pay attention into the system message we passed to the model: _"You are an AI assistant with expertise in CAP NodeJS applications. You will receive an analysis of the logs from a CAP NodeJS application running on Cloud Foundry space. Your task is to analyze further the inputs and provide your assessment about the app health in just one status (use one out of these statuses as a single word with without any formatting or any other chars applied to the status: OK, Investigate, Critical)."_
+
+As we already had learned in the previous execrcise, to consume an output value out of a command executed in SAP Automation Pilot we need to add an Output Key. 
+
+Within the command itself, Go now to the **Output Key** section and click on **Add**.
+![](./images/03-28.png)
+
+Within the popup Add Output Key provide the following attributes: 
+
+- **Name** - `AIOutputSummary`
+
+- **Type** - `string`
+
+  Click on **Add** button.
+  ![](./images/03-29.png)
+
+IMPORTANT: let's map the outputs to specific output values that will be populated along the command execution. To do so, click on **output**  within the Executors section followed by the **Edit** link: 
+![](./images/03-30.png)
+
+Update the values accordingly: 
+
+- **AIOutput**: `$(.AICoreAnalyzeSummary.output.response)`
+
+Click on **Update** button to save the changes.
+![](./images/03-31.png)
 
 **Trigger the command in SAP Automation Pilot**
 Now it is all set and you can trigger the command in SAP Automation Pilot. 
 To do so, click on the **Trigger** button located in the the top righ screen and proceed further as no any further inputs are needed.
-![](./images/02-16.png)
+![](./images/03-32.png)
 
-**Success** - the commands has been completed and data is pushed to SAP Cloud ALM! 
-![](./images/02-17.png)
+The command has been completed succesfully! Click on the Output **Show** link to see the outputs returned by the command after its completion. 
+![](./images/03-33.png)
+
+Success - you see now the output value within `AIOutputSummary` providing a single status insight about the health status of your app powered by AI based on the current snapshot of your app logs. 
+![](./images/03-34.png)
+
+As you see the status is `Investigate` so you shall do further investigation. 
+
+## Exercise 3.4  Extend existing SAP Automation Pilot winsights powerd by SAP AI Core service with a special focus on memory consumption
+
+We already know that the app consumes memory so let's add a logic and assesment by AI with a special focus on app memory consumption. 
+
+To do so, we'll need to extent the command from the previous step - `AppLogsAnalysisByAI`. 
+Hint: That's pretty much same approach as per the previous steps but the parameters are changed. Follow the steps as you shall already quite familiar with the interface from SAP Automation Pilot
+
+**Go to the command itself**, scroll-down to the **Executor section** and click on **Add** button. 
+
+Add the Executor 
+- **Place the new executor** just before the Ouput by clickin on **Here** botton.
+
+- **Alias** - `AICoreMemoryAnalysis` 
+
+- **Command** - `GenerateGpt4OmniCompletion` - that's a provided command in SAP Automation Pilot that can push data to SAP AI Core service (Gpt 4o mini model) and provide the response.
+
+- **Keep enabled** the `Automap parameters`
+
+- Click on **Add** button
+![](./images/03-35.png)
+
+Now navigate to the executor you just created `AICoreMemoryAnalysis` and click on the **Edit** button to update its parameters. 
+
+Update the values accordingly: 
+
+- **deploymentId** - `$(.AICoreData.deploymentId)`
+
+- **prompt** - `Available memory allocated within the Cloud Foundry space = "$(.GetAppState.output.memory) MB" and App logs are $(.AICoreAnalyze.output.response)` 
+
+- **serviceKey** - `$(.AICoreData.serviceKey)`
+
+- **systemMessage** - `You are an AI assistant with expertise in CAP NodeJS applications. You will receive as inputs the available memory allocated within the Cloud Foundry where the app runs and also  the logs from the same CAP NodeJS application running on Cloud Foundry space. Your task is to analyze these inputs and prepare an assessment of the app memory utilisation providing also recommendations only related to the app memory utilisation topic.`
+
+Click on the **Update** button. 
 
 
+What baisically we just did is that we are getting the available mememory allocated in our  Cloud Foundry space and along with the logs logs collected for our app  we pass this information to the SAP AI Core service (Gpt 4o mini model)  asking for an assessment as we also send a system messag as well: _"You are an AI assistant with expertise in CAP NodeJS applications. You will receive as inputs the available memory allocated within the Cloud Foundry where the app runs and also  the logs from the same CAP NodeJS application running on Cloud Foundry space. Your task is to analyze these inputs and prepare an assessment of the app memory utilisation providing also recommendations only related to the app memory utilisation topic."_
+
+Let's also add another executor. 
+
+Since the analysis from the first step might be a bit longer, let's try to summarize it and make it much shorter so that we can push this summary directly into SAP Cloud ALM - Health Monitoring.
+
+To do so: we'll need to extent the same command - `AppLogsAnalysisByAI`. 
+
+**Go to the command itself**, scroll-down to the **Executor section** and click on **Add** button. 
+
+Add the Executor: 
+- **Place the new executor** just before the Ouput by clickin on **Here** botton.
+
+- **Alias** - `AICoreMemoryAnalyzeSummary` 
+
+- **Command** - `GenerateGpt4OmniCompletion` - that's a provided command in SAP Automation Pilot that can push data to SAP AI Core service (Gpt 4o mini model) and provide the response.
+
+- **Keep enabled** the `Automap parameters`
+
+- Click on **Add** button
+![](./images/03-36.png)
+
+Now navigate to the executor you just created `AICoreMemoryAnalyzeSummary` and click on the **Edit** button to update its parameters. 
+![](./images/03-25.png)
+
+Update the values accordingly: 
+
+- **deploymentId** - `$(.AICoreData.deploymentId)`
+
+- **prompt** - `Available memory allocated within the Cloud Foundry space = "$(.GetAppState.output.memory) MB" and App logs are $(.AICoreAnalyze.output.response)` 
+
+- **serviceKey** - `$(.AICoreData.serviceKey)`
+
+- **systemMessage** - `You are an AI assistant with expertise in CAP NodeJS applications. You will receive as inputs the available memory allocated within the Cloud Foundry where the app runs and also  the logs from the same CAP NodeJS application running on Cloud Foundry space. Your task is to analyze these inputs and prepare an assessment of the app memory utilisation only summarising in up to 3 words.`
+
+Click on the **Update** button. 
+
+What baisically we just did is that we are getting the AI Core from the previous step and we are asking the model to summarize and prepare an assessment in up to 3 words. This assessment can be ingested and used directly into SAP Cloud ALM on a later stage. Pay attention into the system message we passed to the model: _"You are an AI assistant with expertise in CAP NodeJS applications. You will receive as inputs the available memory allocated within the Cloud Foundry where the app runs and also  the logs from the same CAP NodeJS application running on Cloud Foundry space. Your task is to analyze these inputs and prepare an assessment of the app memory utilisation only summarising in up to 3 words."_
+
+As we already had learned in the previous execrcise, to consume an output value out of a command executed in SAP Automation Pilot we need to add an Output Key. 
+
+Within the command itself, Go now to the **Output Key** section and click on **Add**.
+![](./images/03-38.png)
+
+Within the popup **Add Output Key** provide the following attributes: 
+
+- **Name** - `AIOutputMemory`
+
+- **Type** - `string`
+
+  Click on **Add** button.
+  
+Add another outout key following the same steps: 
+
+Within the popup **Add Output Key** provide the following attributes: 
+
+- **Name** - `AIOutputMemorySummary`
+
+- **Type** - `string`
+
+  Click on **Add** button.
+
+IMPORTANT: let's map the outputs to specific output values that will be populated along the command execution. To do so, click on **output**  within the Executors section followed by the **Edit** link: 
+![](./images/03-39.png)
+
+Update the values accordingly: 
+
+- **AIOutputMemory**: `$(.AICoreMemoryAnalysis.output.response)`
+
+- **AIOutputMemorySummary**: `$(.AICoreMemoryAnalyzeSummary.output.response)`
+
+Click on **Update** button to save the changes.
+![](./images/03-40.png)
+
+**Trigger the command in SAP Automation Pilot**
+Now it is all set and you can trigger the command in SAP Automation Pilot. 
+To do so, click on the **Trigger** button located in the the top righ screen and proceed further as no any further inputs are needed.
+![](./images/03-41.png)
+
+The command has been completed succesfully! Click on the Output **Show** link to see the outputs returned by the command after its completion. 
+![](./images/03-42.png)
+
+Success - you see now the output value within `AIOutputMemory` and `AIOutputMemorySummary` longer and short app memory analysis powered by AI based. 
+![](./images/03-43.png)
 
 
+## Exercise 3.5  Use existing commands in SAP Automation Pilot to push these metrics to SAP Cloud ALM - Health Monitoring
+
+Now we want to push these metrics into SAP Cloud ALM - Health Monitoring. 
+
+To do so, we'll need to extent this existing command. As we already had used provided content in SAP Automation Pilot to do so (see ## Exercise 2.2) we can jump directly into an extended command. 
+
+From the letf menu go to: My Catalogs --> Catalog `XP267 Ex03 - AI Powered Commands` and click on **Commands**
+![](./images/03-44.png)
+
+Then click on command `AppLogsAnalysisByAIExtendedPushToCloudALM`
+![](./images/03-45.png)
+
+IMPORTANT: make sure you had navigated to the command specified: `AppLogsAnalysisByAIExtendedPushToCloudALM`.
+
+It is the same command we just worked on but it is extended with two additional executors: 
+
+- `pushAppSummary` - it pushes to SAP Cloud ALM the output value out of the executor `AICoreAnalyzeSummary` we had created in the previous steps. Basically that's the single word status for the app health check.
+![](./images/03-46.png)
+
+- `pushMemorySummary` - it pushes to SAP Cloud ALM the output value out of the executor `AICoreMemoryAnalyzeSummary` we had created in the previous steps. Basically that's three words status for the app memory consumptions analysis and recommendations.
+![](./images/03-47.png)
+
+ 
+**Trigger the command in SAP Automation Pilot**
+Now it is all set and you can trigger the command in SAP Automation Pilot. 
+To do so, click on the **Trigger** button located in the the top righ screen and proceed further as no any further inputs are needed.
+
+The command has been completed succesfully! Click on the Output **Show** link to see the outputs returned by the command after its completion. 
+
+**Success** - the command has been completed and the data has been pushed to SAP Cloud ALM. 
+![](./images/03-49.png)
 
 
+## Exercise 3.6 Access SAP Cloud ALM and explore the metrics visible in Health Monitoring
 
-
-
-
-
-Thus command is already configured to collect the  logs , the current state and the latest events for you CAP application. 
-**Trigger** the command , no any further inputs are needed. 
-![](./images/03-03.png)
-
-
-
-
-## Exercise 3.2  Extend the command in SAP Automation Pilot with insights provided by SAP AI Core
-
-**Access SAP Automation Pilot** - same command from the previous step - `AppLogsAnalysisByAI`. 
-
-So far wr 
-
-
-
-
-
-====================
-
-## Exercise 1.1 Access SAP Cloud ALM and explore the metrics visible in Health Monitoring
+Now it's time to check the result in SAP Cloud ALM. 
 
 **Access SAP Cloud ALM** by following this link here: https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/
 
 **Login** with your user 
 Select the **Operations** menu item. 
-![](./images/01-01.png)
 
-Click on Health Monitoring capability. 
-![](./images/01-02.png)
+Click on **Health Monitoring** capability. 
 
 You will land at Health Monitoring Overview screen. 
 Make sure Scope has been selected to your subaccount XP267-0XX_CF (e.g. XP267_000_CF)
-![](./images/01-03.png)
 
 Click on the tile and you shall be able to see the services/ system visible in the Health Monitoring. 
-![](./images/01-04.png)
+![](./images/03-48.png)
 
-Click on the service to land to the SAP BTP Cloud Foundry environment Metrics Overview. 
-These are all metrics ingested by your CAP app via the Open Telemtry. 
-![](./images/01-05.png)
+Click on the service to land to the SAP BTP Cloud Foundry environment **Metrics Overview**. 
 
-Feel free to click on **All Metrics** tab to explore these metrics further. 
-![](./images/01-06.png)
+Take a look into the section "**Other Metrics** and you will find two new metrics: 
 
-Well done! You can now undestand better the health status of you CAP app. 
-It is time to move your SAP Automation Pilot tenant and BTP Cockpit.
+- `app.memory.ai`
 
+- `app.status.ai`
 
-
-
-
-
-
-
-
-
-
-
-
-## Exercise 1.2 Interact with App endpoints via SAP Automation Pilot
-
-### Exercise 1.2.1 Explore main sections in SAP Automation Pilot
-
-To check out you SAP Automation Pilot tenant you need to go back to you SAP BTP subaccount. 
-
-Your **SAP BTP subaccount is XP267-0XX** (use your hands-on session user e.g. XP266-001) and then click on **Services** dropdown from the lefside menu --> **Instances and Subscriptions** 
-
-From the **Subscriptions** sections --> **Automation Pilot** (see the screenshot below)
-![](./images/01-1-01.png)
-
-
-
-
+Congrats! These are the ones we just pushed from SAP Automation Pilot directly into SAP Cloud ALM. Now you are all set and you can consume insights direcltly into **Metrics Overview dashboard** in SAP Cloud ALM - **Health Monitoring**. 
+![](./images/03-50.png)
 
 
 ## Summary
 
-You've now learned the basic of SAP Automation Pilot, SAP Cloud ALM Health Monitoring and you have integrated the two products.
+You've now learned the basics and more extended usage of the interplay betweenSAP Automation Pilot, SAP AI Core service and SAP Cloud ALM Health Monitoring to push real time insights powered by AI model directly into **Metrics Overview dashboard** in SAP Cloud ALM - **Health Monitoring**.
 
-Continue to - [Exercise 2 - Exercise 2 Description](../ex2/README.md)
+Continue to - [Exercise 4 - Exercise 4 Description](../ex4/README.md)
