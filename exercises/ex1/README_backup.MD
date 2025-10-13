@@ -344,4 +344,3 @@ You are all set - it's time to move forward!
 You've now learned the basic of SAP Automation Pilot, SAP Cloud ALM Health Monitoring and you have integrated the two products.
 
 Continue to - [Exercise 2 - Exercise 2 Description](../ex2/README.md)
-
