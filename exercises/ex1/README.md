@@ -78,7 +78,7 @@ Let’s create your first custom command.
    ![](./images/1-2-2-02.png)
 
 3. Fill in the details:  
-   - **Catalog**: type in `XP267 Ex01 – Kick Start Commands` and from the drop-down select your XP267 Kick Start Catalog
+   - **Catalog**: type in `XP267 Ex01 - Kick Start Commands` and from the drop-down select your XP267 Kick Start Catalog
    - **Name**: `simpleHttpRequest`  
 
    Click **Create**.  
