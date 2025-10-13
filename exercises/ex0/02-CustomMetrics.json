@@ -1,106 +1,32 @@
 {
-  "id": "techEd2025-<<<TENANT_ID>>>",
-  "technicalName": "techEd2025",
-  "name": "XP267 Ex01 - Kick Start Commands",
+  "id": "TechEd207-<<<TENANT_ID>>>",
+  "technicalName": "TechEd207",
+  "name": "XP267 Ex02 - Custom Metrics into Cloud ALM",
   "description": "",
   "owner": "<<<TENANT_ID>>>",
   "inputs": [
     {
-      "id": "techEd2025-<<<TENANT_ID>>>:appDetails:1",
-      "name": "appDetails",
+      "id": "TechEd207-<<<TENANT_ID>>>:CloudAlmServiceKey:1",
+      "name": "CloudAlmServiceKey",
       "description": null,
-      "catalog": "techEd2025-<<<TENANT_ID>>>",
+      "catalog": "TechEd207-<<<TENANT_ID>>>",
       "owner": null,
       "version": 1,
       "keys": {
-        "appBaseUrl": {
-          "type": "string",
-          "sensitive": false,
-          "description": null
-        },
-        "spaceId": {
-          "type": "string",
-          "sensitive": false,
-          "description": null
-        },
-        "appName": {
-          "type": "string",
-          "sensitive": false,
-          "description": null
-        },
-        "subaccount-orgName": {
-          "type": "string",
-          "sensitive": false,
-          "description": null
-        },
-        "region": {
-          "type": "string",
-          "sensitive": false,
-          "description": null
-        }
-      },
-      "values": {
-        "appBaseUrl": "https://xp267042-dev-bookshop-srv.cfapps.eu10-004.hana.ondemand.com",
-        "spaceId": "a6be6e91-5905-491e-9a2b-394f6c891fc9",
-        "appName": "bookshop-srv",
-        "subaccount-orgName": "xp267042",
-        "region": "cf-eu10-004"
-      },
-      "tags": {}
-    },
-    {
-      "id": "techEd2025-<<<TENANT_ID>>>:appEndPoints:1",
-      "name": "appEndPoints",
-      "description": "URL checks for different app endpoints",
-      "catalog": "techEd2025-<<<TENANT_ID>>>",
-      "owner": null,
-      "version": 1,
-      "keys": {
-        "apiAuthors": {
-          "type": "string",
-          "sensitive": false,
-          "description": ""
-        },
-        "urlHomepage": {
-          "type": "string",
-          "sensitive": false,
-          "description": null
-        },
-        "apiBooks": {
-          "type": "string",
-          "sensitive": false,
-          "description": null
-        }
-      },
-      "values": {
-        "apiAuthors": "/admin/Authors",
-        "urlHomepage": "xxx",
-        "apiBooks": "/admin/Books"
-      },
-      "tags": {}
-    },
-    {
-      "id": "techEd2025-<<<TENANT_ID>>>:btpTechUser:1",
-      "name": "btpTechUser",
-      "description": null,
-      "catalog": "techEd2025-<<<TENANT_ID>>>",
-      "owner": null,
-      "version": 1,
-      "keys": {
-        "pass": {
-          "type": "string",
+        "serviceKey": {
+          "type": "object",
           "sensitive": true,
-          "description": "Password for BTP Technical User"
+          "description": "Used to authenticate and push metrics to SAP Cloud ALM API"
         },
-        "username": {
+        "serviceId": {
           "type": "string",
           "sensitive": false,
           "description": null
         }
       },
       "values": {
-        "username": "DL_60C315CAD2D510027E5C91DF@global.corp.sap",
-        "pass": ""
+        "serviceId": "552672a2-fd65-4652-9859-3fbf13dbe878",
+        "serviceKey": ""
       },
       "tags": {}
     }
@@ -108,21 +34,247 @@
   "commands": [
     {
       "configuration": {
-        "values": [],
+        "values": [
+          {
+            "alias": "regionData",
+            "valueFrom": {
+              "inputReference": "metadata-sapcp:CfRegionData:1",
+              "inputKey": "$(.execution.input.region)"
+            }
+          }
+        ],
         "output": {
-          "header": "$(.getAppEndpoint.output.headers)",
-          "body": "$(.getAppEndpoint.output.body)",
-          "url": "$(.getAppEndpoint.output.url)",
-          "status": "$(.getAppEndpoint.output.status)"
+          "spaceName": "$(.getCfSpace.output.body | toObject | .name)",
+          "spaceMemoryPercentage": "$(.calculateSpaceMemoryPercentage.output.message)",
+          "resourceName": "$(.getCfSpaceQuota.output.body | toObject | .name)",
+          "orgMemoryPercentage": "$(.calculateOrgMemoryPercentage.output.message)"
         },
         "executors": [
           {
             "execute": "http-sapcp:HttpRequest:1",
             "input": {
+              "password": "$(.execution.input.password)",
+              "clientId": "cf",
+              "tokenUrl": "$(.regionData.uaaTokenUrl)?login_hint=$({ \"origin\": .execution.input.identityProvider } | toUrlEncoded)",
               "method": "GET",
-              "url": "$(.execution.input.appBaseUrl)$(.execution.input.URL)"
+              "user": "$(.execution.input.user)",
+              "url": "$(.regionData.cfApiUrl)/v3/spaces/$(.execution.input.spaceId)",
+              "timeout": "10"
             },
-            "alias": "getAppEndpoint",
+            "alias": "getCfSpace",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "http-sapcp:HttpRequest:1",
+            "input": {
+              "password": "$(.execution.input.password)",
+              "clientId": "cf",
+              "tokenUrl": "$(.regionData.uaaTokenUrl)?login_hint=$({ \"origin\": .execution.input.identityProvider } | toUrlEncoded)",
+              "method": "GET",
+              "user": "$(.execution.input.user)",
+              "url": "$(.regionData.cfApiUrl)/v3/organizations/$(.getCfSpace.output.body | toObject | .relationships.organization.data.guid)",
+              "timeout": "10"
+            },
+            "alias": "getCfOrg",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "http-sapcp:HttpRequest:1",
+            "input": {
+              "password": "$(.execution.input.password)",
+              "clientId": "cf",
+              "tokenUrl": "$(.regionData.uaaTokenUrl)?login_hint=$({ \"origin\": .execution.input.identityProvider } | toUrlEncoded)",
+              "method": "GET",
+              "user": "$(.execution.input.user)",
+              "url": "$(.regionData.cfApiUrl)/v3/organizations/$(.getCfSpace.output.body | toObject | .relationships.organization.data.guid)/usage_summary",
+              "timeout": "10"
+            },
+            "alias": "getCfOrgUsage",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "http-sapcp:HttpRequest:1",
+            "input": {
+              "password": "$(.execution.input.password)",
+              "clientId": "cf",
+              "tokenUrl": "$(.regionData.uaaTokenUrl)?login_hint=$({ \"origin\": .execution.input.identityProvider } | toUrlEncoded)",
+              "method": "GET",
+              "user": "$(.execution.input.user)",
+              "url": "$(.getCfOrg.output.body | toObject | .links.quota.href)",
+              "timeout": "10"
+            },
+            "alias": "getCfOrgQuota",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "http-sapcp:HttpRequest:1",
+            "input": {
+              "password": "$(.execution.input.password)",
+              "clientId": "cf",
+              "tokenUrl": "$(.regionData.uaaTokenUrl)?login_hint=$({ \"origin\": .execution.input.identityProvider } | toUrlEncoded)",
+              "method": "GET",
+              "user": "$(.execution.input.user)",
+              "url": "$(.regionData.cfApiUrl)/v3/service_instances?organization_guids=$(.getCfSpace.output.body | toObject | .relationships.organization.data.guid)",
+              "timeout": "10"
+            },
+            "alias": "getServiceInstanceByOrg",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "http-sapcp:HttpRequest:1",
+            "input": {
+              "password": "$(.execution.input.password)",
+              "clientId": "cf",
+              "tokenUrl": "$(.regionData.uaaTokenUrl)?login_hint=$({ \"origin\": .execution.input.identityProvider } | toUrlEncoded)",
+              "method": "GET",
+              "user": "$(.execution.input.user)",
+              "url": "$(.getCfSpace.output.body | toObject | .links.quota.href | if . == null then ($.getCfOrg.output.body | toObject | .links.quota.href) else . end)",
+              "timeout": "10"
+            },
+            "alias": "getCfSpaceQuota",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "http-sapcp:HttpRequest:1",
+            "input": {
+              "password": "$(.execution.input.password)",
+              "clientId": "cf",
+              "tokenUrl": "$(.regionData.uaaTokenUrl)?login_hint=$({ \"origin\": .execution.input.identityProvider } | toUrlEncoded)",
+              "method": "GET",
+              "user": "$(.execution.input.user)",
+              "url": "$(.regionData.cfApiUrl)/v3/service_instances?space_guids=$(.execution.input.spaceId)",
+              "timeout": "10"
+            },
+            "alias": "getServiceInstanceBySpace",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "applm-sapcp:ListCfApps:1",
+            "input": {
+              "resourceGroup": "$(.execution.input.spaceId)",
+              "password": "$(.execution.input.password)",
+              "pageSize": "100",
+              "region": "$(.execution.input.region)",
+              "user": "$(.execution.input.user)",
+              "subAccount": "$(.getCfOrg.output.body | toObject | .guid)",
+              "identityProvider": "$(.execution.input.identityProvider)"
+            },
+            "alias": "getCfApps",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "TechEd207-<<<TENANT_ID>>>:GetCfAppsDetailsXP267:1",
+            "input": {
+              "defaultCfCredentials": "{\"user\": \"$(.execution.input.user)\", \"password\": \"$(.execution.input.password | toEscapedJson)\", \"identityProvider\": \"$(.execution.input.identityProvider)\", \"resourceGroup\":\"$(.execution.input.spaceId)\", \"region\": \"$(.execution.input.region)\", \"subAccount\": \"$(.getCfOrg.output.body | toObject | .guid)\"}",
+              "appResources": "$(.getCfApps.output.resourceNames | map({ resourceName: . }))"
+            },
+            "alias": "calculateSpaceMemory",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "utils-sapcp:Void:1",
+            "input": {
+              "message": "$(.getCfSpaceQuota.output.body | toObject | .apps.total_memory_in_mb | if . == null then \"0\" else ((($.calculateSpaceMemory.output.spaceMemory | toNumber) / ($.getCfSpaceQuota.output.body | toObject | .apps.total_memory_in_mb | toNumber)) * 10000 | round | . / 100 | if . == null then 0 else . end) end)"
+            },
+            "alias": "calculateSpaceMemoryPercentage",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "utils-sapcp:Void:1",
+            "input": {
+              "message": "$(.getCfOrgQuota.output.body | toObject | .apps.total_memory_in_mb | if . == null or . == 0 then 0 else (($.getCfOrgUsage.output.body | toObject | .usage_summary.memory_in_mb | toNumber) / ($.getCfOrgQuota.output.body | toObject | .apps.total_memory_in_mb | toNumber) * 10000 | round | . / 100 ) end)"
+            },
+            "alias": "calculateOrgMemoryPercentage",
             "description": null,
             "progressMessage": null,
             "initialDelay": null,
@@ -137,13 +289,13 @@
         ],
         "listeners": []
       },
-      "id": "techEd2025-<<<TENANT_ID>>>:getAppAuthorsAPI:1",
-      "name": "getAppAuthorsAPI",
-      "description": "Simple Command to get the App endpoint details.",
-      "catalog": "techEd2025-<<<TENANT_ID>>>",
+      "id": "TechEd207-<<<TENANT_ID>>>:CheckResourceQuotaUtilizationXP267:1",
+      "name": "CheckResourceQuotaUtilizationXP267",
+      "description": "Calculate resource utilization of Cloud Foundry space and its parrent organization",
+      "catalog": "TechEd207-<<<TENANT_ID>>>",
       "version": 1,
       "inputKeys": {
-        "appBaseUrl": {
+        "spaceId": {
           "type": "string",
           "sensitive": false,
           "required": false,
@@ -158,13 +310,13 @@
           "defaultValue": null,
           "defaultValueFromInput": {
             "inputReference": "techEd2025-<<<TENANT_ID>>>:appDetails:1",
-            "inputKey": "appBaseUrl"
+            "inputKey": "spaceId"
           },
-          "description": null
+          "description": "The GUID identifier of the Cloud Foundry space"
         },
-        "method": {
+        "password": {
           "type": "string",
-          "sensitive": false,
+          "sensitive": true,
           "required": false,
           "minSize": null,
           "maxSize": null,
@@ -174,11 +326,54 @@
           "allowedValuesFromInputKeys": null,
           "suggestedValues": null,
           "suggestedValuesFromInputKeys": null,
-          "defaultValue": "GET",
-          "defaultValueFromInput": null,
+          "defaultValue": null,
+          "defaultValueFromInput": {
+            "inputReference": "techEd2025-<<<TENANT_ID>>>:btpTechUser:1",
+            "inputKey": "pass"
+          },
           "description": null
         },
-        "URL": {
+        "serviceKey": {
+          "type": "object",
+          "sensitive": true,
+          "required": false,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": {
+            "inputReference": "TechEd207-<<<TENANT_ID>>>:CloudAlmServiceKey:1",
+            "inputKey": "serviceKey"
+          },
+          "description": null
+        },
+        "region": {
+          "type": "string",
+          "sensitive": false,
+          "required": false,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": [
+            "metadata-sapcp:CfRegionData:1"
+          ],
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": {
+            "inputReference": "techEd2025-<<<TENANT_ID>>>:appDetails:1",
+            "inputKey": "region"
+          },
+          "description": "Technical name of your SAP BTP region, e.g. cf-eu10,cf-eu20"
+        },
+        "user": {
           "type": "string",
           "sensitive": false,
           "required": false,
@@ -192,30 +387,46 @@
           "suggestedValuesFromInputKeys": null,
           "defaultValue": null,
           "defaultValueFromInput": {
-            "inputReference": "techEd2025-<<<TENANT_ID>>>:appEndPoints:1",
-            "inputKey": "apiAuthors"
+            "inputReference": "techEd2025-<<<TENANT_ID>>>:btpTechUser:1",
+            "inputKey": "username"
           },
-          "description": null
+          "description": "User ID or email of a Cloud Foundry technical user"
+        },
+        "identityProvider": {
+          "type": "string",
+          "sensitive": false,
+          "required": false,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": "sap.ids",
+          "defaultValueFromInput": null,
+          "description": "Identity provider to be used  By default it is SAP ID Service (sap.ids). To use a custom IdP, enter origin key from the CF Org/Space members section."
         }
       },
       "outputKeys": {
-        "header": {
-          "type": "object",
-          "sensitive": false,
-          "description": null
-        },
-        "body": {
+        "spaceName": {
           "type": "string",
           "sensitive": false,
           "description": null
         },
-        "url": {
+        "spaceMemoryPercentage": {
           "type": "string",
           "sensitive": false,
           "description": null
         },
-        "status": {
-          "type": "number",
+        "resourceName": {
+          "type": "string",
+          "sensitive": false,
+          "description": null
+        },
+        "orgMemoryPercentage": {
+          "type": "string",
           "sensitive": false,
           "description": null
         }
@@ -228,21 +439,247 @@
     },
     {
       "configuration": {
-        "values": [],
+        "values": [
+          {
+            "alias": "regionData",
+            "valueFrom": {
+              "inputReference": "metadata-sapcp:CfRegionData:1",
+              "inputKey": "$(.execution.input.region)"
+            }
+          }
+        ],
         "output": {
-          "header": "$(.getAppEndpoint.output.headers)",
-          "body": "$(.getAppEndpoint.output.body)",
-          "url": "$(.getAppEndpoint.output.url)",
-          "status": "$(.getAppEndpoint.output.status)"
+          "spaceName": "$(.getCfSpace.output.body | toObject | .name)",
+          "spaceMemoryPercentage": "$(.calculateSpaceMemoryPercentage.output.message)",
+          "resourceName": "$(.getCfSpaceQuota.output.body | toObject | .name)",
+          "orgMemoryPercentage": "$(.calculateOrgMemoryPercentage.output.message)"
         },
         "executors": [
           {
             "execute": "http-sapcp:HttpRequest:1",
             "input": {
+              "password": "$(.execution.input.password)",
+              "clientId": "cf",
+              "tokenUrl": "$(.regionData.uaaTokenUrl)?login_hint=$({ \"origin\": .execution.input.identityProvider } | toUrlEncoded)",
               "method": "GET",
-              "url": "$(.execution.input.appBaseUrl)$(.execution.input.URL)"
+              "user": "$(.execution.input.user)",
+              "url": "$(.regionData.cfApiUrl)/v3/spaces/$(.execution.input.spaceId)",
+              "timeout": "10"
             },
-            "alias": "getAppEndpoint",
+            "alias": "getCfSpace",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "http-sapcp:HttpRequest:1",
+            "input": {
+              "password": "$(.execution.input.password)",
+              "clientId": "cf",
+              "tokenUrl": "$(.regionData.uaaTokenUrl)?login_hint=$({ \"origin\": .execution.input.identityProvider } | toUrlEncoded)",
+              "method": "GET",
+              "user": "$(.execution.input.user)",
+              "url": "$(.regionData.cfApiUrl)/v3/organizations/$(.getCfSpace.output.body | toObject | .relationships.organization.data.guid)",
+              "timeout": "10"
+            },
+            "alias": "getCfOrg",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "http-sapcp:HttpRequest:1",
+            "input": {
+              "password": "$(.execution.input.password)",
+              "clientId": "cf",
+              "tokenUrl": "$(.regionData.uaaTokenUrl)?login_hint=$({ \"origin\": .execution.input.identityProvider } | toUrlEncoded)",
+              "method": "GET",
+              "user": "$(.execution.input.user)",
+              "url": "$(.regionData.cfApiUrl)/v3/organizations/$(.getCfSpace.output.body | toObject | .relationships.organization.data.guid)/usage_summary",
+              "timeout": "10"
+            },
+            "alias": "getCfOrgUsage",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "http-sapcp:HttpRequest:1",
+            "input": {
+              "password": "$(.execution.input.password)",
+              "clientId": "cf",
+              "tokenUrl": "$(.regionData.uaaTokenUrl)?login_hint=$({ \"origin\": .execution.input.identityProvider } | toUrlEncoded)",
+              "method": "GET",
+              "user": "$(.execution.input.user)",
+              "url": "$(.getCfOrg.output.body | toObject | .links.quota.href)",
+              "timeout": "10"
+            },
+            "alias": "getCfOrgQuota",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "http-sapcp:HttpRequest:1",
+            "input": {
+              "password": "$(.execution.input.password)",
+              "clientId": "cf",
+              "tokenUrl": "$(.regionData.uaaTokenUrl)?login_hint=$({ \"origin\": .execution.input.identityProvider } | toUrlEncoded)",
+              "method": "GET",
+              "user": "$(.execution.input.user)",
+              "url": "$(.regionData.cfApiUrl)/v3/service_instances?organization_guids=$(.getCfSpace.output.body | toObject | .relationships.organization.data.guid)",
+              "timeout": "10"
+            },
+            "alias": "getServiceInstanceByOrg",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "http-sapcp:HttpRequest:1",
+            "input": {
+              "password": "$(.execution.input.password)",
+              "clientId": "cf",
+              "tokenUrl": "$(.regionData.uaaTokenUrl)?login_hint=$({ \"origin\": .execution.input.identityProvider } | toUrlEncoded)",
+              "method": "GET",
+              "user": "$(.execution.input.user)",
+              "url": "$(.getCfSpace.output.body | toObject | .links.quota.href | if . == null then ($.getCfOrg.output.body | toObject | .links.quota.href) else . end)",
+              "timeout": "10"
+            },
+            "alias": "getCfSpaceQuota",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "http-sapcp:HttpRequest:1",
+            "input": {
+              "password": "$(.execution.input.password)",
+              "clientId": "cf",
+              "tokenUrl": "$(.regionData.uaaTokenUrl)?login_hint=$({ \"origin\": .execution.input.identityProvider } | toUrlEncoded)",
+              "method": "GET",
+              "user": "$(.execution.input.user)",
+              "url": "$(.regionData.cfApiUrl)/v3/service_instances?space_guids=$(.execution.input.spaceId)",
+              "timeout": "10"
+            },
+            "alias": "getServiceInstanceBySpace",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "applm-sapcp:ListCfApps:1",
+            "input": {
+              "resourceGroup": "$(.execution.input.spaceId)",
+              "password": "$(.execution.input.password)",
+              "pageSize": "100",
+              "region": "$(.execution.input.region)",
+              "user": "$(.execution.input.user)",
+              "subAccount": "$(.getCfOrg.output.body | toObject | .guid)",
+              "identityProvider": "$(.execution.input.identityProvider)"
+            },
+            "alias": "getCfApps",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "TechEd207-<<<TENANT_ID>>>:GetCfAppsDetailsXP267:1",
+            "input": {
+              "defaultCfCredentials": "{\"user\": \"$(.execution.input.user)\", \"password\": \"$(.execution.input.password | toEscapedJson)\", \"identityProvider\": \"$(.execution.input.identityProvider)\", \"resourceGroup\":\"$(.execution.input.spaceId)\", \"region\": \"$(.execution.input.region)\", \"subAccount\": \"$(.getCfOrg.output.body | toObject | .guid)\"}",
+              "appResources": "$(.getCfApps.output.resourceNames | map({ resourceName: . }))"
+            },
+            "alias": "calculateSpaceMemory",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "utils-sapcp:Void:1",
+            "input": {
+              "message": "$(.getCfSpaceQuota.output.body | toObject | .apps.total_memory_in_mb | if . == null then \"0\" else ((($.calculateSpaceMemory.output.spaceMemory | toNumber) / ($.getCfSpaceQuota.output.body | toObject | .apps.total_memory_in_mb | toNumber)) * 10000 | round | . / 100 | if . == null then 0 else . end) end)"
+            },
+            "alias": "calculateSpaceMemoryPercentage",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "utils-sapcp:Void:1",
+            "input": {
+              "message": "$(.getCfOrgQuota.output.body | toObject | .apps.total_memory_in_mb | if . == null or . == 0 then 0 else (($.getCfOrgUsage.output.body | toObject | .usage_summary.memory_in_mb | toNumber) / ($.getCfOrgQuota.output.body | toObject | .apps.total_memory_in_mb | toNumber) * 10000 | round | . / 100 ) end)"
+            },
+            "alias": "calculateOrgMemoryPercentage",
             "description": null,
             "progressMessage": null,
             "initialDelay": null,
@@ -257,13 +694,13 @@
         ],
         "listeners": []
       },
-      "id": "techEd2025-<<<TENANT_ID>>>:getAppBooksAPI:1",
-      "name": "getAppBooksAPI",
-      "description": "Simple Command to get the App endpoint details.",
-      "catalog": "techEd2025-<<<TENANT_ID>>>",
+      "id": "TechEd207-<<<TENANT_ID>>>:CheckResourceQuotaUtilizationXP267Extended:1",
+      "name": "CheckResourceQuotaUtilizationXP267Extended",
+      "description": "Calculate resource utilization of Cloud Foundry space and its parrent organization",
+      "catalog": "TechEd207-<<<TENANT_ID>>>",
       "version": 1,
       "inputKeys": {
-        "appBaseUrl": {
+        "spaceId": {
           "type": "string",
           "sensitive": false,
           "required": false,
@@ -278,13 +715,13 @@
           "defaultValue": null,
           "defaultValueFromInput": {
             "inputReference": "techEd2025-<<<TENANT_ID>>>:appDetails:1",
-            "inputKey": "appBaseUrl"
+            "inputKey": "spaceId"
           },
-          "description": null
+          "description": "The GUID identifier of the Cloud Foundry space"
         },
-        "method": {
+        "password": {
           "type": "string",
-          "sensitive": false,
+          "sensitive": true,
           "required": false,
           "minSize": null,
           "maxSize": null,
@@ -294,11 +731,14 @@
           "allowedValuesFromInputKeys": null,
           "suggestedValues": null,
           "suggestedValuesFromInputKeys": null,
-          "defaultValue": "GET",
-          "defaultValueFromInput": null,
+          "defaultValue": null,
+          "defaultValueFromInput": {
+            "inputReference": "techEd2025-<<<TENANT_ID>>>:btpTechUser:1",
+            "inputKey": "pass"
+          },
           "description": null
         },
-        "URL": {
+        "calmServiceId": {
           "type": "string",
           "sensitive": false,
           "required": false,
@@ -312,30 +752,105 @@
           "suggestedValuesFromInputKeys": null,
           "defaultValue": null,
           "defaultValueFromInput": {
-            "inputReference": "techEd2025-<<<TENANT_ID>>>:appEndPoints:1",
-            "inputKey": "apiBooks"
+            "inputReference": "TechEd207-<<<TENANT_ID>>>:CloudAlmServiceKey:1",
+            "inputKey": "serviceId"
           },
           "description": null
+        },
+        "serviceKey": {
+          "type": "object",
+          "sensitive": true,
+          "required": false,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": {
+            "inputReference": "TechEd207-<<<TENANT_ID>>>:CloudAlmServiceKey:1",
+            "inputKey": "serviceKey"
+          },
+          "description": null
+        },
+        "region": {
+          "type": "string",
+          "sensitive": false,
+          "required": false,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": [
+            "metadata-sapcp:CfRegionData:1"
+          ],
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": {
+            "inputReference": "techEd2025-<<<TENANT_ID>>>:appDetails:1",
+            "inputKey": "region"
+          },
+          "description": "Technical name of your SAP BTP region, e.g. cf-eu10,cf-eu20"
+        },
+        "user": {
+          "type": "string",
+          "sensitive": false,
+          "required": false,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": {
+            "inputReference": "techEd2025-<<<TENANT_ID>>>:btpTechUser:1",
+            "inputKey": "username"
+          },
+          "description": "User ID or email of a Cloud Foundry technical user"
+        },
+        "identityProvider": {
+          "type": "string",
+          "sensitive": false,
+          "required": false,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": "sap.ids",
+          "defaultValueFromInput": null,
+          "description": "Identity provider to be used  By default it is SAP ID Service (sap.ids). To use a custom IdP, enter origin key from the CF Org/Space members section."
         }
       },
       "outputKeys": {
-        "header": {
-          "type": "object",
-          "sensitive": false,
-          "description": null
-        },
-        "body": {
+        "spaceName": {
           "type": "string",
           "sensitive": false,
           "description": null
         },
-        "url": {
+        "spaceMemoryPercentage": {
           "type": "string",
           "sensitive": false,
           "description": null
         },
-        "status": {
-          "type": "number",
+        "resourceName": {
+          "type": "string",
+          "sensitive": false,
+          "description": null
+        },
+        "orgMemoryPercentage": {
+          "type": "string",
           "sensitive": false,
           "description": null
         }
@@ -350,19 +865,17 @@
       "configuration": {
         "values": [],
         "output": {
-          "header": "$(.getAppEndpoint.output.headers)",
-          "body": "$(.getAppEndpoint.output.body)",
-          "url": "$(.getAppEndpoint.output.url)",
-          "status": "$(.getAppEndpoint.output.status)"
+          "spaceMemory": "$(.calculateAppMemory.output.outputs | map({desiredState: .desiredState, name: .desiredStateData.name, memory: .memory, instances: .stateData.instances}) | [.[] | {desiredState,name, memory, instances} | select(.desiredState != \"STOPPED\")] | map(.memory * .instances) | add)"
         },
         "executors": [
           {
-            "execute": "http-sapcp:HttpRequest:1",
+            "execute": "utils-sapcp:ForEach:1",
             "input": {
-              "method": "GET",
-              "url": "$(.execution.input.URL)"
+              "inputs": "$(.execution.input.appResources)",
+              "defaultValues": "$(.execution.input.defaultCfCredentials)",
+              "command": "applm-sapcp:GetCfAppState:1"
             },
-            "alias": "getAppEndpoint",
+            "alias": "calculateAppMemory",
             "description": null,
             "progressMessage": null,
             "initialDelay": null,
@@ -377,13 +890,100 @@
         ],
         "listeners": []
       },
-      "id": "techEd2025-<<<TENANT_ID>>>:getAppHomepage:1",
-      "name": "getAppHomepage",
-      "description": "Simple Command to get the App endpoint details.",
-      "catalog": "techEd2025-<<<TENANT_ID>>>",
+      "id": "TechEd207-<<<TENANT_ID>>>:GetCfAppsDetailsXP267:1",
+      "name": "GetCfAppsDetailsXP267",
+      "description": null,
+      "catalog": "TechEd207-<<<TENANT_ID>>>",
       "version": 1,
       "inputKeys": {
-        "method": {
+        "defaultCfCredentials": {
+          "type": "object",
+          "sensitive": false,
+          "required": true,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": null,
+          "description": "Credentials need to authenticate against Cloud Foundry"
+        },
+        "appResources": {
+          "type": "array",
+          "sensitive": false,
+          "required": true,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": null,
+          "description": "Aplications data in the Cloud Foundry space"
+        }
+      },
+      "outputKeys": {
+        "spaceMemory": {
+          "type": "string",
+          "sensitive": false,
+          "description": "Total memory used by all started applications in the Cloud Foundry space"
+        }
+      },
+      "tags": {
+        "feature:logs": "",
+        "feature:priority": "medium"
+      },
+      "issues": []
+    },
+    {
+      "configuration": {
+        "values": [],
+        "output": {
+          "response": "$(.PushMetric.output.body)"
+        },
+        "executors": [
+          {
+            "execute": "http-sapcp:HttpRequest:1",
+            "input": {
+              "headers": "{\"content-type\":\"application/json\"}",
+              "clientId": "$(.execution.input.serviceKey.uaa.clientid)",
+              "tokenUrl": "$(.execution.input.serviceKey.uaa.url)/oauth/token",
+              "method": "POST",
+              "clientSecret": "$(.execution.input.serviceKey.uaa.clientsecret)",
+              "body": "{\n    \"resourceMetrics\": [\n        {\n            \"scopeMetrics\": [\n                {\n                    \"scope\": {\n                        \"name\": \"sap.automation-pilot\",\n                        \"version\": \"1.0.0\"\n                    },\n                    \"metrics\": [\n                        {\n                            \"name\": \"$(.execution.input.metricName)\",\n                            \"unit\": \"$(.execution.input.unit)\",\n                            \"gauge\": {\n                                \"dataPoints\": [\n                                    {\n                                        \"asDouble\": $(.execution.input.value)\n                                    }\n                                ]\n                            }\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}\n",
+              "contentType": "application/json",
+              "url": "$(.execution.input.serviceKey.endpoints.Api)/calm-metrics/v1/metrics?useCase=hm&serviceId=$(.execution.input.serviceId)&dev=$(.execution.input.devMode)",
+              "timeout": "10"
+            },
+            "alias": "PushMetric",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          }
+        ],
+        "listeners": []
+      },
+      "id": "TechEd207-<<<TENANT_ID>>>:PushCloudAlmGaugeXP267:1",
+      "name": "PushCloudAlmGaugeXP267",
+      "description": "Sends a gauge metric to Cloud ALM Health Monitoring",
+      "catalog": "TechEd207-<<<TENANT_ID>>>",
+      "version": 1,
+      "inputKeys": {
+        "unit": {
           "type": "string",
           "sensitive": false,
           "required": false,
@@ -395,11 +995,11 @@
           "allowedValuesFromInputKeys": null,
           "suggestedValues": null,
           "suggestedValuesFromInputKeys": null,
-          "defaultValue": "GET",
+          "defaultValue": null,
           "defaultValueFromInput": null,
-          "description": null
+          "description": "Metric unit to push, e.g., mb, bytes, millis"
         },
-        "URL": {
+        "metricName": {
           "type": "string",
           "sensitive": false,
           "required": true,
@@ -413,29 +1013,507 @@
           "suggestedValuesFromInputKeys": null,
           "defaultValue": null,
           "defaultValueFromInput": null,
-          "description": null
+          "description": "Metric name to publish"
+        },
+        "devMode": {
+          "type": "boolean",
+          "sensitive": false,
+          "required": false,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": "false",
+          "defaultValueFromInput": null,
+          "description": "When true, the consumer is called synchronously so you immediately get the response and error messages. Intended only for implementation and testing"
+        },
+        "serviceKey": {
+          "type": "object",
+          "sensitive": true,
+          "required": false,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": {
+            "inputReference": "TechEd207-<<<TENANT_ID>>>:CloudAlmServiceKey:1",
+            "inputKey": "serviceKey"
+          },
+          "description": "Credential to authenticate and send metrics to Cloud ALM"
+        },
+        "serviceId": {
+          "type": "string",
+          "sensitive": false,
+          "required": true,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": null,
+          "description": "Unique identifier of the service as defined in Cloud ALM"
+        },
+        "value": {
+          "type": "number",
+          "sensitive": false,
+          "required": true,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": null,
+          "description": "Metric value to push"
         }
       },
       "outputKeys": {
-        "header": {
+        "response": {
           "type": "object",
           "sensitive": false,
-          "description": null
+          "description": "The response from Cloud ALM when the metric is sent in devMode"
+        }
+      },
+      "tags": {},
+      "issues": []
+    },
+    {
+      "configuration": {
+        "values": [],
+        "output": {
+          "response": "$(.PushStatus.output.body)"
         },
-        "body": {
+        "executors": [
+          {
+            "execute": "http-sapcp:HttpRequest:1",
+            "input": {
+              "headers": "{\"content-type\":\"application/json\"}",
+              "clientId": "$(.execution.input.serviceKey.uaa.clientid)",
+              "tokenUrl": "$(.execution.input.serviceKey.uaa.url)/oauth/token",
+              "method": "POST",
+              "clientSecret": "$(.execution.input.serviceKey.uaa.clientsecret)",
+              "body": "{\n    \"resourceMetrics\": [\n        {\n            \"resource\": {},\n            \"scopeMetrics\": [\n                {\n                    \"metrics\": [\n                        {\n                            \"name\": \"$(.execution.input.name)\",\n                            \"unit\": \"$(.execution.input.unit)\",\n                            \"gauge\": {\n                                \"dataPoints\": [\n                                    {\n                                        \"asDouble\": 0,\n                                        \"attributes\": [\n                                            {\n                                                \"key\": \"sap.calm.hm.metric.type\",\n                                                \"value\": {\n                                                    \"stringValue\": \"quota\"\n                                                }\n                                            },\n                                            {\n                                                \"key\": \"sap.calm.hm.metric.rating\",\n                                                \"value\": {\n                                                    \"stringValue\": \"$(.execution.input.rating)\"\n                                                }\n                                            }\n                                        ]\n                                    },\n                                    {\n                                        \"asDouble\": $(.execution.input.limit),\n                                        \"attributes\": [\n                                            {\n                                                \"key\": \"sap.calm.hm.quota\",\n                                                \"value\": {\n                                                    \"stringValue\": \"limit\"\n                                                }\n                                            }\n                                        ]\n                                    },\n                                    {\n                                        \"asDouble\": $(.execution.input.used),\n                                        \"attributes\": [\n                                            {\n                                                \"key\": \"sap.calm.hm.quota\",\n                                                \"value\": {\n                                                    \"stringValue\": \"value\"\n                                                }\n                                            }\n                                        ]\n                                    }\n                                ]\n                            }\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}",
+              "contentType": "application/json",
+              "url": "$(.execution.input.serviceKey.endpoints.Api)/calm-metrics/v1/metrics?useCase=hm&serviceId=$(.execution.input.serviceId)&dev=$(.execution.input.devMode)",
+              "timeout": "10"
+            },
+            "alias": "PushMetric",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": {
+              "maxCount": 3,
+              "delay": "5s",
+              "logic": "INCREMENTAL",
+              "applyOnValidation": false,
+              "when": {
+                "semantic": "OR",
+                "conditions": [
+                  {
+                    "semantic": "OR",
+                    "cases": [
+                      {
+                        "expression": "$(.PushStatus.output.status | valueIn([ 429, 500, 502, 503, 504 ]))",
+                        "operator": "EQUALS",
+                        "semantic": "OR",
+                        "values": [
+                          "true"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          }
+        ],
+        "listeners": []
+      },
+      "id": "TechEd207-<<<TENANT_ID>>>:PushCloudAlmQuotaXP267:1",
+      "name": "PushCloudAlmQuotaXP267",
+      "description": "Sends a quota metric to track resource utilization against predefined limits in Cloud ALM Health Monitoring",
+      "catalog": "TechEd207-<<<TENANT_ID>>>",
+      "version": 1,
+      "inputKeys": {
+        "unit": {
           "type": "string",
           "sensitive": false,
-          "description": null
+          "required": true,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": null,
+          "description": "Metric unit to push, e.g., mb, bytes"
         },
-        "url": {
+        "devMode": {
+          "type": "boolean",
+          "sensitive": false,
+          "required": false,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": "false",
+          "defaultValueFromInput": null,
+          "description": "When true, the consumer is called synchronously so you immediately get the response and error messages. Intended only for implementation and testing"
+        },
+        "name": {
           "type": "string",
           "sensitive": false,
-          "description": null
+          "required": true,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": null,
+          "description": "Metric name to publish"
         },
-        "status": {
+        "limit": {
           "type": "number",
           "sensitive": false,
-          "description": null
+          "required": true,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": null,
+          "description": "The predefined resource quota limit"
+        },
+        "rating": {
+          "type": "string",
+          "sensitive": false,
+          "required": true,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": [
+            "ok",
+            "warning",
+            "critical",
+            "fatal",
+            "error",
+            "info"
+          ],
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": null,
+          "description": "Rating to be reported"
+        },
+        "used": {
+          "type": "number",
+          "sensitive": false,
+          "required": true,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": null,
+          "description": "Current resource utilization"
+        },
+        "serviceKey": {
+          "type": "object",
+          "sensitive": true,
+          "required": false,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": {
+            "inputReference": "TechEd207-<<<TENANT_ID>>>:CloudAlmServiceKey:1",
+            "inputKey": "serviceKey"
+          },
+          "description": "Credential to authenticate and send metrics to Cloud ALM"
+        },
+        "serviceId": {
+          "type": "string",
+          "sensitive": false,
+          "required": true,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": null,
+          "description": "Unique identifier of the service as defined in Cloud ALM"
+        }
+      },
+      "outputKeys": {
+        "response": {
+          "type": "object",
+          "sensitive": false,
+          "description": "The response from Cloud ALM when the metric is sent in devMode"
+        }
+      },
+      "tags": {},
+      "issues": []
+    },
+    {
+      "configuration": {
+        "values": [],
+        "output": {
+          "response": "$(.PushStatus.output.body)"
+        },
+        "executors": [
+          {
+            "execute": "http-sapcp:HttpRequest:1",
+            "input": {
+              "headers": "{\"content-type\":\"application/json\"}",
+              "clientId": "$(.execution.input.serviceKey.uaa.clientid)",
+              "tokenUrl": "$(.execution.input.serviceKey.uaa.url)/oauth/token",
+              "method": "POST",
+              "clientSecret": "$(.execution.input.serviceKey.uaa.clientsecret)",
+              "body": "{\n    \"resourceMetrics\": [\n        {\n            \"resource\": {\n                \"attributes\": $(.execution.input.resourceAttributes | toEntries | map({ key, value: { stringValue: .value }}) // [])\n            },\n            \"scopeMetrics\": [\n                {\n                    \"metrics\": [\n                        {\n                            \"name\": \"$(.execution.input.metricName | toEscapedJson)\",\n                            \"description\": \"$(.execution.input.message | toEscapedJson)\",\n                            \"gauge\": {\n                                \"dataPoints\": [\n                                    {\n                                        \"asDouble\": 1,\n                                        \"attributes\": [\n                                            {\n                                                \"key\": \"sap.calm.hm.metric.type\",\n                                                \"value\": {\n                                                    \"stringValue\": \"status\"\n                                                }\n                                            },\n                                            {\n                                                \"key\": \"sap.calm.hm.metric.rating\",\n                                                \"value\": {\n                                                    \"stringValue\": \"$(.execution.input.status)\"\n                                                }\n                                            }\n                                        ]\n                                    }\n                                ]\n                            }\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}",
+              "contentType": "application/json",
+              "url": "$(.execution.input.serviceKey.endpoints.Api)/calm-metrics/v1/metrics?useCase=hm&serviceId=$(.execution.input.serviceId)&dev=$(.execution.input.devMode)",
+              "timeout": "10"
+            },
+            "alias": "PushStatus",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
+            "validate": null,
+            "autoRetry": {
+              "maxCount": 3,
+              "delay": "5s",
+              "logic": "INCREMENTAL",
+              "applyOnValidation": false,
+              "when": {
+                "semantic": "OR",
+                "conditions": [
+                  {
+                    "semantic": "OR",
+                    "cases": [
+                      {
+                        "expression": "$(.PushStatus.output.status | valueIn([ 429, 500, 502, 503, 504 ]))",
+                        "operator": "EQUALS",
+                        "semantic": "OR",
+                        "values": [
+                          "true"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          }
+        ],
+        "listeners": []
+      },
+      "id": "TechEd207-<<<TENANT_ID>>>:PushCloudAlmStatusXP267:1",
+      "name": "PushCloudAlmStatusXP267",
+      "description": "Sends a simple health status to Cloud ALM Health Monitoring",
+      "catalog": "TechEd207-<<<TENANT_ID>>>",
+      "version": 1,
+      "inputKeys": {
+        "metricName": {
+          "type": "string",
+          "sensitive": false,
+          "required": true,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": null,
+          "description": "Metric name to publish"
+        },
+        "devMode": {
+          "type": "boolean",
+          "sensitive": false,
+          "required": false,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": "false",
+          "defaultValueFromInput": null,
+          "description": "When true, the consumer is called synchronously so you immediately get the response and error messages. Intended only for implementation and testing"
+        },
+        "attributes": {
+          "type": "object",
+          "sensitive": false,
+          "required": false,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": "{}",
+          "defaultValueFromInput": null,
+          "description": "Used to describe the measurement itself - what exactly was measured. Example: { \"route\": \"/health\" }"
+        },
+        "serviceKey": {
+          "type": "object",
+          "sensitive": true,
+          "required": false,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": {
+            "inputReference": "TechEd207-<<<TENANT_ID>>>:CloudAlmServiceKey:1",
+            "inputKey": "serviceKey"
+          },
+          "description": "Credential to authenticate and send metrics to Cloud ALM"
+        },
+        "message": {
+          "type": "string",
+          "sensitive": false,
+          "required": true,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": null,
+          "description": "Human-readable message of the current state/context"
+        },
+        "serviceId": {
+          "type": "string",
+          "sensitive": false,
+          "required": true,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": null,
+          "description": "Unique identifier of the service as defined in Cloud ALM"
+        },
+        "resourceAttributes": {
+          "type": "object",
+          "sensitive": false,
+          "required": false,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": null,
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": "{}",
+          "defaultValueFromInput": null,
+          "description": "Describe the entity producing the metrics and apply to every metric in that resource block. Example: { \"service.name\": \"my-app\" }"
+        },
+        "status": {
+          "type": "string",
+          "sensitive": false,
+          "required": true,
+          "minSize": null,
+          "maxSize": null,
+          "minValue": null,
+          "maxValue": null,
+          "allowedValues": [
+            "ok",
+            "warning",
+            "error",
+            "critical",
+            "fatal",
+            "info"
+          ],
+          "allowedValuesFromInputKeys": null,
+          "suggestedValues": null,
+          "suggestedValuesFromInputKeys": null,
+          "defaultValue": null,
+          "defaultValueFromInput": null,
+          "description": "Health rating to be reported"
+        }
+      },
+      "outputKeys": {
+        "response": {
+          "type": "object",
+          "sensitive": false,
+          "description": "The response from Cloud ALM when the metric is sent in devMode"
         }
       },
       "tags": {},
