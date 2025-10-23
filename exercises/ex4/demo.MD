@@ -35,7 +35,7 @@ Click on the **Update** button.
 
 
 
-## Demo #2 - Aanalyze logs with AI and push to CALM
+## Demo #2 - Analyze logs with AI and push to CALM
 
 ### Add AI Insights Focused on Memory Consumption
 
@@ -62,14 +62,16 @@ Add an AI analysis specialized in **memory utilization**, plus a **short summary
 
    Click **Update**.
 
-3. Add another executor for a **very short memory summary** (≤ 3 words):  
+### Add another executor for a **very short memory summary** (≤ 3 words)
+
+1. Add the executor:  
    - **Alias**: `AICoreMemoryAnalyzeSummary`  
    - **Command**: `GenerateGpt4OmniCompletion`  
    - **Placement**: before **Output**  
    - Keep **Automap parameters** enabled  
    - Click **Add**  
 
-4. Edit **`AICoreMemoryAnalyzeSummary`** and set:  
+2. Edit **`AICoreMemoryAnalyzeSummary`** and set:  
 
    - **deploymentId**: `$(.AICoreData.deploymentId)`  
    - **prompt**:  
@@ -84,7 +86,7 @@ Add an AI analysis specialized in **memory utilization**, plus a **short summary
 
    Click **Update**.
 
-5. Add **Output Keys** and map them:  
+3. Add **Output Keys** and map them:  
    ![](./images/03-38.png)
 
    - **AIOutputMemory** (`string`) → `$(.AICoreMemoryAnalysis.output.response)`  
@@ -92,5 +94,6 @@ Add an AI analysis specialized in **memory utilization**, plus a **short summary
 
    Save the mappings in the **output** executor.  
 
-6. **Trigger** the command and check **Output** for both memory fields.  
+4. **Trigger** the command and check **Output** for both memory fields.  
 
+### Now trigger the *demo command to push the metrics to CALM*
