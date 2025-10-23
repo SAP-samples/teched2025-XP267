@@ -1,6 +1,8 @@
-## Demo #1
+## Demo #1 - Push metrics to CALM 
 
-Add the Executor 
+#### As a starting point: Run the command 
+
+#### Add the Executor 
 - **Place the new executor** just before the Ouput by clickin on **Here** botton.
 
 - **Alias** - `pushSpaceMemoryUtilization` 
@@ -10,10 +12,10 @@ Add the Executor
 - **Keep enabled** the `Automap parameters`
 
 - Click on **Add** button
-![](./images/02-07.png)
 
+
+#### Edit Executor's parameters
 Now navigate to the executor you just created `pushSpaceMemoryUtilization` and click on the **Edit** button to update its parameters. 
-![](./images/02-08.png)
 
 Update the values accordingly: 
 
@@ -30,4 +32,7 @@ Update the values accordingly:
 - **used** - `$(.calculateSpaceMemory.output.spaceMemory // 0)`
 
 Click on the **Update** button. 
-![](./images/02-09.png)
+
+
+
+## Demo #2 - Aanalyze logs with AI and push to CALM
