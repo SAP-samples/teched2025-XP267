@@ -37,32 +37,7 @@ Click on the **Update** button.
 
 ## Demo #2 - Analyze logs with AI and push to CALM
 
-### Add AI Insights Focused on Memory Consumption
-
-Add an AI analysis specialized in **memory utilization**, plus a **short summary**.
-
-1. Add an executor:  
-   - **Alias**: `AICoreMemoryAnalysis`  
-   - **Command**: `GenerateGpt4OmniCompletion`  
-   - **Placement**: before **Output**  
-   - Keep **Automap parameters** enabled  
-   - Click **Add**  
-
-2. Edit **`AICoreMemoryAnalysis`** and set:  
-   - **deploymentId**: `$(.AICoreData.deploymentId)`  
-   - **prompt**:  
-     ```
-     Available memory allocated within the Cloud Foundry space = "$(.GetAppState.output.memory) MB" and App logs are $(.AICoreAnalyze.output.response)
-     ```
-   - **serviceKey**: `$(.AICoreData.serviceKey)`  
-   - **systemMessage**:  
-     ```
-     You are an AI assistant with expertise in CAP NodeJS applications. You will receive as inputs the available memory allocated within the Cloud Foundry space where the app runs and the logs from the same CAP NodeJS application. Analyze these inputs and provide an assessment of the app's memory utilization with recommendations focused only on memory utilization.
-     ```
-
-   Click **Update**.
-
-### Add another executor for a **very short memory summary** (≤ 3 words)
+###  Add AI Insights Focused on Memory Consumptionr with a **very short memory summary** (≤ 3 words)
 
 1. Add the executor:  
    - **Alias**: `AICoreMemoryAnalyzeSummary`  
