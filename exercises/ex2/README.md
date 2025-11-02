@@ -76,7 +76,54 @@ Click on the **Update** button.
 Navigate to the executor `pushSpaceMemoryUtilization` and validate the paramters you just had added. It should look like this one:
 ![](./images/02-10.png)
 
-Now we need to add another executor next to it. The executor is about pushing the current usage for all our CF spaces on Org level (in case we do have more than one CF Space). 
+
+**Trigger the command in SAP Automation Pilot**
+Now it is all set and you can trigger the command in SAP Automation Pilot. 
+To do so, click on the **Trigger** button located in the the top righ screen and proceed further as no any further inputs are needed.
+![](./images/02-16.png)
+
+**Success** - the commands has been completed and data is pushed to SAP Cloud ALM! 
+![](./images/02-17.png)
+
+Now let's check the data ingested into SAP Cloud ALM - Health Monitoring. 
+
+## Exercise 2.3  Consume the custom metrics in SAP Cloud ALM - Health Monitoring
+
+**Access SAP Cloud ALM** by following this link here: https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/
+
+**Login** with your user --> select the **Operations** menu item --> **Health Monitoring**
+
+Within Health Monitoring Overview, click on **Monitoring**
+![](./images/02-18.png)
+
+Click on your SAP BTP Cloud Foundry environment `XP267_OXX_CF` (as per the usernam assigned to you, in example, XP267_001_CF) 
+![](./images/02-19.png)
+
+You will open the **Metrcis Overview** screen in Health Monitoring. Within the very same screen, scroll-down to **Other Metrics** section and you will find the two metrics ( `org.memory.utilization` and `space.memory.utilization`) with the respective values pushed by SAP Automation Pilot. 
+Congrats - you can now feed directly your Obserbavility platform with any metric you might wish to bring in.
+![](./images/02-20.png)
+
+_Hint: _ From this screen, if you click on the `space.memory.utilization` in example, you could see further details about the metric such as information, rating, value. Click on the **History** button. 
+![](./images/02-21.png)
+
+You could explore how this metric's value had changed over the time (in case you have various entries for the specified metric) and get additional insights. 
+![](./images/02-22.png)
+
+### Congrats - you can now feed directly your Obserbavility platform with any metric you might wish to bring in.
+
+## Summary
+
+You've now learned how to extend your commands in SAP Automation Pilot by adding new executors to them and resuing also existing command. Moreover, you had manage to trigger command in Automation Pilot that collects further details about your landscape and consume these in a central observability platform such as SAP Cloud ALM. Once that's done, metrics' data is kept in SAP Cloud ALM and it gets visualised in a dashboard such as Metrics Overview in Health Monitoring for further exploration and analysis.
+
+Continue to - [Exercise 3 - Exercise 3 Description](../ex3/README.md)
+
+
+## [Optional] - Extend the existing command in SAP Automation Pilot by pushing Org Memory Utilization metric to SAP Cloud ALM  
+
+In case you have more than one CF Spaces, it might be beneficial to keep an eye on the total memory utilizaed in your BTP Organization. You could extend the command you were working on in this excercise named `CheckResourceQuotaUtilizationXP267Extended` . 
+
+To do so, navigate to the command itslef add another executor next to it. 
+The executor is about pushing the current usage for all our CF spaces on Org level (_hint: beneficial, in case we do have more than one CF Space_). 
 
 To do so, go to the executors section in your command and click on the **Add** button to add a new executro within you automation flow. 
 ![](./images/02-11.png)
@@ -116,42 +163,4 @@ Click on the **Update** button.
 Navigate to the executor `pushOrgMemoryUtilization` and validate the paramters you just had added. It should look like this one:
 ![](./images/02-15.png)
 
-**Trigger the command in SAP Automation Pilot**
-Now it is all set and you can trigger the command in SAP Automation Pilot. 
-To do so, click on the **Trigger** button located in the the top righ screen and proceed further as no any further inputs are needed.
-![](./images/02-16.png)
 
-**Success** - the commands has been completed and data is pushed to SAP Cloud ALM! 
-![](./images/02-17.png)
-
-Now let's check the data imngested into SAP Cloud ALM - Health Monitoring. 
-
-## Exercise 2.3  Consume the custom metrics in SAP Cloud ALM - Health Monitoring
-
-**Access SAP Cloud ALM** by following this link here: https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/
-
-**Login** with your user --> select the **Operations** menu item --> **Health Monitoring**
-
-Within Health Monitoring Overview, click on **Monitoring**
-![](./images/02-18.png)
-
-Click on your SAP BTP Cloud Foundry environment `XP267_OXX_CF` (as per the usernam assigned to you, in example, XP267_001_CF) 
-![](./images/02-19.png)
-
-You will open the **Metrcis Overview** screen in Health Monitoring. Within the very same screen, scroll-down to **Other Metrics** section and you will find the two metrics ( `org.memory.utilization` and `space.memory.utilization`) with the respective values pushed by SAP Automation Pilot. 
-Congrats - you can now feed directly your Obserbavility platform with any metric you might wish to bring in.
-![](./images/02-20.png)
-
-From this screen, if you click on any of these two metrics, `space.memory.utilization` in example, you will see further details about the metric such as information, rating, value. Click on the **History** button. 
-![](./images/02-21.png)
-
-You could explore how this metric's value had changed over the time and get additional insights. 
-![](./images/02-22.png)
-
-### Congrats - you can now feed directly your Obserbavility platform with any metric you might wish to bring in.
-
-## Summary
-
-You've now learned how to extend your commands in SAP Automation Pilot by adding new executors to them and resuing also existing command. Moreover, you had manage to trigger command in Automation Pilot that collects further details about your landscape and consume these in a central observability platform such as SAP Cloud ALM. Once that's done, metrics' data is kept in SAP Cloud ALM and it gets visualised in a dashboard such as Metrics Overview in Health Monitoring for further exploration and analysis.
-
-Continue to - [Exercise 3 - Exercise 3 Description](../ex3/README.md)
