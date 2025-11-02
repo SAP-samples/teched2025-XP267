@@ -56,15 +56,19 @@ Update the values accordingly:
 
 - **limit** - `$(.getCfSpaceQuota.output.body | toObject | .apps.total_memory_in_mb // 0)`
 
-- **name** - `space.memory.utilization`
-
-- **rating** - `$(.calculateSpaceMemoryPercentage.output.message | toNumber | if . > 95 then "fatal" elif . > 85 then "critical" elif . > 70 then "warning" elif . > 0 then "ok" else "error" end)`
+- **metricName** - `space.memory.utilization`
 
 - **serviceId** - `$(.execution.input.calmServiceId)`
 
+- **serviceKey** - DO NOT modofy it as it should be alreary mapped (it should be: `$(.execution.input.serviceKey)` ) 
+
+- **severity** - `$(.calculateSpaceMemoryPercentage.output.message | toNumber | if . > 95 then "fatal" elif . > 85 then "critical" elif . > 70 then "warning" elif . > 0 then "ok" else "error" end)`
+
+- **usage** - `$(.calculateSpaceMemory.output.spaceMemory // 0)`
+
 - **unit** - `mb`
 
-- **used** - `$(.calculateSpaceMemory.output.spaceMemory // 0)`
+
 
 Click on the **Update** button. 
 ![](./images/02-09.png)
