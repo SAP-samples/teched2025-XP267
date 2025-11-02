@@ -20,7 +20,7 @@ After completing this exercise, you will:
 
 1. Open your **SAP BTP Cockpit** and navigate to your subaccount.  
    Your subaccount name follows the pattern:  
-   `XP267-0XX` (for example, `XP267-001`).
+   `XP267-0XX` (for example, `XP267-041`).
 
 2. From the left-side menu, expand **Cloud Foundry** → **Spaces**.  
    ![](./images/00-01.png)
