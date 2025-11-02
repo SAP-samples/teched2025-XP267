@@ -106,7 +106,6 @@ Let’s create your first custom command.
    - **Value**: `GET`  
    Click **Add**.  
    ![](./images/1-2-2-07.png)
-<img src="./images/1-2-2-07.png" width="700" height="400">
 
 #### Add Executor
 
@@ -198,11 +197,9 @@ In **SAP Automation Pilot**, click on the **User** menu (bottom left corner) and
 - Tenant ID  
 - Tenant URL  
 ![](./images/01-2-01.png)
-<img src="./images/01-2-01.png" width="700" height="400">
 
 Then click **API** (bottom left menu) and copy the **Base URL**.  
 ![](./images/01-2-02.png)
-<img src="./images/01-2-02.png" width="600">
 
 ### Step 2 – Create a Service Account
 
@@ -217,11 +214,9 @@ Then click **API** (bottom left menu) and copy the **Base URL**.
 
    Click **Create**.  
    ![](./images/01-2-04.png)
-   <img src="./images/01-2-04.png" width="700" height="400">
 
 4. Copy the **Username** and **Password** immediately — the password will not be displayed again.  
    ![](./images/01-2-05.png)
-   <img src="./images/01-2-05.png" width="700" height="400">
 
 Click **Close** when done.
 
@@ -270,7 +265,6 @@ You should now have the following values ready:
    - **Password**: *Password*  
    Click **Save**.  
    ![](./images/01-2-11.png)
-   <img src="./images/01-2-11.png" width="700" height="400">
 
 8. After saving, click **Ping Connection** to verify the setup.  
    ![](./images/01-2-12.png)
