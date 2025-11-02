@@ -202,7 +202,7 @@ In **SAP Automation Pilot**, click on the **User** menu (bottom left corner) and
 
 Then click **API** (bottom left menu) and copy the **Base URL**.  
 ![](./images/01-2-02.png)
-<img src="./images/ex-01-2-02.png" width="600" height="300">
+<img src="./images/ex-01-2-02.png" width="600">
 
 ### Step 2 – Create a Service Account
 
