@@ -197,6 +197,8 @@ Click on your SAP BTP Cloud Foundry environment `XP267_OXX_CF` (as per the usern
 You will open the **Metrcis Overview** screen in Health Monitoring. 
 
 Within the very same screen, scroll-down to **Other Metrics** section and you will find the newly added metric -  `org.memory.utilization` with the respective values pushed by SAP Automation Pilot. 
+
+
 Congrats - you can now feed directly your Obserbavility platform with more metrics you might wish to bring in.
 ![](./images/02-25.png)
 
