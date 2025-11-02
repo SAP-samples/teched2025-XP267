@@ -42,7 +42,7 @@ Add the Executor
 
 - **Alias** - `pushSpaceMemoryUtilization` 
 
-- **Command** - `PushCloudAlmQuotaXP267` - that's a command in SAP Automation Pilot that pushes quota data directly into SAP Cloud ALM metrics API.
+- **Command** - `PushCloudAlmQuotaMetric` - that's a command in SAP Automation Pilot that pushes quota data directly into SAP Cloud ALM metrics API.
 
 - **Keep enabled** the `Automap parameters`
 
@@ -78,6 +78,7 @@ Navigate to the executor `pushSpaceMemoryUtilization` and validate the paramters
 
 
 **Trigger the command in SAP Automation Pilot**
+
 Now it is all set and you can trigger the command in SAP Automation Pilot. 
 To do so, click on the **Trigger** button located in the the top righ screen and proceed further as no any further inputs are needed.
 ![](./images/02-16.png)
@@ -99,11 +100,13 @@ Within Health Monitoring Overview, click on **Monitoring**
 Click on your SAP BTP Cloud Foundry environment `XP267_OXX_CF` (as per the usernam assigned to you, in example, XP267_001_CF) 
 ![](./images/02-19.png)
 
-You will open the **Metrcis Overview** screen in Health Monitoring. Within the very same screen, scroll-down to **Other Metrics** section and you will find the two metrics ( `org.memory.utilization` and `space.memory.utilization`) with the respective values pushed by SAP Automation Pilot. 
+You will open the **Metrcis Overview** screen in Health Monitoring. Within the very same screen, scroll-down to **Other Metrics** section and you will find the metric you just had pushed - `space.memory.utilization` with the respective values pushed by SAP Automation Pilot. 
+
 Congrats - you can now feed directly your Obserbavility platform with any metric you might wish to bring in.
 ![](./images/02-20.png)
 
-_Hint: _ From this screen, if you click on the `space.memory.utilization` in example, you could see further details about the metric such as information, rating, value. Click on the **History** button. 
+_**Hint:**_ 
+From this screen, if you click on the `space.memory.utilization` in example, you could see further details about the metric such as information, rating, value. Click on the **History** button. 
 ![](./images/02-21.png)
 
 You could explore how this metric's value had changed over the time (in case you have various entries for the specified metric) and get additional insights. 
@@ -118,14 +121,15 @@ You've now learned how to extend your commands in SAP Automation Pilot by adding
 Continue to - [Exercise 3 - Exercise 3 Description](../ex3/README.md)
 
 
-## [Optional] - Extend the existing command in SAP Automation Pilot by pushing Org Memory Utilization metric to SAP Cloud ALM  
+### [Optional] - Extend the existing command in SAP Automation Pilot by pushing Org Memory Utilization metric to SAP Cloud ALM  
 
 In case you have more than one CF Spaces, it might be beneficial to keep an eye on the total memory utilizaed in your BTP Organization. You could extend the command you were working on in this excercise named `CheckResourceQuotaUtilizationXP267Extended` . 
 
 To do so, navigate to the command itslef add another executor next to it. 
-The executor is about pushing the current usage for all our CF spaces on Org level (_hint: beneficial, in case we do have more than one CF Space_). 
 
-To do so, go to the executors section in your command and click on the **Add** button to add a new executro within you automation flow. 
+The executor will be about pushing the current usage for all our CF spaces on Org level (_hint: beneficial, in case we do have more than one CF Space_). 
+
+Now go to the executors section in your command and click on the **Add** button to add a new executro within you automation flow. 
 ![](./images/02-11.png)
 
 Add the Executor 
@@ -133,7 +137,7 @@ Add the Executor
 
 - **Alias** - `pushOrgMemoryUtilization` 
 
-- **Command** - `PushCloudAlmQuotaXP267` - that's a command in SAP Automation Pilot that pushes quota data directly into SAP Cloud ALM metrics API.
+- **Command** - `PushCloudAlmQuotaMetric` - that's a command in SAP Automation Pilot that pushes quota data directly into SAP Cloud ALM metrics API.
 
 - **Keep enabled** the `Automap parameters`
 
@@ -147,20 +151,52 @@ Update the values accordingly:
 
 - **limit** - `$(.getCfOrgQuota.output.body | toObject | .apps.total_memory_in_mb // 0)`
 
-- **name** - `org.memory.utilization`
-
-- **rating** - `$(.calculateOrgMemoryPercentage.output.message | toNumber | if . > 95 then "fatal" elif . > 85 then "critical" elif . > 70 then "warning" elif . > 0 then "ok" else "error" end)`
+- **metricName** - `org.memory.utilization`
 
 - **serviceId** - `$(.execution.input.calmServiceId)`
 
+- **serviceKey** - DO NOT modofy it as it should be alreary mapped (it should be: `$(.execution.input.serviceKey)` ) 
+
+- **severity** - `$(.calculateOrgMemoryPercentage.output.message | toNumber | if . > 95 then "fatal" elif . > 85 then "critical" elif . > 70 then "warning" elif . > 0 then "ok" else "error" end)`
+
+- **usage** - `$(.getCfOrgUsage.output.body | toObject | .usage_summary.memory_in_mb // 0)`
+
 - **unit** - `mb`
 
-- **used** - `$(.getCfOrgUsage.output.body | toObject | .usage_summary.memory_in_mb // 0)`
 
 Click on the **Update** button. 
 ![](./images/02-14.png)
 
 Navigate to the executor `pushOrgMemoryUtilization` and validate the paramters you just had added. It should look like this one:
 ![](./images/02-15.png)
+
+**Trigger the command in SAP Automation Pilot**
+
+Now it is all set and you can trigger the command in SAP Automation Pilot. 
+To do so, click on the **Trigger** button located in the the top righ screen and proceed further as no any further inputs are needed.
+![](./images/02-16.png)
+
+**Success** - the commands has been completed and data is pushed to SAP Cloud ALM! 
+![](./images/02-17.png)
+
+Now let's check the data ingested into SAP Cloud ALM - Health Monitoring. 
+
+Consume the custom metrics in SAP Cloud ALM - Health Monitoring
+
+**Access SAP Cloud ALM** by following this link here: https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/
+
+**Login** with your user --> select the **Operations** menu item --> **Health Monitoring**
+
+Within Health Monitoring Overview, click on **Monitoring**
+![](./images/02-18.png)
+
+Click on your SAP BTP Cloud Foundry environment `XP267_OXX_CF` (as per the usernam assigned to you, in example, XP267_001_CF) 
+![](./images/02-19.png)
+
+You will open the **Metrcis Overview** screen in Health Monitoring. 
+
+Within the very same screen, scroll-down to **Other Metrics** section and you will find the newly added metric -  `org.memory.utilization` with the respective values pushed by SAP Automation Pilot. 
+Congrats - you can now feed directly your Obserbavility platform with more metrics you might wish to bring in.
+![](./images/02-25.png)
 
 
