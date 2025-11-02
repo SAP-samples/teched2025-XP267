@@ -28,7 +28,7 @@ After the command succesful execution, consult the output values by clicking on 
 That's a current snapshot of the resource utilization of Cloud Foundry space and its parrent organization for your subaccount. 
 ![](./images/02-05.png)
 
-_HINT: the output provides the insights that ~45% out of your memory allocated for both Organisation and CF Space are currently allocated._
+_HINT: the output provides the insights that 19.53% out of your memory allocated for both Organisation and CF Space are currently allocated._
 
 ## Exercise 2.2  Use existing commands in SAP Automation Pilot to push these metrics to SAP Cloud ALM 
 
