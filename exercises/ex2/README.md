@@ -120,6 +120,7 @@ You've now learned how to extend your commands in SAP Automation Pilot by adding
 
 Continue to - [Exercise 3 - Exercise 3 Description](../ex3/README.md)
 
+----------------
 
 ### [Optional] - Extend the existing command in SAP Automation Pilot by pushing Org Memory Utilization metric to SAP Cloud ALM  
 
