@@ -129,17 +129,13 @@ Let’s create your first custom command.
    ![](./images/1-2-2-11.png)
 
    Add the following outputs:  
-   - **Name**: `url` – **Type**: `string`  
    - **Name**: `status` – **Type**: `number`  
-   - **Name**: `header` – **Type**: `object`  
    - **Name**: `body` – **Type**: `string`  
    ![](./images/1-2-2-14.png)
 
 2. Map outputs to their respective values:  
-   - **body**: `$(.getAppEndpoint.output.body)`  
-   - **header**: `$(.getAppEndpoint.output.headers)`  
+   - **body**: `$(.getAppEndpoint.output.body)`    
    - **status**: `$(.getAppEndpoint.output.status)`  
-   - **url**: `$(.getAppEndpoint.output.url)`  
    Click **Update**.  
    ![](./images/1-2-2-16-2.png)
 
