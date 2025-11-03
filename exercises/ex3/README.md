@@ -34,7 +34,7 @@ For a better understanding of the use case, refer to the diagram below:
    You now have a snapshot of CAP app logs, state, and events.  
    ![](./images/03-05.png)
 
-### Optional – Add an Output Key for State Memory
+### Extend the Command by Adding an Output Key for State Memory
 
 1. In the **Output Keys** section, click **Add**.  
    ![](./images/03-06.png)
@@ -80,11 +80,11 @@ Now that you collect the relevant data, let’s add an AI-based assessment using
    ![](./images/03-12.png)
 
    - **deploymentId**: `$(.AICoreData.deploymentId)`  
-   - **prompt**: `$(.GetAppLogs.output.logs)`  
+   - **prompt**: `App logs are $(.GetAppLogs.output.logs) , have in mind also the memory allocated within the Cloud Foundry space = "$(.GetAppState.output.memory) MB"`  
    - **serviceKey**: `$(.AICoreData.serviceKey)`  
    - **systemMessage**:  
      ```
-     You are an AI assistant with expertise in CAP NodeJS applications. You will receive application logs from a CAP NodeJS application that uses HANA Cloud as its database. Your task is to analyze these logs and provide a summary highlighting the application's current state and any potential issues.
+     You are an AI assistant with expertise in CAP NodeJS applications. You will receive application logs and the allocated memory for a CAP NodeJS application running on BTP Cloud Foundry. Your task is to analyze these logs and provide a summary highlighting the application's current state and any potential issues.
      ```
 
    Click **Update**.  
