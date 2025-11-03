@@ -116,7 +116,7 @@ Now that you collect the relevant data, let’s add an AI-based assessment using
 
 ---
 
-## Exercise 3.3 – Generate a One-Word Health Status Summary via SAP AI Core
+## [ 🧩 Optional ] Exercise 3.3 – Generate a One-Word Health Status Summary via SAP AI Core
 
 Let’s obtain a concise **single-status** health summary (`OK`, `Investigate`, or `Critical`) suitable for dashboards.
 
@@ -166,7 +166,7 @@ Let’s obtain a concise **single-status** health summary (`OK`, `Investigate`, 
 
 ---
 
-## [Optional] Exercise 3.4 – Add AI Insights Focused on Memory Consumption
+## [ 🧩 Optional ] Exercise 3.4 – Add AI Insights Focused on Memory Consumption
 
 Add an AI analysis specialized in **memory utilization**, plus a **short summary**.
 
