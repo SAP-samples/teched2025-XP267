@@ -166,7 +166,7 @@ Let’s obtain a concise **single-status** health summary (`OK`, `Investigate`, 
 
 ---
 
-## Exercise 3.4 – Add AI Insights Focused on Memory Consumption
+## [Optional] Exercise 3.4 – Add AI Insights Focused on Memory Consumption
 
 Add an AI analysis specialized in **memory utilization**, plus a **short summary**.
 
