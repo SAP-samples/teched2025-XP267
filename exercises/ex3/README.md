@@ -281,4 +281,5 @@ You have successfully:
 - Produced a one-word **health status** and a concise **memory summary**  
 - Pushed AI insights to **SAP Cloud ALM – Health Monitoring** for centralized observability
 
-Congrats!! With that - our hands-on tutorial has been completed. We hope you had learned new ideas and approaches for your Day Two Operation tasks. 
+Proceed to the next step:  
+➡️ [Exercise 4 – Exercise 4 Description](../ex4/README.md)
