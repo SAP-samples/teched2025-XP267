@@ -18,17 +18,19 @@ After completing this exercise, you will:
 > 💡 **Note:**  
 > The CAP application is a **Node.js** service already deployed and instrumented with an **OpenTelemetry (OTEL)** library, which allows it to push operational metrics to **SAP Cloud ALM**.
 
-1. Open your **SAP BTP Cockpit** and navigate to your subaccount.  
+1. Open your **SAP BTP Cockpit** and navigate to your subaccount following this link: https://emea.cockpit.btp.cloud.sap/cockpit?idp=tdct3ched1.accounts.ondemand.com#/globalaccount/4c772782-0751-42ee-93c3-897452fdcb63/
    Your subaccount name follows the pattern:  
    `XP267-0XX` (for example, `XP267-041`).
 
-2. From the left-side menu, expand **Cloud Foundry** → **Spaces**.  
+   Login with the password provided during the session.
+
+3. From the left-side menu, expand **Cloud Foundry** → **Spaces**.  
    ![](./images/00-01.png)
 
-3. Click on the **dev** space — this is your development environment.  
+4. Click on the **dev** space — this is your development environment.  
    ![](./images/00-02.png)
 
-4. You will now see a list of applications running in your **dev** space.  
+5. You will now see a list of applications running in your **dev** space.  
    Locate the app named **`bookshop-srv`** with status **“Started.”**  
    ![](./images/00-03.png)
 
