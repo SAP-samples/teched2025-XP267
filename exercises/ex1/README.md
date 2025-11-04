@@ -279,7 +279,8 @@ You should now have the following values ready:
 > ⚠️ **Remark:**  
 > **Do not** click the **Check Connection** button yet — the service has not been provisioned, and the connection check will fail until it is in place.
 
-    Click **Save**.  
+
+   Click **Save**.  
    ![](./images/01-2-11.png)
 
 9. After saving, click **Ping Connection** to verify the setup.  
