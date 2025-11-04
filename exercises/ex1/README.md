@@ -15,7 +15,7 @@ For a better understanding of the use case, refer to the diagram below:
 1. Access **SAP Cloud ALM**:  
    [https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/](https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/)
 
-   **Note**: click on the option to sign in with: `tdct3ched1.accounts.ondemand.com` and the log in with the credentials (email and password you had already used in exercise 0) 
+   **Note**: click on the option to sign in with: `tdct3ched1.accounts.ondemand.com` and then log in with the credentials (email and password you had already used in exercise 0) 
    ![](./images/1-00-00-1.png)
 
 2. **Log in** with your provided user credentials.  
@@ -253,7 +253,7 @@ You should now have the following values ready:
    ![](./images/01-2-07.png)
 
 4. Fill in the **Add Service** form:  
-   - **Name**: `AP-XP267-0XX` (e.g. `AP-XP267-001` for User 01 , `AP-XP267-041` for User 41, etc.) )  
+   - **Name**: `AP-XP267-0XX` (e.g. `AP-XP267-001` for User 01 , `AP-XP267-041` for User 41, etc.)
    - **System Number**: *Tenant ID* (copied earlier, e.g. `1T0011140RX` )  
    - **Service Type**: `SAP Automation Pilot`  
    - **Role**: `Test`  
