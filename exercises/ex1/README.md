@@ -15,7 +15,7 @@ For a better understanding of the use case, refer to the diagram below:
 1. Access **SAP Cloud ALM**:  
    [https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/](https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/)
 
-   **Note**: click on the option to sign in with: `tdct3ched1.accounts.ondemand.com` and the log in with the credentials (email and password you had already used in excercise 1) 
+   **Note**: click on the option to sign in with: `tdct3ched1.accounts.ondemand.com` and the log in with the credentials (email and password you had already used in exercise 1) 
    ![](./images/1-00-00-1.png)
 
 3. **Log in** with your provided user credentials.  
@@ -162,9 +162,9 @@ Let’s create your first custom command.
 
 ### [ 🧩 Optional ] – Using Stored Input Keys
 
-You can store and reuse input values in **SAP Automation Pilot** so that you are not asked to provide static parameters each time a command gets triggered but the input can be fetched dunamically or from already stored input key.
+You can store and reuse input values in **SAP Automation Pilot** so that you are not asked to provide static parameters each time a command gets triggered but the input can be fetched dynamically or from already stored input key.
 
-Let's demonstrate how that works by exenting the command you just have created - `simpleHttpRequest` . First , let's start with exploring and updating an input key. 
+Let's demonstrate how that works by extending the command you just have created - `simpleHttpRequest` . First , let's start by exploring and updating an input key. 
 
 1. Click **Inputs** in the left menu.  
    ![](./images/1-2-2-21.png)
@@ -179,7 +179,7 @@ Let's demonstrate how that works by exenting the command you just have created -
    ![](./images/new-6.png)
    ![](./images/new-7.png)
 
-6. Edit the **URL** input key within the **Input Keys contract secion** by clicking on the **pencil button** to reference the stored value:  
+6. Edit the **URL** input key within the **Input Keys contract section** by clicking on the **pencil button** to reference the stored value:  
    - Uncheck **Required**  
    - **Default Value Source**: `Input Key`  
    - **Input**: `appEndPoints`  
@@ -197,7 +197,7 @@ Let's demonstrate how that works by exenting the command you just have created -
 
 ## Exercise 1.3 – Set Up Integration Between SAP Cloud ALM and SAP Automation Pilot
 
-Now, let’s integrate **SAP Cloud ALM** with **SAP Automation Pilot**.
+Now, let’s integrate **SAP Cloud ALM** with **SAP Automation Pilot** to to enable automated command execution.
 
 ### Step 1 – Gather Required Values from SAP Automation Pilot
 
@@ -226,7 +226,7 @@ Then click **API** (bottom left menu) and copy the **Base URL**.
 4. Copy the **Username** and **Password** immediately — the password will not be displayed again.  
    ![](./images/01-2-05.png)
 
-Click **Close** when done.
+Click **Close** when you are done.
 
 You should now have the following values ready:  
 - Tenant ID  
@@ -242,7 +242,7 @@ You should now have the following values ready:
 1. Open **SAP Cloud ALM**:  
    [https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/](https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/)
 
-2. Go to **Operations → Landscape Management**.  
+2. From the main menu, go to **Operations → Landscape Management**.  
    ![](./images/01-2-06.png)
 
 3. From the left sidebar, select **Services and Systems** → click **Add New Service**.  
@@ -250,10 +250,10 @@ You should now have the following values ready:
 
 4. Fill in the **Add Service** form:  
    - **Name**: `AP-XP267-0XX` (e.g. `AP-XP267-041`)  
-   - **System Number**: *Tenant ID* (copied earlier)  
+   - **System Number**: *Tenant ID* (copied earlier, e.g. `1T0011140RX` )  
    - **Service Type**: `SAP Automation Pilot`  
    - **Role**: `Test`  
-   - **Root URL**: *Tenant URL*  
+   - **Root URL**: *Tenant URL*  (e.g. `https://xp267-0XX-1a0od9aa.autopilot.cfapps.eu10.hana.ondemand.com`) 
    - **Deployment Model**: `BTP System`  
 
    Click **Save**.  
@@ -266,15 +266,19 @@ You should now have the following values ready:
    ![](./images/01-2-10.png)
 
 7. Fill in the endpoint details:  
-   - **Endpoint Name**: `AP-XP267-0XX`  
-   - **Root URL**: *Base URL*  
+   - **Endpoint Name**: `AP-XP267-0XX` (e.g. `AP-XP267-001` for User 01 , `AP-XP267-041` for User 41, etc.) 
+   - **Root URL**: *Base URL*  (e.g. `https://emea.autopilot.cloud.sap`)
    - **Authentication**: Basic  
    - **User**: *Username*  
    - **Password**: *Password*  
-   Click **Save**.  
+
+> ⚠️ **Remark:**  
+> **Do not** click the **Check Connection** button yet — the service has not been provisioned, and the connection check will fail until it is in place.
+
+    Click **Save**.  
    ![](./images/01-2-11.png)
 
-8. After saving, click **Ping Connection** to verify the setup.  
+9. After saving, click **Ping Connection** to verify the setup.  
    ![](./images/01-2-12.png)
 
 ✅ **Success!** The endpoint connection is active. You can now trigger Automation Pilot commands directly from **SAP Cloud ALM**.  
