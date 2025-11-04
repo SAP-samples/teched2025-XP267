@@ -55,7 +55,7 @@ You do **not** need to perform any setup steps — simply proceed with the hands
 
 
 ## Exercises
-Let's start the excercise - for a better understanding, please follow the excercises as listed below:
+Let's start the exercise - for a better understanding, please follow the exercise as listed below:
 Continue to: 
 - [Getting Started](exercises/ex0/)
 
