@@ -38,7 +38,7 @@ Now we want to push these metrics into SAP Cloud ALM - Health Monitoring. To do 
 ![](./images/02-06.png)
 
 Add the Executor 
-- **Place the new executor** just before the Output by clickin on **Here** botton.
+- **Place the new executor** just before the Output by clicking on the **Here** botton.
 
 - **Alias** - `pushSpaceMemoryUtilization` 
 
@@ -60,7 +60,7 @@ Update the values accordingly:
 
 - **serviceId** - `$(.execution.input.calmServiceId)`
 
-- **serviceKey** - DO NOT modofy it as it should be alreary mapped (it should be: `$(.execution.input.serviceKey)` ) 
+- **serviceKey** - DO NOT modify it as it should be already mapped (it should be: `$(.execution.input.serviceKey)` ) 
 
 - **severity** - `$(.calculateSpaceMemoryPercentage.output.message | toNumber | if . > 95 then "fatal" elif . > 85 then "critical" elif . > 70 then "warning" elif . > 0 then "ok" else "error" end)`
 
@@ -119,7 +119,7 @@ Example screenshot - in your environment you don't have historical data and ther
 ![](./images/02-22.png)
 
 
-### Congrats - you can now feed directly your Obserbavility platform with any metric you might wish to bring in.
+### Congrats - you can now feed directly your Observability platform with any metric you might wish to bring in.
 
 ## Summary
 
@@ -185,10 +185,10 @@ Navigate to the executor `pushOrgMemoryUtilization` and validate the parameters 
 **Trigger the command in SAP Automation Pilot**
 
 Now it is all set and you can trigger the command in SAP Automation Pilot. 
-To do so, click on the **Trigger** button located in the the top righ screen and proceed further as no further inputs are needed.
+To do so, click on the **Trigger** button located in the top right screen and proceed further as no further inputs are needed.
 ![](./images/02-16.png)
 
-**Success** - the commands has been completed and data is pushed to SAP Cloud ALM! 
+**Success** - the command has been completed and data is pushed to SAP Cloud ALM! 
 ![](./images/02-17.png)
 
 Now let's check the data ingested into SAP Cloud ALM - Health Monitoring. 
@@ -205,12 +205,12 @@ Within Health Monitoring Overview, click on **Monitoring**
 Click on your SAP BTP Cloud Foundry environment `XP267_OXX_CF` (as per the username assigned to you, in example, XP267_001_CF) 
 ![](./images/02-19.png)
 
-You will open the **Metrcis Overview** screen in Health Monitoring. 
+You will open the **Metrics Overview** screen in Health Monitoring. 
 
 Within the very same screen, scroll-down to **Other Metrics** section and you will find the newly added metric -  `org.memory.utilization` with the respective values pushed by SAP Automation Pilot. 
 
 
-Congrats - you can now feed directly your Obserbavility platform with more metrics you might wish to bring in.
+Congrats - you can now feed directly your Observability platform with more metrics you might wish to bring in.
 ![](./images/02-25.png)
 
 ## Summary
