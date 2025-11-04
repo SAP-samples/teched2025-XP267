@@ -179,7 +179,7 @@ Let's demonstrate how that works by extending the command you just have created 
 3. Update the `urlHomepage` value with your app’s URL and **Save**.  
    ![](./images/1-2-2-23.png)
 
-4. Click on **My Catalogs** menu item from the left sidebar, then click on **Kick Start Catalog** and open the `getAppHomepage` command.  
+4. Click on **My Catalogs** menu item from the left sidebar, then click on **Kick Start Catalog** and open the `simpleHttpRequest` command.  
    ![](./images/new-6.png)
    ![](./images/new-7.png)
 
