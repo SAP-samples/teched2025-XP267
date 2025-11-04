@@ -15,26 +15,29 @@ For a better understanding of the use case, refer to the diagram below:
 1. Access **SAP Cloud ALM**:  
    [https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/](https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/)
 
-2. **Log in** with your provided user credentials.  
+   **Note**: click on the option to sign in with: `tdct3ched1.accounts.ondemand.com` and the log in with the credentials (email and password you had already used in excercise 1) 
+   ![](./images/1-00-00-1.png)
 
-3. From the main menu, select **Operations**.  
+3. **Log in** with your provided user credentials.  
+
+4. From the main menu, select **Operations**.  
    ![](./images/01-01.png)
 
-4. Click on **Health Monitoring**.  
+5. Click on **Health Monitoring**.  
    ![](./images/01-02.png)
 
-5. You will land on the **Health Monitoring Overview** screen.  
+6. You will land on the **Health Monitoring Overview** screen.  
    Make sure the **Scope** is set to your subaccount, e.g. `XP267-0XX_CF` (for example, `XP267_001_CF`).  
    ![](./images/01-03.png)
 
-6. Click on the tile to view all available services and systems in Health Monitoring.  
+7. Click on the tile to view all available services and systems in Health Monitoring.  
    ![](./images/01-04.png)
 
-7. Click on a service to access the **SAP BTP Cloud Foundry Metrics Overview**.  
+8. Click on a service to access the **SAP BTP Cloud Foundry Metrics Overview**.  
    These are metrics ingested from your CAP app through **OpenTelemetry**.  
    ![](./images/01-05.png)
 
-8. Optionally, click on the **All Metrics** tab to explore the collected metrics in detail.  
+9. Optionally, click on the **All Metrics** tab to explore the collected metrics in detail.  
    ![](./images/01-06.png)
 
 ✅ **Well done!** You can now monitor the health of your CAP app.  
@@ -71,18 +74,18 @@ You can also explore:
 
 Let’s create your first custom command.
 
-1. Navigate to **My Catalogs** → open **Commands** from the catalog named **XP267 Ex01 – Kick Start Commands**.  
-   ![](./images/1-2-2-01.png)
+1. Click  the **Commands** menu item from the left sidebar to navigate to the "Commands" section in SAP Automation Pilot 
+   ![](./images/1-00-00-2.png)
 
 2. Click **Create**.  
-   ![](./images/1-2-2-02.png)
+   ![](./images/1-00-00-3.png)
 
 3. Fill in the details:  
    - **Catalog**: type in `XP267 Ex01 – Kick Start Commands` and from the drop-down select your XP267 Kick Start Catalog
    - **Name**: `simpleHttpRequest`  
 
    Click **Create**.  
-   ![](./images/1-2-2-03.png)
+   ![](./images/1-00-00-4.png)
 
 4. The command is created but currently has no inputs, outputs, or executors.  
    ![](./images/1-2-2-04.png)
@@ -133,11 +136,13 @@ Let’s create your first custom command.
    - **Name**: `body` – **Type**: `string`  
    ![](./images/1-2-2-14.png)
 
-2. Map outputs to their respective values:  
+3. Scroll down to **Configuration**, open the **output** executor, click **Edit**, and map the outputs to their respective values:  
    - **body**: `$(.getAppEndpoint.output.body)`    
    - **status**: `$(.getAppEndpoint.output.status)`  
    Click **Update**.  
+   ![](./images/1-00-00-5.png)
    ![](./images/1-2-2-16-2.png)
+
 
 #### Trigger the Command
 
@@ -155,9 +160,11 @@ Let’s create your first custom command.
 
 ---
 
-### Optional – Using Stored Input Keys
+### [ 🧩 Optional ] – Using Stored Input Keys
 
-You can store and reuse input values in **SAP Automation Pilot**:
+You can store and reuse input values in **SAP Automation Pilot** so that you are not asked to provide static parameters each time a command gets triggered but the input can be fetched dunamically or from already stored input key.
+
+Let's demonstrate how that works by exenting the command you just have created - `simpleHttpRequest` . First , let's start with exploring and updating an input key. 
 
 1. Click **Inputs** in the left menu.  
    ![](./images/1-2-2-21.png)
@@ -168,10 +175,11 @@ You can store and reuse input values in **SAP Automation Pilot**:
 3. Update the `urlHomepage` value with your app’s URL and **Save**.  
    ![](./images/1-2-2-23.png)
 
-4. Go back to your **Kick Start Catalog** and open the `getAppHomepage` command.  
-   ![](./images/1-2-2-20.png)
+4. Click on **My Catalogs** menu item from the left sidebar, then click on **Kick Start Catalog** and open the `getAppHomepage` command.  
+   ![](./images/new-6.png)
+   ![](./images/new-7.png)
 
-5. Edit the **URL** input key within the **Input Keys contract secion** by clicking on the **pencil button** to reference the stored value:  
+6. Edit the **URL** input key within the **Input Keys contract secion** by clicking on the **pencil button** to reference the stored value:  
    - Uncheck **Required**  
    - **Default Value Source**: `Input Key`  
    - **Input**: `appEndPoints`  
@@ -180,7 +188,7 @@ You can store and reuse input values in **SAP Automation Pilot**:
    ![](./images/01-01-extra.png)
    ![](./images/1-2-2-25.png)
 
-6. Trigger the command again — it will now automatically use the stored input value.  
+7. Trigger the command again — it will now automatically use the stored input value.  
    ![](./images/1-2-2-26.png)
 
 ✅ You’ve learned how to create, execute, and reuse inputs for commands in SAP Automation Pilot.
@@ -282,4 +290,4 @@ You have successfully:
 - Integrated both products for automated operational actions  
 
 Proceed to the next step:  
-➡️ [Exercise 2 – Exercise 2 Description](../ex2/README.md)
+➡️ [Exercise 2 – Extend SAP Automation Pilot with SAP AI Core for Log Assessment and AI Recommendations](../ex2/README.md)
