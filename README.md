@@ -42,13 +42,17 @@ The service is designed to work with low latency, even under a heavy workload, a
 ##  **Let's Build & Automate!**
 This TechEd session is **interactive  hands-on**, ensuring you gain **real-world experience** with products and tools delivered by SAP. Get ready for your Day 2 Operations activities!
 
-## Requirements
-The requirements to follow the exercises in this repository are: 
-- Access to SAP Automation Pilot
-- Access to SAP Cloud ALM
-- A Cloud Foundry CAP application
-- SAP AI Core credentials and a GPT-4o deployment
-- "Technical user" on your SAP BTP Cloud Foundry space (already provided to each participant)
+## Prerequisites (Already Prepared for You)
+
+The following setup and access prerequisites have been **preconfigured for all participants**.  
+You do **not** need to perform any setup steps — simply proceed with the hands-on exercises.
+
+- Access to **SAP Automation Pilot**  
+- Access to **SAP Cloud ALM**  
+- A **Cloud Foundry CAP application** deployed in your SAP BTP subaccount   
+- **SAP AI Core** credentials with a **GPT-4o** deployment  
+- A **technical user** on your **SAP BTP Cloud Foundry** space (already assigned to each participant)
+
 
 ## Exercises
 Let's start the excercise - for a better understanding, please follow the excercises as listed below:
