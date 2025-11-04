@@ -233,11 +233,11 @@ Then click **API** (bottom left menu) and copy the **Base URL**.
 Click **Close** when you are done.
 
 You should now have the following values ready:  
-- Tenant ID  
-- Tenant URL  
-- Base URL  
-- Username  
-- Password  
+- Tenant ID (e.g. `1T0011140RX`)   
+- Tenant URL (e.g. `https://xp267-0XX-1a0od9aa.autopilot.cfapps.eu10.hana.ondemand.com`)
+- Base URL (e.g. `https://emea.autopilot.cloud.sap`)
+- Username (already copied)
+- Password (already copied)
 
 ---
 
@@ -253,7 +253,7 @@ You should now have the following values ready:
    ![](./images/01-2-07.png)
 
 4. Fill in the **Add Service** form:  
-   - **Name**: `AP-XP267-0XX` (e.g. `AP-XP267-041`)  
+   - **Name**: `AP-XP267-0XX` (e.g. `AP-XP267-001` for User 01 , `AP-XP267-041` for User 41, etc.) )  
    - **System Number**: *Tenant ID* (copied earlier, e.g. `1T0011140RX` )  
    - **Service Type**: `SAP Automation Pilot`  
    - **Role**: `Test`  
