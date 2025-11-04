@@ -222,6 +222,4 @@ You have successfully:
 - (Optionally) Enhanced observability by pushing **organization-level metrics** 
 
 Proceed to the next step:  
-➡️ [Exercise 3 – Extend SAP Automation Pilot with SAP AI Core for Log Assessment and AI Recommendations](../ex2/README.md)
-
-
+➡️ [Exercise 3 – Extend SAP Automation Pilot with SAP AI Core for Log Assessment and AI Recommendations](../ex3/README.md)
