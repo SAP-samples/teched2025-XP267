@@ -213,4 +213,15 @@ Within the very same screen, scroll-down to **Other Metrics** section and you wi
 Congrats - you can now feed directly your Obserbavility platform with more metrics you might wish to bring in.
 ![](./images/02-25.png)
 
+## Summary
+
+You have successfully:  
+- Collected **usage metrics** from your **SAP BTP subaccount** using **SAP Automation Pilot**  
+- Extended an existing command by adding new **executors** to push data into **SAP Cloud ALM**  
+- Viewed and analyzed **custom metrics** in **SAP Cloud ALM – Health Monitoring**  
+- (Optionally) Enhanced observability by pushing **organization-level metrics** 
+
+Proceed to the next step:  
+➡️ [Exercise 3 – Extend SAP Automation Pilot with SAP AI Core for Log Assessment and AI Recommendations](../ex2/README.md)
+
 
