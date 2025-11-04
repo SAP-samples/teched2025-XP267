@@ -5,7 +5,7 @@ In this exercise, we will:
 - Use existing commands in SAP Automation Pilot to push these metrics to SAP Cloud ALM 
 - Consume the custom metrics in SAP Cloud ALM - Health Monitoring  
 
-For a better understanding of the currenet use case, please consult the diagram shared below: 
+For a better understanding of the current use case, please consult the diagram shared below: 
 
 <img src="./images/ex-02-scenario.png" width="700" height="400">
 
