@@ -8,7 +8,7 @@ This repository contains the material for the SAP TechEd 2025 with Session ID XP
 
 ## Overview
 
-This session introduces attendees to SAP Automation Pilot and SAP Cloud ALM in the context of Day 2 Operations. Main goal is participants to gain practical experience in automating different set of technical operation tasks in SAP Business Technology Platform (SAP BTP). To do so, by setting up an integration between SAP Automation Pilot and SAP Cloud ALM, during this hands-on we will explore how to trigger ready-to-use commands in SAP Automation Pilot to do troubleshooting and perform remediation actions based on alerts in SAP Cloud ALM. You will also learn how to build your own automation flows or extend existing ones.
+This session introduces attendees to SAP Automation Pilot and SAP Cloud ALM in the context of Day 2 Operations. The main  goal is for participants to gain practical experience in automating different set of technical operation tasks in SAP Business Technology Platform (SAP BTP). To do so, is needed to set up an integration between SAP Automation Pilot and SAP Cloud ALM. During this hands-on we will explore how to trigger ready-to-use commands in SAP Automation Pilot to do troubleshooting and perform remediation actions based on alerts in SAP Cloud ALM. You will also learn how to build your own automation flows or extend existing ones.
 
 ## **Main scenario covered during this session:**
 ![](./usecase-final.png) 
