@@ -105,12 +105,16 @@ You will open the **Metrcis Overview** screen in Health Monitoring. Within the v
 Congrats - you can now feed directly your Obserbavility platform with any metric you might wish to bring in.
 ![](./images/02-20.png)
 
-_**Hint:**_ 
-From this screen, if you click on the `space.memory.utilization` in example, you could see further details about the metric such as information, rating, value. Click on the **History** button. 
+_**Optional:**_ 
+From this screen, you could click on a metric such as `space.memory.utilization` to view additional details — including its **information**, **rating**, and **current value**.  
+Click on the **History** button to explore historical trends.  
 ![](./images/02-21.png)
 
-You could explore how this metric's value had changed over the time (in case you have various entries for the specified metric) and get additional insights. 
+> 💡 **Note:**  
+> In your environment, there might be **no historical data available** yet.  
+> However, this feature allows you to analyze how a metric’s value changes over time once multiple data entries are collected, providing deeper operational insights.
 ![](./images/02-22.png)
+
 
 ### Congrats - you can now feed directly your Obserbavility platform with any metric you might wish to bring in.
 
