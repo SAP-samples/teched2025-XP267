@@ -23,7 +23,7 @@ After completing this exercise, you will:
     Your subaccount name follows the pattern:  
    `XP267-0XX` (for example, `XP267-041`).
 
-2. Now login with the email (following the pattern of your user , e.g. user 041 goes with an email XP267-041@education.cloud.sap) and the password provided during the session by filling in the login form: 
+2. Now log in with the email (following the pattern of your user , e.g. user 041 uses an email XP267-041@education.cloud.sap) and the password provided during the session by filling in the login form: 
   ![](./images/00-01-1.png)
 
 3. Select the SAP BTP subaccount associated with your user (following the pattern of your user , e.g. user 041 uses a subaccount `XP267-041`):  
