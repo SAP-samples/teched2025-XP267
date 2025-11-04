@@ -161,6 +161,10 @@ Let’s create your first custom command.
 ---
 
 ### [ 🧩 Optional ] – Using Stored Input Keys
+> **Note (Optional Exercise):**  
+> This exercise is **optional**. Due to time limitations, it is **recommended to proceed with the next tasks** first.  
+> You can return to the optional exercises **after completing the full scenario**, if time permits.
+
 
 You can store and reuse input values in **SAP Automation Pilot** so that you are not asked to provide static parameters each time a command gets triggered but the input can be fetched dynamically or from already stored input key.
 
