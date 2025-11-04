@@ -1,13 +1,13 @@
 # Exercise 3 – Extend SAP Automation Pilot with SAP AI Core for Log Assessment and AI Recommendations
 
 In this exercise, you will:
-- Run and extend a command in **SAP Automation Pilot** to collect application logs and Cloud Foundry environment parameters  
+- Run and extend a command in **SAP Automation Pilot** to collect application logs and **Cloud Foundry environment details** \  
 - Integrate SAP Automation Pilot with **SAP AI Core** to provide logs and context to an AI model for assessment and recommendations  
 - Retrieve a summarized assessment in Automation Pilot and **push AI-powered insights to SAP Cloud ALM – Health Monitoring**
 
 > **Context:**  
-> In **Exercise 2**, you pushed custom usage metrics to SAP Cloud ALM.  
-> Here, you will enrich your observability with **AI-generated assessments** based on real app logs and environment context.
+> In **Exercise 2**, you pushed custom usage metrics to **SAP Cloud ALM** . 
+> Here, you will enrich your observability with **AI-generated assessments** based on real application logs and environment context.
 
 For a better understanding of the use case, refer to the diagram below:  
 <img src="./images/ex-03-scenario.png" width="700" height="400">
@@ -282,4 +282,4 @@ You have successfully:
 - Pushed AI insights to **SAP Cloud ALM – Health Monitoring** for centralized observability
 
 Proceed to the next step:  
-➡️ [Exercise 4 – Exercise 4 Description](../ex4/README.md)
+➡️ [Exercise 4 – Trigger a Remediation Command in SAP Automation Pilot Directly from SAP Cloud ALM](../ex4/README.md)
