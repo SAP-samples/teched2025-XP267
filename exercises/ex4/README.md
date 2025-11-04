@@ -6,7 +6,7 @@ In this exercise, you will:
 - Validate the result and **close the alert** in Health Monitoring
 
 > **Context:**  
-> In the previous exercise, you derived AI-driven insights indicating high memory utilization and a recommendation to upscale. Here, you’ll operationalize that recommendation by triggering a remediation flow from **SAP Cloud ALM** into **SAP Automation Pilot**.
+> In the previous exercise, you derived AI-driven insights indicating high memory utilization and a recommendation to upscale. Here, you’ll executee that recommendation by triggering a remediation command from **SAP Cloud ALM** into **SAP Automation Pilot**.
 
 For a better understanding of the use case, refer to the diagram below:  
 <img src="./images/ex-04-scenario.png" width="700" height="400">
