@@ -19,18 +19,23 @@ After completing this exercise, you will:
 > The CAP application is a **Node.js** service already deployed and instrumented with an **OpenTelemetry (OTEL)** library, which allows it to push operational metrics to **SAP Cloud ALM**.
 
 1. Open your **SAP BTP Cockpit** and navigate to your subaccount following this link: https://emea.cockpit.btp.cloud.sap/cockpit?idp=tdct3ched1.accounts.ondemand.com#/globalaccount/4c772782-0751-42ee-93c3-897452fdcb63/
-   Your subaccount name follows the pattern:  
+
+    Your subaccount name follows the pattern:  
    `XP267-0XX` (for example, `XP267-041`).
 
-   Login with the password provided during the session.
+2. Now login with the email (following the pattern of your user , e.g. user 041 goes with an email XP267-041@education.cloud.sap) and the password provided during the session by filling in the login form: 
+  ![](./images/00-01-1.png)
 
-3. From the left-side menu, expand **Cloud Foundry** → **Spaces**.  
+3. Select the SAP BTP subaccount associated with your user (following the pattern of your user , e.g. user 041 uses a subaccount `XP267-041`):  
+  ![](./images/00-01-2.png)   
+
+4. From the left-side menu, expand **Cloud Foundry** → **Spaces**.  
    ![](./images/00-01.png)
 
-4. Click on the **dev** space — this is your development environment.  
+5. Click on the **dev** space — this is your development environment.  
    ![](./images/00-02.png)
 
-5. You will now see a list of applications running in your **dev** space.  
+6. You will now see a list of applications running in your **dev** space.  
    Locate the app named **`bookshop-srv`** with status **“Started.”**  
    ![](./images/00-03.png)
 
@@ -39,7 +44,7 @@ After completing this exercise, you will:
 ## Step 2 – Review the Application Details
 
 1. Review the visible parameters for your app.  
-   You’ll notice that each instance has **400 MB of allocated memory**.  
+   You’ll notice that each instance has **400 MB of memory**.  
 
 2. Click on the application name `bookshop-srv` to open the **Overview** tab.  
    Observe the **memory usage metrics** — the app typically uses slightly less than the 400 MB allocated.  
@@ -56,7 +61,7 @@ After completing this exercise, you will:
    This will open the **Admin Books** web application.
    ![](./images/00-05.png)
 
-4. You should see a page similar to the one below, confirming that the application is running successfully:
+3. You should see a page similar to the one below, confirming that the application is running successfully:
    ![](./images/00-06.png)
 
 ---
@@ -69,6 +74,6 @@ You have successfully:
 - Accessed the application’s **web interface** to confirm it is operational.  
 
 Proceed to the next step:  
-➡️ [Exercise 1 – Introduction to SAP Automation Pilot](../ex1/README.md)
+➡️ [Exercise 1 – Access SAP Cloud ALM and Trigger Commands to Your App via SAP Automation Pilot](../ex1/README.md)
 
 
