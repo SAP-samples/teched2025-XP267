@@ -15,29 +15,29 @@ For a better understanding of the use case, refer to the diagram below:
 1. Access **SAP Cloud ALM**:  
    [https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/](https://xp267-calm-1hdji9xc.eu10-004.alm.cloud.sap/)
 
-   **Note**: click on the option to sign in with: `tdct3ched1.accounts.ondemand.com` and the log in with the credentials (email and password you had already used in exercise 1) 
+   **Note**: click on the option to sign in with: `tdct3ched1.accounts.ondemand.com` and the log in with the credentials (email and password you had already used in exercise 0) 
    ![](./images/1-00-00-1.png)
 
-3. **Log in** with your provided user credentials.  
+2. **Log in** with your provided user credentials.  
 
-4. From the main menu, select **Operations**.  
+3. From the main menu, select **Operations**.  
    ![](./images/01-01.png)
 
-5. Click on **Health Monitoring**.  
+4. Click on **Health Monitoring**.  
    ![](./images/01-02.png)
 
-6. You will land on the **Health Monitoring Overview** screen.  
+5. You will land on the **Health Monitoring Overview** screen.  
    Make sure the **Scope** is set to your subaccount, e.g. `XP267-0XX_CF` (for example, `XP267_001_CF`).  
    ![](./images/01-03.png)
 
-7. Click on the tile to view all available services and systems in Health Monitoring.  
+6. Click on the tile to view all available services and systems in Health Monitoring.  
    ![](./images/01-04.png)
 
-8. Click on a service to access the **SAP BTP Cloud Foundry Metrics Overview**.  
+7. Click on a service to access the **SAP BTP Cloud Foundry Metrics Overview**.  
    These are metrics ingested from your CAP app through **OpenTelemetry**.  
    ![](./images/01-05.png)
 
-9. Optionally, click on the **All Metrics** tab to explore the collected metrics in detail.  
+8. Optionally, click on the **All Metrics** tab to explore the collected metrics in detail.  
    ![](./images/01-06.png)
 
 ✅ **Well done!** You can now monitor the health of your CAP app.  
