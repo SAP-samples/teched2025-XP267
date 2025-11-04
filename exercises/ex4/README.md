@@ -6,14 +6,14 @@ In this exercise, you will:
 - Validate the result and **close the alert** in Health Monitoring
 
 > **Context:**  
-> In the previous exercise, you derived AI-driven insights indicating high memory utilization and a recommendation to upscale. Here, you’ll executee that recommendation by triggering a remediation command from **SAP Cloud ALM** into **SAP Automation Pilot**.
+> In the previous exercise, you derived AI-driven insights indicating high memory utilization and a recommendation to upscale. Here, you’ll execute that recommendation by triggering a remediation command from **SAP Cloud ALM** into **SAP Automation Pilot**.
 
 For a better understanding of the use case, refer to the diagram below:  
 <img src="./images/ex-04-scenario.png" width="700" height="400">
 
 ---
 
-## 4.1 – Consume an Alert in SAP Cloud ALM and Trigger a Remediation Command
+## Exercise 4.1 – Consume an Alert in SAP Cloud ALM and Trigger a Remediation Command
 
 In Exercise 3 you identified that your application’s memory utilization reached the Cloud Foundry limit and the AI suggested **upscaling memory**. You’ll now trigger an Automation Pilot command **from Cloud ALM** to remediate.
 
@@ -58,7 +58,7 @@ In Exercise 3 you identified that your application’s memory utilization reache
 
 ---
 
-## 4.2 – Validate Execution and Review Outputs
+## Exercise 4.2 – Validate Execution and Review Outputs
 
 1. In the **Alert** details, open the **Operation Flow** tab.  
    ![](./images/04-10.png)
@@ -74,7 +74,7 @@ In Exercise 3 you identified that your application’s memory utilization reache
 
 ---
 
-## 4.3 – Confirm the Upscale in SAP BTP Cockpit
+## Exercise 4.3 – Confirm the Upscale in SAP BTP Cockpit
 
 1. In your BTP subaccount, navigate to the Cloud Foundry **dev** space.
 
@@ -92,7 +92,7 @@ In Exercise 3 you identified that your application’s memory utilization reache
 
 ---
 
-## 4.4 – Close the Alert in SAP Cloud ALM
+## Exercise 4.4 – Close the Alert in SAP Cloud ALM
 
 1. Return to **SAP Cloud ALM – Health Monitoring** and open the **Alerts** → **Alert details** page.
 
