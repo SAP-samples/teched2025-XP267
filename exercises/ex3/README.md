@@ -118,6 +118,10 @@ Now that you collect the relevant data, let’s add an AI-based assessment using
 
 ## [ 🧩 Optional ] Exercise 3.3 – Generate a One-Word Health Status Summary via SAP AI Core
 
+> **Note (Optional Exercise):**  
+> This exercise is **optional**. Due to time limitations, it is **recommended to proceed with the next tasks** first.  
+> You can return to the optional exercises **after completing the full scenario**, if time permits.
+
 Let’s obtain a concise **single-status** health summary (`OK`, `Investigate`, or `Critical`) suitable for dashboards.
 
 1. In **`AppLogsAnalysisByAI`**, add another executor:  
@@ -167,6 +171,10 @@ Let’s obtain a concise **single-status** health summary (`OK`, `Investigate`, 
 ---
 
 ## [ 🧩 Optional ] Exercise 3.4 – Add AI Insights Focused on Memory Consumption
+
+> **Note (Optional Exercise):**  
+> This exercise is **optional**. Due to time limitations, it is **recommended to proceed with the next tasks** first.  
+> You can return to the optional exercises **after completing the full scenario**, if time permits.
 
 Add an AI analysis specialized in **memory utilization**, plus a **short summary**.
 
