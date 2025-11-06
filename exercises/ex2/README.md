@@ -129,7 +129,7 @@ Continue to - [Exercise 3 - Exercise 3 Description](../ex3/README.md)
 
 ----------------
 
-### [Optional] - Extend the existing command in SAP Automation Pilot by pushing Org Memory Utilization metric to SAP Cloud ALM  
+### [ 🧩 Optional ] - Extend the existing command in SAP Automation Pilot by pushing Org Memory Utilization metric to SAP Cloud ALM  
 
 > **Note (Optional Exercise):**  
 > This exercise is **optional**. Due to time limitations, it is **recommended to proceed with the next tasks** first.  
