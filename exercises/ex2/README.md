@@ -112,8 +112,8 @@ Click on the **History** button to explore historical trends.
 ![](./images/02-21.png)
 
 > 💡 **Note:**  
-> Your environment might not yet show historical data,** so this view may differ.**
-> However, this feature allows you to analyze how a metric’s value changes over time once multiple data entries are collected, providing deeper operational insights.
+> Your environment might not yet show historical data.
+> This feature allows you to analyze how a metric’s value changes over time once multiple data entries are collected, providing deeper operational insights.
 
 
 ### Congrats - you can now feed directly your Observability platform with any metric you might wish to bring in.
