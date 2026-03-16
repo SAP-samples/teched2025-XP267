@@ -45,13 +45,15 @@
           }
         ],
         "output": {
+          "AIOutput": "$(.AICoreAnalyze.output.response)",
           "appState": "$(.GetAppState.output.desiredStateData)",
           "appEvents": "$(.GetCFAppEvents.output.eventsData)",
+          "stateMemory": "$(.GetAppState.output.memory)",
           "appLogs": "$(.GetAppLogs.output.logs)"
         },
         "executors": [
           {
-            "execute": "applm-sapcp:GetCfAppState:2",
+            "execute": "applm-sapcp:GetCfAppState:1",
             "input": {
               "resourceGroup": "$(.execution.input.resourceGroup)",
               "password": "$(.execution.input.password)",
@@ -156,6 +158,26 @@
                 }
               ]
             },
+            "validate": null,
+            "autoRetry": null,
+            "repeat": null,
+            "errorMessages": [],
+            "dryRun": null
+          },
+          {
+            "execute": "aicore-sapcp:GenerateGpt4OmniCompletion:1",
+            "input": {
+              "systemMessage": "You are an AI assistant with expertise in CAP NodeJS applications. You will receive application logs and the allocated memory for a CAP NodeJS application running on BTP Cloud Foundry. Your task is to analyze these logs and provide a summary highlighting the application's current state and any potential issues.",
+              "deploymentId": "$(.AICoreData.deploymentId)",
+              "serviceKey": "$(.AICoreData.serviceKey)",
+              "prompt": "App logs are $(.GetAppLogs.output.logs) , have in mind also the memory allocated within the Cloud Foundry space = \"$(.GetAppState.output.memory) MB\""
+            },
+            "alias": "AICoreAnalyze",
+            "description": null,
+            "progressMessage": null,
+            "initialDelay": null,
+            "pause": null,
+            "when": null,
             "validate": null,
             "autoRetry": null,
             "repeat": null,
@@ -316,6 +338,11 @@
         }
       },
       "outputKeys": {
+        "AIOutput": {
+          "type": "string",
+          "sensitive": false,
+          "description": null
+        },
         "appState": {
           "type": "string",
           "sensitive": false,
@@ -323,6 +350,11 @@
         },
         "appEvents": {
           "type": "string",
+          "sensitive": false,
+          "description": null
+        },
+        "stateMemory": {
+          "type": "number",
           "sensitive": false,
           "description": null
         },
@@ -349,7 +381,6 @@
         "output": {
           "AIOutput": "$(.AICoreAnalyze.output.response)",
           "appEvents": "$(.GetCFAppEvents.output.eventsData)",
-          "appState": "$(.GetAppState.output.desiredStateData)",
           "stateMemory": "$(.GetAppState.output.memory)",
           "stateDetectedBuildpack": "$(.GetAppState.output.detectedBuildpack)",
           "AIOutputMemorySummary": "$(.AICoreMemoryAnalyzeSummary.output.response)",
@@ -357,11 +388,13 @@
           "AIOutputSummary": "$(.AICoreAnalyzeSummary.output.response)",
           "stateDisk": "$(.GetAppState.output.disk)",
           "AIOutputMemory": "$(.AICoreMemoryAnalysis.output.response)",
-          "stateBuildpack": "$(.GetAppState.output.buildpack)"
+          "stateBuildpack": "$(.GetAppState.output.buildpack)",
+          "stateEnvironment": "$(.GetAppState.output.environment)",
+          "stateData": "$(.GetAppState.output.stateData)"
         },
         "executors": [
           {
-            "execute": "applm-sapcp:GetCfAppState:2",
+            "execute": "applm-sapcp:GetCfAppState:1",
             "input": {
               "resourceGroup": "$(.execution.input.resourceGroup)",
               "password": "$(.execution.input.password)",
@@ -796,11 +829,6 @@
           "sensitive": false,
           "description": null
         },
-        "appState": {
-          "type": "string",
-          "sensitive": false,
-          "description": null
-        },
         "stateMemory": {
           "type": "number",
           "sensitive": false,
@@ -838,6 +866,16 @@
         },
         "stateBuildpack": {
           "type": "string",
+          "sensitive": false,
+          "description": null
+        },
+        "stateEnvironment": {
+          "type": "object",
+          "sensitive": false,
+          "description": null
+        },
+        "stateData": {
+          "type": "object",
           "sensitive": false,
           "description": null
         }
